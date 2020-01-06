@@ -8,15 +8,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="724.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="localmoviedatabase.gui.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="localmoviedatabase.gui.FXMLDocumentController">
    <children>
-      <TableView layoutX="104.0" layoutY="344.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="movieTableView" layoutX="104.0" layoutY="344.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="movieTitle" prefWidth="100.0" text="Title" />
           <TableColumn fx:id="movieRating" prefWidth="99.0" text="Rating" />
         </columns>
       </TableView>
-      <TableView layoutX="104.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="categoryTableView" layoutX="104.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="categoryName" prefWidth="199.0" text="Categories" />
         </columns>

@@ -12,7 +12,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import localmoviedatabase.be.Genre;
+import localmoviedatabase.be.Movie;
 
 /**
  *
@@ -22,23 +26,39 @@ public class FXMLDocumentController implements Initializable {
     
     private Label label;
     @FXML
-    private TableColumn<?, ?> movieTitle;
+    private TableColumn<Movie, String> movieTitle;
     @FXML
-    private TableColumn<?, ?> movieRating;
+    private TableColumn<Movie, String> movieRating;
     @FXML
-    private TableColumn<?, ?> categoryName;
+    private TableColumn<Genre, String> categoryName;
     @FXML
     private TextField showTitle;
     @FXML
     private TextField showCategory;
     @FXML
     private TextField showRating;
+    @FXML
+    private TableView<Movie> movieTableView;
+    @FXML
+    private TableView<Genre> categoryTableView;
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
+
+    private void movieTable()
+    {
+        movieTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        movieRating.setCellValueFactory(new PropertyValueFactory<> ("rating"));
+    }
+    
+    private void categoryTable()
+    {
+        categoryName.setCellValueFactory(new PropertyValueFactory<>("genreName"));
+    }
 
     @FXML
     private void addCategory(ActionEvent event)
