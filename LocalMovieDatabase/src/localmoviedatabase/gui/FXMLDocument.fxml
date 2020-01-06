@@ -1,14 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="localmoviedatabase.gui.FXMLDocumentController">
-    <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="724.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="localmoviedatabase.gui.FXMLDocumentController">
+   <children>
+      <TableView layoutX="104.0" layoutY="344.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="movieTitle" prefWidth="100.0" text="Title" />
+          <TableColumn fx:id="movieRating" prefWidth="99.0" text="Rating" />
+        </columns>
+      </TableView>
+      <TableView layoutX="104.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="categoryName" prefWidth="199.0" text="Categories" />
+        </columns>
+      </TableView>
+      <Button layoutX="129.0" layoutY="275.0" mnemonicParsing="false" onAction="#addCategory" prefWidth="45.0" text="Add" />
+      <Button layoutX="174.0" layoutY="275.0" mnemonicParsing="false" onAction="#removeCategory" text="Remove" />
+      <Button layoutX="129.0" layoutY="544.0" mnemonicParsing="false" onAction="#addMovie" prefWidth="45.0" text="Add" />
+      <Button layoutX="174.0" layoutY="544.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
+      <TextField layoutX="104.0" layoutY="320.0" prefHeight="25.0" prefWidth="200.0" promptText="search in movies" />
+      <Label layoutX="512.0" layoutY="222.0" text="Selected movie">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="showTitle" alignment="CENTER" layoutX="478.0" layoutY="260.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="showCategory" alignment="CENTER" layoutX="478.0" layoutY="305.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="396.0" layoutY="265.0" text="Title:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="396.0" layoutY="310.0" text="Category:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="235.0" layoutY="544.0" mnemonicParsing="false" onAction="#editMovie" text="Edit" />
+      <Label layoutX="396.0" layoutY="359.0" text="Rating:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="showRating" alignment="CENTER" layoutX="478.0" layoutY="354.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button layoutX="522.0" layoutY="414.0" mnemonicParsing="false" onAction="#playSelectedMovie" text="Play movie">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="235.0" layoutY="275.0" mnemonicParsing="false" onAction="#editCategory" text="Edit" />
+      <Label layoutX="290.0" layoutY="21.0" text="Movie Manager" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="528.0" layoutY="444.0" opacity="0.5" text="(opens in VLC)" />
+   </children>
 </AnchorPane>

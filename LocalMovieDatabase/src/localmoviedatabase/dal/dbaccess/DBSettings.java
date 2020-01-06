@@ -18,6 +18,7 @@ import java.util.Properties;
  * @author math2
  */
 public class DBSettings {
+<<<<<<< HEAD
 
     private SQLServerDataSource dataSource;
 
@@ -45,4 +46,7 @@ public class DBSettings {
     public Connection getConnection() throws SQLServerException {
         return dataSource.getConnection();
     }
+=======
+    
+>>>>>>> c0237e306e205ab53695a01a068c055da5c6427a
 }

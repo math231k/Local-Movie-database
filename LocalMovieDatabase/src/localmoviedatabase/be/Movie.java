@@ -10,6 +10,7 @@ package localmoviedatabase.be;
  * @author math2
  */
 public class Movie {
+<<<<<<< HEAD
     int id;
     private String title;
     private String length;
@@ -62,4 +63,37 @@ public class Movie {
     public String toString(){
         return (title +" "+ length +" "+ rating);
     }
+=======
+    
+    private final int id;
+    private String title;
+    private String category;
+
+    public Movie(int id, String title)
+    {
+        this.id = id;
+        this.title = title;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    public String getCategory()
+    {
+        return category;
+    }
+
+    public void setCategory(String category)
+    {
+        this.category = category;
+    }
+    
+>>>>>>> c0237e306e205ab53695a01a068c055da5c6427a
 }
