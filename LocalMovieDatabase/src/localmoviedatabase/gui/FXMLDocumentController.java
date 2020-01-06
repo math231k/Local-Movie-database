@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -17,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -41,6 +43,21 @@ public class FXMLDocumentController implements Initializable {
     private TableView<Movie> movieTableView;
     @FXML
     private TableView<Genre> categoryTableView;
+    private Button categoryAdd;
+    @FXML
+    private Button categoryRemove;
+    @FXML
+    private Button movieAdd;
+    @FXML
+    private Button movieRemove;
+    @FXML
+    private TextField searchMovie;
+    @FXML
+    private Button movieEdit;
+    @FXML
+    private Button playButton;
+    @FXML
+    private Button categoryEdit;
     
     
     @Override
@@ -92,6 +109,11 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void editCategory(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void searchMovie(KeyEvent event)
     {
     }
     
