@@ -5,10 +5,15 @@
  */
 package localmoviedatabase.dal.dbmanagers.facades;
 
+import localmoviedatabase.be.Movie;
+
 /**
  *
  * @author math2
  */
 public interface MovieDalFacade {
-    
+    public boolean createMovie(Movie movie);
+    public boolean deleteMovie(Movie movie);
+    public boolean readMovie(Movie movie);
+    public boolean updateMovie(Movie movie);
 }
