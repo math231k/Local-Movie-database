@@ -10,9 +10,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 /**
  *
@@ -33,6 +35,22 @@ public class FXMLDocumentController implements Initializable {
     private TextField showCategory;
     @FXML
     private TextField showRating;
+    @FXML
+    private Button categoryAdd;
+    @FXML
+    private Button categoryRemove;
+    @FXML
+    private Button movieAdd;
+    @FXML
+    private Button movieRemove;
+    @FXML
+    private TextField searchMovie;
+    @FXML
+    private Button movieEdit;
+    @FXML
+    private Button playButton;
+    @FXML
+    private Button categoryEdit;
     
     
     @Override
@@ -72,6 +90,11 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void editCategory(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void searchMovie(KeyEvent event)
     {
     }
     

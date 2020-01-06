@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="724.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="localmoviedatabase.gui.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="613.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="localmoviedatabase.gui.FXMLDocumentController">
    <children>
       <TableView layoutX="104.0" layoutY="344.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
@@ -21,11 +21,11 @@
           <TableColumn fx:id="categoryName" prefWidth="199.0" text="Categories" />
         </columns>
       </TableView>
-      <Button layoutX="129.0" layoutY="275.0" mnemonicParsing="false" onAction="#addCategory" prefWidth="45.0" text="Add" />
-      <Button layoutX="174.0" layoutY="275.0" mnemonicParsing="false" onAction="#removeCategory" text="Remove" />
-      <Button layoutX="129.0" layoutY="544.0" mnemonicParsing="false" onAction="#addMovie" prefWidth="45.0" text="Add" />
-      <Button layoutX="174.0" layoutY="544.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
-      <TextField layoutX="104.0" layoutY="320.0" prefHeight="25.0" prefWidth="200.0" promptText="search in movies" />
+      <Button fx:id="categoryAdd" layoutX="129.0" layoutY="275.0" mnemonicParsing="false" onAction="#addCategory" prefWidth="45.0" text="Add" />
+      <Button fx:id="categoryRemove" layoutX="174.0" layoutY="275.0" mnemonicParsing="false" onAction="#removeCategory" text="Remove" />
+      <Button fx:id="movieAdd" layoutX="129.0" layoutY="544.0" mnemonicParsing="false" onAction="#addMovie" prefWidth="45.0" text="Add" />
+      <Button fx:id="movieRemove" layoutX="174.0" layoutY="544.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
+      <TextField fx:id="searchMovie" layoutX="104.0" layoutY="320.0" onKeyTyped="#searchMovie" prefHeight="25.0" prefWidth="200.0" promptText="search in movies" />
       <Label layoutX="512.0" layoutY="222.0" text="Selected movie">
          <font>
             <Font size="16.0" />
@@ -51,7 +51,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button layoutX="235.0" layoutY="544.0" mnemonicParsing="false" onAction="#editMovie" text="Edit" />
+      <Button fx:id="movieEdit" layoutX="235.0" layoutY="544.0" mnemonicParsing="false" onAction="#editMovie" text="Edit" />
       <Label layoutX="396.0" layoutY="359.0" text="Rating:">
          <font>
             <Font size="14.0" />
@@ -62,12 +62,12 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="522.0" layoutY="414.0" mnemonicParsing="false" onAction="#playSelectedMovie" text="Play movie">
+      <Button fx:id="playButton" layoutX="522.0" layoutY="414.0" mnemonicParsing="false" onAction="#playSelectedMovie" text="Play movie">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="235.0" layoutY="275.0" mnemonicParsing="false" onAction="#editCategory" text="Edit" />
+      <Button fx:id="categoryEdit" layoutX="235.0" layoutY="275.0" mnemonicParsing="false" onAction="#editCategory" text="Edit" />
       <Label layoutX="290.0" layoutY="21.0" text="Movie Manager" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="24.0" />
