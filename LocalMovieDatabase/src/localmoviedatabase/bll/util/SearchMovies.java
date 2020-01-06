@@ -14,7 +14,7 @@ import localmoviedatabase.be.Movie;
  *
  * @author Mikkel Husum
  */
-public class SearchSongs {
+public class SearchMovies {
 
     public static List<Movie> search(List<Movie> searchBase, String query) {
         List<Movie> output = new ArrayList<>();
