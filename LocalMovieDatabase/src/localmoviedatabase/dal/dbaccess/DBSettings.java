@@ -9,6 +9,6 @@ package localmoviedatabase.dal.dbaccess;
  *
  * @author math2
  */
-public class DBSetting {
+public class DBSettings {
     
 }
