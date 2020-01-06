@@ -7,11 +7,14 @@ package localmoviedatabase.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -24,8 +27,9 @@ import javafx.scene.input.KeyEvent;
  *
  * @author math2
  */
-public class FXMLDocumentController implements Initializable {
-    
+public class FXMLDocumentController implements Initializable
+{
+
     private Label label;
     @FXML
     private TableColumn<Movie, String> movieTitle;
@@ -58,23 +62,47 @@ public class FXMLDocumentController implements Initializable {
     private Button playButton;
     @FXML
     private Button categoryEdit;
-    
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        selectedMovie();
+    }
 
     private void movieTable()
     {
         movieTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-        movieRating.setCellValueFactory(new PropertyValueFactory<> ("rating"));
+        movieRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
     }
-    
+
     private void categoryTable()
     {
         categoryName.setCellValueFactory(new PropertyValueFactory<>("genreName"));
+    }
+
+    /**
+     * shows information about selected movie
+     */
+    private void selectedMovie()
+    {
+        showTitle.setEditable(false);
+        showCategory.setEditable(false);
+        showRating.setEditable(false);
+        
+        movieTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        movieTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Movie>() {
+            @Override
+            public void changed(ObservableValue<? extends Movie> arg0, Movie oldValue, Movie newValue)
+            {
+                if (newValue != null)
+                {
+                    showTitle.setText(newValue.getTitle());
+                    showCategory.setText(newValue.getCategory());
+                    showRating.setText(newValue.getRating());
+                }
+            }
+        });
+        
     }
 
     @FXML
@@ -116,5 +144,5 @@ public class FXMLDocumentController implements Initializable {
     private void searchMovie(KeyEvent event)
     {
     }
-    
+
 }
