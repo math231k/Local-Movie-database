@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import javafx.scene.input.KeyEvent;
+import localmoviedatabase.dal.dbmanagers.mockdatamanagers.MockMovieManager;
 
 /**
  *
@@ -62,6 +63,8 @@ public class FXMLDocumentController implements Initializable
     private Button playButton;
     @FXML
     private Button categoryEdit;
+    
+    private MockMovieManager mmm = new MockMovieManager();
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -144,5 +147,4 @@ public class FXMLDocumentController implements Initializable
     private void searchMovie(KeyEvent event)
     {
     }
-
 }
