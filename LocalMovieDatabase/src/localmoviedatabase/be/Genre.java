@@ -11,37 +11,46 @@ import java.util.List;
  *
  * @author math2
  */
-public class Genre {
+public class Genre
+{
+
     String genreName;
     List<Movie> movies;
     int id;
 
-    public Genre(String genreName) {
+    public Genre(String genreName)
+    {
         this.genreName = genreName;
     }
 
-    public String getGenreName() {
+    public String getGenreName()
+    {
         return genreName;
     }
 
-    public void setGenreName(String genreName) {
+    public void setGenreName(String genreName)
+    {
         this.genreName = genreName;
     }
 
-    public List<Movie> getMovies() {
+    public List<Movie> getMovies()
+    {
         return movies;
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
-    
-    public boolean addMovieToGenre(Movie movie){
+
+    public boolean addMovieToGenre(Movie movie)
+    {
         movies.add(movie);
         return true;
     }
-    
-    public List<Movie> getGenreMovieList(){
+
+    public List<Movie> getGenreMovieList()
+    {
         return movies;
     }
 }

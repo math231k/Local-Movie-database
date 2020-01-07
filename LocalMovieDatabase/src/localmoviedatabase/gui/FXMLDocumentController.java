@@ -5,8 +5,11 @@
  */
 package localmoviedatabase.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -22,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import javafx.scene.input.KeyEvent;
+import localmoviedatabase.dal.dbaccess.DalException;
 
 /**
  *
@@ -47,6 +51,7 @@ public class FXMLDocumentController implements Initializable
     private TableView<Movie> movieTableView;
     @FXML
     private TableView<Genre> categoryTableView;
+    @FXML
     private Button categoryAdd;
     @FXML
     private Button categoryRemove;
@@ -63,10 +68,28 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private Button categoryEdit;
 
+    private AppModel model;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        try
+        {
+            model = new AppModel();
+            movieTable();
+            categoryTable();
+            
+        } catch (IOException ex)
+        {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DalException ex)
+        {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         selectedMovie();
+        
     }
 
     private void movieTable()
@@ -75,9 +98,12 @@ public class FXMLDocumentController implements Initializable
         movieRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
     }
 
-    private void categoryTable()
+    private void categoryTable() throws DalException
     {
         categoryName.setCellValueFactory(new PropertyValueFactory<>("genreName"));
+        categoryTableView.getColumns().clear();
+        categoryTableView.setItems(model.getCategories());
+        categoryTableView.getColumns().addAll(categoryName);
     }
 
     /**

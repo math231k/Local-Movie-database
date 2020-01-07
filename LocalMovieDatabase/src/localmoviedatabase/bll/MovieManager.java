@@ -5,10 +5,28 @@
  */
 package localmoviedatabase.bll;
 
+import java.util.List;
+import localmoviedatabase.be.Movie;
+import localmoviedatabase.dal.dbmanagers.dbdao.MovieDBDAO;
+
 /**
  *
  * @author math2
  */
-public class MovieManager {
+public class MovieManager
+{
+    
+    private MovieDBDAO movieDBDAO;
+
+    
+    public MovieManager()
+    {
+        movieDBDAO = new MovieDBDAO();
+    }
+    
+    
+    
+    
+    
     
 }
