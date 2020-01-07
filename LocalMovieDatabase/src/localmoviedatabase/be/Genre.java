@@ -5,7 +5,6 @@
  */
 package localmoviedatabase.be;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public class Genre
 {
 
     String genreName;
-    List<Movie> movies = new ArrayList<>();
+    List<Movie> movies;
     int id;
 
     public Genre(String genreName)
