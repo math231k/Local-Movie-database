@@ -26,6 +26,8 @@ import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import javafx.scene.input.KeyEvent;
 import localmoviedatabase.dal.dbaccess.DalException;
+import localmoviedatabase.dal.dbmanagers.mockdatamanagers.MockMovieManager;
+
 
 /**
  *
@@ -67,6 +69,8 @@ public class FXMLDocumentController implements Initializable
     private Button playButton;
     @FXML
     private Button categoryEdit;
+    
+    private MockMovieManager mmm = new MockMovieManager();
 
     private AppModel model;
     
@@ -170,5 +174,4 @@ public class FXMLDocumentController implements Initializable
     private void searchMovie(KeyEvent event)
     {
     }
-
 }
