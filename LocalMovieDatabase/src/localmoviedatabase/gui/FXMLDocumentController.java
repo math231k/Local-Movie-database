@@ -5,6 +5,7 @@
  */
 package localmoviedatabase.gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +26,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import localmoviedatabase.dal.dbaccess.DalException;
 
 /**
@@ -69,6 +73,8 @@ public class FXMLDocumentController implements Initializable
     private Button categoryEdit;
 
     private AppModel model;
+    @FXML
+    private MediaView mediaView;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -159,6 +165,12 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private void playSelectedMovie(ActionEvent event)
     {
+        File file = new File("Clips\\Move.mp4");
+        Media media = new Media(file.toURI().toString());
+        MediaPlayer mp = new MediaPlayer(media);
+        
+        mediaView.setMediaPlayer(mp);
+        mp.play();
     }
 
     @FXML
