@@ -20,7 +20,7 @@ import java.util.Properties;
 public class DBSettings {
 
 
-    private SQLServerDataSource dataSource;
+    private final SQLServerDataSource dataSource;
 
     /**
      * Sets the user credentials, ip, and port configuration
