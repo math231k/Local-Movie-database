@@ -107,10 +107,13 @@ public class FXMLDocumentController implements Initializable
         
     }
 
-    private void movieTable()
+    private void movieTable() throws DalException, IOException
     {
         movieTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         movieRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        movieTableView.getColumns().clear();
+        movieTableView.setItems(model.getMovies());
+        movieTableView.getColumns().addAll(movieTitle, movieRating);
     }
 
     private void categoryTable() throws DalException

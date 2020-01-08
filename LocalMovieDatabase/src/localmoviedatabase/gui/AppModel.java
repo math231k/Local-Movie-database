@@ -38,8 +38,15 @@ public class AppModel
         categories.clear();
         categories.addAll(categoryManager.getAllCategories());
         return categories;
-        
     }        
+    
+    public ObservableList<Movie> getMovies() throws DalException, IOException
+    {
+        movies.clear();
+        movies.addAll(movieManager.getAllMovies());
+        return movies;
+        
+    }
     
 
 
