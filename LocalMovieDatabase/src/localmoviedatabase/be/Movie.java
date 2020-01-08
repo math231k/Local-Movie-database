@@ -19,7 +19,8 @@ public class Movie {
     private int relDate;
     private String path;
 
-    public Movie(String title, String length, int relDate, String path) {
+    public Movie(String title, String length, int relDate, String path, int id) {
+        this.id = id;
         this.title = title;
         this.length = length;       
         this.relDate = relDate;
@@ -74,6 +75,14 @@ public class Movie {
     public void setCategory(String category)
     {
         this.category = category;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package localmoviedatabase.dal.dbmanagers.facades;
 
+import java.util.List;
 import localmoviedatabase.be.Movie;
 
 /**
@@ -14,6 +15,6 @@ import localmoviedatabase.be.Movie;
 public interface MovieDalFacade {
     public boolean createMovie(Movie movie);
     public boolean deleteMovie(Movie movie);
-    public boolean readMovie(Movie movie);
+    public List<Movie> readMovie();
     public boolean updateMovie(Movie movie);
 }

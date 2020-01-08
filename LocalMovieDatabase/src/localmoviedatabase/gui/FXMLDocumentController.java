@@ -176,8 +176,8 @@ public class FXMLDocumentController implements Initializable
         String length = m.getDuration().toString();
        
         
-        Movie movie = new Movie(title, length, returnValue, path);
-        System.out.println(movie.toString());
+        //Movie movie = new Movie(title, length, returnValue, path);
+        //System.out.println(movie.toString());
     }
 
     @FXML
