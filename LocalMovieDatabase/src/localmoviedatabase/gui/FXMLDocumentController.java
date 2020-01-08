@@ -8,9 +8,12 @@ package localmoviedatabase.gui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javafx.beans.binding.Bindings.length;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -29,6 +32,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import localmoviedatabase.dal.dbaccess.DalException;
 
 /**
@@ -150,6 +155,25 @@ public class FXMLDocumentController implements Initializable
     @FXML
     private void addMovie(ActionEvent event)
     {
+        JFileChooser jfc = new JFileChooser();
+        FileNameExtensionFilter mp4Filter = new FileNameExtensionFilter(".mp4 Files", "mp4");
+        FileNameExtensionFilter mpeg4Filter = new FileNameExtensionFilter(".mpeg4 Files", "mpeg4");
+        jfc.setFileFilter(mp4Filter);
+        jfc.setFileFilter(mpeg4Filter);
+        jfc.setAcceptAllFileFilterUsed(false);
+        jfc.setCurrentDirectory(new File("."));
+
+        int returnValue = jfc.showOpenDialog(null);
+        String path = jfc.getSelectedFile().toString();
+        String title = jfc.getSelectedFile().getName();
+        
+        Media m = new Media(jfc.getSelectedFile().getPath());
+        
+        String length = m.getDuration().toString();
+       
+        
+        Movie movie = new Movie(title, length, returnValue, path);
+        System.out.println(movie.toString());
     }
 
     @FXML

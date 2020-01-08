@@ -17,12 +17,13 @@ public class Movie {
     private String length;
     private String rating;
     private int relDate;
+    private String path;
 
-    public Movie(String title, String length, String rating, int relDate) {
+    public Movie(String title, String length, int relDate, String path) {
         this.title = title;
-        this.length = length;
-        this.rating = rating;
+        this.length = length;       
         this.relDate = relDate;
+        this.path = path;
     }
 
     public String getTitle() {
