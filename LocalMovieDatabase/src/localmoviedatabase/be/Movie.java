@@ -19,14 +19,19 @@ public class Movie {
     private int relDate;
     private String path;
 
-    public Movie(String title, String length, int relDate, String path, int id) {
+
+    public Movie(int id, String category, String title, String length, String rating, int relDate, String path)
+    {
         this.id = id;
+        this.category = category;
         this.title = title;
-        this.length = length;       
+        this.length = length;
+        this.rating = rating;
         this.relDate = relDate;
         this.path = path;
     }
 
+  
     public String getTitle() {
         return title;
     }
@@ -76,7 +81,7 @@ public class Movie {
     {
         this.category = category;
     }
-
+    
     public String getPath() {
         return path;
     }

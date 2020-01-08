@@ -12,12 +12,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DBSettings;
+import localmoviedatabase.dal.dbaccess.DalException;
 import localmoviedatabase.dal.dbmanagers.facades.MovieDalFacade;
 
 /**
@@ -26,19 +29,56 @@ import localmoviedatabase.dal.dbmanagers.facades.MovieDalFacade;
  */
 public class MovieDBDAO implements MovieDalFacade{
 
-    private DBSettings dbs;
+    private DBSettings dbConnection;
 
-    public MovieDBDAO() {
-        try {
-            dbs = new DBSettings();
-        } catch (IOException e) {
-
+    public MovieDBDAO() throws IOException
+    {
+        dbConnection = new DBSettings();
+    }
+    
+    public List<Movie> getAllMovies() throws DalException
+    {
+        
+        try
+        {
+            dbConnection = new DBSettings();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        try ( Connection con = dbConnection.getConnection())
+        {
+            String sql = "SELECT * FROM Movie;";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            ArrayList<Movie> allMovies = new ArrayList<>();
+            while (rs.next())
+            {
+                String title = rs.getString("title");
+                String path = rs.getString("path");
+                int id = rs.getInt("movieId");
+                String category = rs.getString("genre");
+                String rating = rs.getString("rating");
+                String length = rs.getString("length");
+                int relDate = rs.getInt("date");
+                
+                Movie mov = new Movie(id, category, title, length, rating, relDate, path);
+                allMovies.add(mov);
+            }
+            
+            return allMovies;
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new DalException();
         }
     }
     
+
     @Override
     public boolean createMovie(Movie movie) {
-        try (Connection con = dbs.getConnection()) {
+        try (Connection con = dbConnection.getConnection()) {
             String sql = "INSERT INTO Songs (name, artist, genre, seconds, filepath) VALUES (?,?,?,?);";
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -66,7 +106,7 @@ public class MovieDBDAO implements MovieDalFacade{
 
     @Override
     public List<Movie> readMovie() {
-        try (Connection con = dbs.getConnection()) {
+        try (Connection con = dbConnection.getConnection()) {
             String sql = "SELECT * FROM Songs;";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -79,7 +119,7 @@ public class MovieDBDAO implements MovieDalFacade{
                 String length = rs.getString("length");
                 String path = rs.getString("path");
 
-                Movie m = new Movie(title, length, relDate, path, id);
+                Movie m = new Movie(id, category, title, length, path, relDate, path);
                 m.setId(id);
                 movies.add(m);
             }
@@ -96,5 +136,7 @@ public class MovieDBDAO implements MovieDalFacade{
     public boolean updateMovie(Movie movie) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
     
 }
