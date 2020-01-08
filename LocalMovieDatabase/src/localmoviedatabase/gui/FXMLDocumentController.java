@@ -35,6 +35,8 @@ import javafx.scene.media.MediaView;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import localmoviedatabase.dal.dbaccess.DalException;
+import localmoviedatabase.dal.dbmanagers.mockdatamanagers.MockMovieManager;
+
 
 /**
  *
@@ -76,6 +78,8 @@ public class FXMLDocumentController implements Initializable
     private Button playButton;
     @FXML
     private Button categoryEdit;
+    
+    private MockMovieManager mmm = new MockMovieManager();
 
     private AppModel model;
     @FXML
@@ -206,5 +210,4 @@ public class FXMLDocumentController implements Initializable
     private void searchMovie(KeyEvent event)
     {
     }
-
 }
