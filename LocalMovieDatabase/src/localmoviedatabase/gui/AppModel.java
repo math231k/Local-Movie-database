@@ -8,6 +8,8 @@ package localmoviedatabase.gui;
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.media.Media;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.bll.CategoryManager;
@@ -46,6 +48,28 @@ public class AppModel
         movies.addAll(movieManager.getAllMovies());
         return movies;
         
+    }
+
+
+    void addMovie(Movie m) {
+        movieManager.addMovie(m);
+    }
+
+    void removeMovie(Movie m) {
+        movieManager.removeMovie(m);
+    }
+    
+    void updateMovie(Movie m){
+        movieManager.updateMovie();
+    }
+    
+    public void noMovieSelected(){
+        Alert noSelectionAlert = new Alert(Alert.AlertType.ERROR);
+                noSelectionAlert.setTitle("No Song");
+                noSelectionAlert.setHeaderText("Song not Selected");
+                noSelectionAlert.setContentText("Select a song to play");
+                
+                noSelectionAlert.showAndWait();
     }
     
 

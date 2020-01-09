@@ -31,6 +31,7 @@ public class Movie {
         this.path = path;
     }
 
+
   
     public String getTitle() {
         return title;
