@@ -10,6 +10,7 @@ import java.sql.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale.Category;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import localmoviedatabase.be.Genre;
@@ -64,6 +65,35 @@ public class CategoryDBDAO
         }        
     }
     
+    public Boolean createGenre(Genre g) throws SQLServerException, SQLException{
+        try(Connection con = dbConnection.getConnection()){
+            
+            String sql = "INSERT INTO Genre (genreName) VALUES (?);";
+            
+            
+            PreparedStatement pstm = con.prepareStatement(sql);
+            
+            pstm.setString(1, g.getGenreName());
+            
+            int updatedRows = pstm.executeUpdate();
+
+            return updatedRows > 0;
+             
+        } catch (SQLServerException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return false;
+    }
     
     
 }
+        
+    
+    
+    
+    
+

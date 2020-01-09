@@ -8,17 +8,18 @@ package localmoviedatabase.gui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javafx.beans.binding.Bindings.length;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.AmbientLight;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
@@ -32,6 +33,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import localmoviedatabase.dal.dbaccess.DalException;
@@ -84,6 +87,8 @@ public class LmdbController implements Initializable
     private AppModel model;
     @FXML
     private MediaView mediaView;
+    @FXML
+    private TextField catNameFld;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -91,13 +96,18 @@ public class LmdbController implements Initializable
         try
         {
             model = new AppModel();
-            movieTable();
-            categoryTable();
+            try {
+                movieTable();
+            } catch (DalException ex) {
+                Logger.getLogger(LmdbController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                categoryTable();
+            } catch (DalException ex) {
+                Logger.getLogger(LmdbController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         } catch (IOException ex)
-        {
-            Logger.getLogger(LmdbController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DalException ex)
         {
             Logger.getLogger(LmdbController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -150,10 +160,15 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void addCategory(ActionEvent event)
+    private void addCategory(ActionEvent event) throws DalException, SQLException
     {
         
+        Genre g = new Genre(catNameFld.getText());
+        model.createGenre(g);
+        model.getCategories();
         
+        System.out.println(g.getId());
+       
     }
 
     @FXML
@@ -224,4 +239,6 @@ public class LmdbController implements Initializable
     private void searchMovie(KeyEvent event)
     {
     }
+    
+    
 }

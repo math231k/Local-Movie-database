@@ -6,6 +6,7 @@
 package localmoviedatabase.bll;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.dal.dbaccess.DalException;
@@ -25,11 +26,14 @@ public class CategoryManager
     }
     
     
-    public List <Genre> getAllCategories() throws DalException
-    {
+    public List<Genre> getAllCategories() throws DalException{
         return categoryDBDAO.getAllCategories();
         
     }
     
+    public void createGenre(Genre g) throws DalException, SQLException{
+        categoryDBDAO.createGenre(g);
+        
+    }
     
 }

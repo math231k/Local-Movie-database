@@ -6,6 +6,7 @@
 package localmoviedatabase.gui;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -25,8 +26,8 @@ public class AppModel
     
     private MovieManager movieManager;
     private CategoryManager categoryManager;
-    public ObservableList<Movie> movies = FXCollections.observableArrayList();
-    public ObservableList<Genre> categories = FXCollections.observableArrayList();
+    private ObservableList<Movie> movies = FXCollections.observableArrayList();
+    private ObservableList<Genre> categories = FXCollections.observableArrayList();
 
     
     public AppModel() throws IOException
@@ -52,6 +53,7 @@ public class AppModel
 
 
     void addMovie(Movie m) {
+        
         movieManager.addMovie(m);
     }
 
@@ -60,16 +62,22 @@ public class AppModel
     }
     
     void updateMovie(Movie m){
-        movieManager.updateMovie();
+        movieManager.updateMovie(m);
     }
     
     public void noMovieSelected(){
         Alert noSelectionAlert = new Alert(Alert.AlertType.ERROR);
+                
                 noSelectionAlert.setTitle("No Song");
                 noSelectionAlert.setHeaderText("Song not Selected");
                 noSelectionAlert.setContentText("Select a song to play");
                 
                 noSelectionAlert.showAndWait();
+    }
+    
+    public void createGenre(Genre g) throws DalException, SQLException{
+        categoryManager.createGenre(g);
+        
     }
     
 

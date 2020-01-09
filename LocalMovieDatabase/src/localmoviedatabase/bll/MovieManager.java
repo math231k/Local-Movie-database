@@ -32,15 +32,17 @@ public class MovieManager
     }
 
     public void addMovie(Movie m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (m != null){
+        movieDBDAO.createMovie(m);
+        }
     }
 
     public void removeMovie(Movie m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        movieDBDAO.deleteMovie(m);
     }
 
-    public void updateMovie() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateMovie(Movie m) {
+        movieDBDAO.updateMovie(m);
     }
     
     

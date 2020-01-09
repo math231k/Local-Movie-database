@@ -79,13 +79,14 @@ public class MovieDBDAO implements MovieDalFacade{
     @Override
     public boolean createMovie(Movie movie) {
         try (Connection con = dbConnection.getConnection()) {
-            String sql = "INSERT INTO Songs (name, artist, genre, seconds, filepath) VALUES (?,?,?,?);";
+            String sql = "INSERT INTO Movie (title = ?, lenght = ?, path = ?, relDate = ?, genre = ?) VALUES (?,?,?,?,?);";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setString(1, movie.getTitle());
-            stmt.setString(2, movie.getCategory());
-            stmt.setString(3, movie.getLength());
-            stmt.setString(4, movie.getPath());
+            stmt.setString(2, movie.getLength());
+            stmt.setString(3, movie.getPath());
+            stmt.setInt(4, movie.getRelDate());
+            stmt.setString(5, movie.getCategory());
 
             int updatedRows = stmt.executeUpdate();
 
@@ -135,13 +136,13 @@ public class MovieDBDAO implements MovieDalFacade{
     @Override
     public boolean updateMovie(Movie movie) {
         try (Connection con = dbConnection.getConnection()) {
-           String sql = "UPDATE Songs SET id = ?,  = ?, category = ?, title = ?, length = ?, relDate = ?, path = ?  WHERE id = ?;";
+           String sql = "UPDATE Songs SET id = ?, category = ?, title = ?, length = ?, relDate = ?, path = ?  WHERE id = ?;";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, movie.getId());
             stmt.setString(2, movie.getCategory());
             stmt.setString(3, movie.getTitle());
             stmt.setString(4, movie.getLength());
-            stmt.setString(5, movie.getRating());
+            stmt.setInt(5, movie.getRelDate());
             stmt.setString(6, movie.getPath());
             
             int updatedRows = stmt.executeUpdate();

@@ -19,7 +19,7 @@ public class LocalMovieDatabase extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/localmoviedatabase/gui/FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/localmoviedatabase/gui/views/LmdbFXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -33,5 +33,6 @@ public class LocalMovieDatabase extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
     
 }
