@@ -15,12 +15,12 @@ public class Movie {
     private String category;
     private String title;
     private String length;
-    private String rating;
+    private int rating;
     private int relDate;
     private String path;
 
 
-    public Movie(int id, String category, String title, String length, String rating, int relDate, String path)
+    public Movie(int id, String category, String title, String length, int rating, int relDate, String path)
     {
         this.id = id;
         this.category = category;
@@ -50,11 +50,18 @@ public class Movie {
     }
 
     public String getRating() {
-        return rating;
+        return rating + "/10";
     }
 
-    public void setRating(String rating) {
+    public void setRating(int rating) {
+        if (rating > 0 && rating <= 10)
+        {
         this.rating = rating;
+        }
+        else
+        {
+            System.out.println("Please select a rating from 1 to 10");
+        }
     }
 
     public int getRelDate() {

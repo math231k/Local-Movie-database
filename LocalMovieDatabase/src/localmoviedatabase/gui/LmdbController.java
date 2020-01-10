@@ -249,9 +249,7 @@ public class LmdbController implements Initializable
     private void searchMovie(KeyEvent event) throws DalException, IOException
     {
         String input = searchMovie.getText();
-        List<Movie> filter = search.searchMovie(model.getMovies(),input);
-        
-        ObservableList<Movie> result = FXCollections.observableList(filter);
+        ObservableList<Movie> result = model.searchMovie(input);
         movieTableView.setItems(result);
     }
     

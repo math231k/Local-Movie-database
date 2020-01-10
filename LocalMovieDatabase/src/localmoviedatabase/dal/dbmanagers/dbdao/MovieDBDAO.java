@@ -59,7 +59,7 @@ public class MovieDBDAO implements MovieDalFacade{
                 String path = rs.getString("path");
                 int id = rs.getInt("movieId");
                 String category = rs.getString("genre");
-                String rating = rs.getString("rating");
+                int rating = rs.getInt("rating");
                 String length = rs.getString("length");
                 int relDate = rs.getInt("date");
                 
@@ -105,33 +105,7 @@ public class MovieDBDAO implements MovieDalFacade{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Movie> readMovie() {
-        try (Connection con = dbConnection.getConnection()) {
-            String sql = "SELECT * FROM Songs;";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            List<Movie> movies = new ArrayList<>();
-            while (rs.next()) {
-                int id = rs.getInt("movieId");
-                String title = rs.getString("title");
-                String category = rs.getString("category");
-                int relDate = rs.getInt("relDate");
-                String length = rs.getString("length");
-                String path = rs.getString("path");
-
-                Movie m = new Movie(id, category, title, length, path, relDate, path);
-                m.setId(id);
-                movies.add(m);
-            }
-            return movies;
-        } catch (SQLServerException ex) {
-            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
+    
 
     @Override
     public boolean updateMovie(Movie movie) {
@@ -153,6 +127,12 @@ public class MovieDBDAO implements MovieDalFacade{
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public List<Movie> readMovie()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

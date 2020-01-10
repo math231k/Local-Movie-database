@@ -104,6 +104,7 @@ public class CategoryDBDAO
             Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+
     }
     
     
