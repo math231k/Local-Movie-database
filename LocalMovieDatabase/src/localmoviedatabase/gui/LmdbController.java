@@ -9,11 +9,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +40,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import localmoviedatabase.bll.util.SearchMovies;
 import localmoviedatabase.dal.dbaccess.DalException;
 import localmoviedatabase.dal.dbmanagers.mockdatamanagers.MockMovieManager;
 
@@ -83,6 +87,7 @@ public class LmdbController implements Initializable
     private Button categoryEdit;
     
     private MockMovieManager mmm = new MockMovieManager();
+    private SearchMovies search = new SearchMovies();
 
     private AppModel model;
     @FXML
@@ -236,8 +241,13 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void searchMovie(KeyEvent event)
+    private void searchMovie(KeyEvent event) throws DalException, IOException
     {
+        String input = searchMovie.getText();
+        List<Movie> filter = search.searchMovie(model.getMovies(),input);
+        
+        ObservableList<Movie> result = FXCollections.observableList(filter);
+        movieTableView.setItems(result);
     }
     
     

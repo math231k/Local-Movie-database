@@ -7,6 +7,7 @@ package localmoviedatabase.bll.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import localmoviedatabase.be.Genre;
 
 import localmoviedatabase.be.Movie;
 
@@ -16,13 +17,25 @@ import localmoviedatabase.be.Movie;
  */
 public class SearchMovies {
 
-    public static List<Movie> search(List<Movie> searchBase, String query) {
+    public List<Movie> searchMovie(List<Movie> searchBase, String query) {
         List<Movie> output = new ArrayList<>();
 
         for (Movie movie : searchBase) {
             if (movie.getTitle().toLowerCase().contains(query.toLowerCase())
-                    || movie.getCategory().toLowerCase().contains(query.toLowerCase())) {
+                    /*|| genre.getCategory().toLowerCase().contains(query.toLowerCase())*/) {
                 output.add(movie);
+            }
+        }
+
+        return output;
+    }
+    public List<Genre> searchCategory(List<Genre> searchBase, String query) {
+        List<Genre> output = new ArrayList<>();
+
+        for (Genre genre : searchBase) {
+            if (genre.getGenreName().toLowerCase().contains(query.toLowerCase())
+                    /*|| genre.getCategory().toLowerCase().contains(query.toLowerCase())*/) {
+                output.add(genre);
             }
         }
 
