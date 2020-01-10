@@ -7,6 +7,7 @@ package localmoviedatabase.gui;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -15,6 +16,7 @@ import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.bll.CategoryManager;
 import localmoviedatabase.bll.MovieManager;
+import localmoviedatabase.bll.util.SearchMovies;
 import localmoviedatabase.dal.dbaccess.DalException;
 
 /**
@@ -28,6 +30,7 @@ public class AppModel
     private CategoryManager categoryManager;
     private ObservableList<Movie> movies = FXCollections.observableArrayList();
     private ObservableList<Genre> categories = FXCollections.observableArrayList();
+    private SearchMovies search = new SearchMovies();
 
     
     public AppModel() throws IOException
@@ -63,6 +66,13 @@ public class AppModel
     
     void updateMovie(Movie m){
         movieManager.updateMovie(m);
+    }
+    
+    public ObservableList<Movie> searchMovie(String input) throws DalException, IOException{
+        List<Movie> filter = search.searchMovie(getMovies(),input);
+        
+        ObservableList<Movie> result = FXCollections.observableList(filter);
+        return result;
     }
     
     public void noMovieSelected(){

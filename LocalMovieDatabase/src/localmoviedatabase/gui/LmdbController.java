@@ -177,7 +177,7 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void removeCategory(ActionEvent event)
+    private void removeCategory(ActionEvent event) throws DalException, SQLException
     {
         Genre g = categoryTableView.getSelectionModel().getSelectedItem();
         model.removeGenre(g);
@@ -246,9 +246,7 @@ public class LmdbController implements Initializable
     private void searchMovie(KeyEvent event) throws DalException, IOException
     {
         String input = searchMovie.getText();
-        List<Movie> filter = search.searchMovie(model.getMovies(),input);
-        
-        ObservableList<Movie> result = FXCollections.observableList(filter);
+        ObservableList<Movie> result = model.searchMovie(input);
         movieTableView.setItems(result);
     }
     
