@@ -88,7 +88,9 @@
             <Font size="17.0" />
          </font>
       </Text>
-      <TextField layoutX="367.0" layoutY="381.0" promptText="Movie title" />
+      <TextField fx:id="setTitleFld" layoutX="367.0" layoutY="381.0" promptText="Movie title" />
       <Button layoutX="56.0" layoutY="303.0" mnemonicParsing="false" text="Add Movie" />
+      <TextField fx:id="pathFld" layoutX="367.0" layoutY="418.0" promptText="Path" />
+      <Button fx:id="findMoviePath" layoutX="312.0" layoutY="418.0" mnemonicParsing="false" onAction="#FindPath" prefWidth="45.0" text="Find" />
    </children>
 </AnchorPane>

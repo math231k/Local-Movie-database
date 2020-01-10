@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -94,6 +95,12 @@ public class LmdbController implements Initializable
     private MediaView mediaView;
     @FXML
     private TextField catNameFld;
+    @FXML
+    private TextField setTitleFld;
+    @FXML
+    private TextField pathFld;
+    @FXML
+    private Button findMoviePath;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -187,21 +194,19 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void addMovie(ActionEvent event)
+    private void addMovie(ActionEvent event) throws DalException, IOException
     {
-        JFileChooser jfc = new JFileChooser();
-        FileNameExtensionFilter mp4Filter = new FileNameExtensionFilter(".mp4 Files", "mp4");
-        FileNameExtensionFilter mpeg4Filter = new FileNameExtensionFilter(".mpeg4 Files", "mpeg4");
-        jfc.setFileFilter(mp4Filter);
-        jfc.setFileFilter(mpeg4Filter);
-        jfc.setAcceptAllFileFilterUsed(false);
-        jfc.setCurrentDirectory(new File("."));
-
-        int returnValue = jfc.showOpenDialog(null);
-        String path = jfc.getSelectedFile().toString();
-        String title = jfc.getSelectedFile().getName();
         
-        Media m = new Media(jfc.getSelectedFile().getPath());
+        String path = pathFld.getText();
+        //Media m = new Media(path);
+        //int length = (int) m.getDuration().toSeconds();
+        
+        
+        
+        Movie mo = new Movie(setTitleFld.getText(), 200 + "", path);
+        
+        model.addMovie(mo);
+        model.getMovies();
         
        
         
@@ -251,6 +256,27 @@ public class LmdbController implements Initializable
         String input = searchMovie.getText();
         ObservableList<Movie> result = model.searchMovie(input);
         movieTableView.setItems(result);
+    }
+
+    @FXML
+    private void FindPath(ActionEvent event) {
+    JFileChooser jfc = new JFileChooser();
+        FileNameExtensionFilter mp4Filter = new FileNameExtensionFilter(".mp4 Files", "mp4");
+        FileNameExtensionFilter mpeg4Filter = new FileNameExtensionFilter(".mpeg4 Files", "mpeg4");
+        jfc.setFileFilter(mp4Filter);
+        jfc.setFileFilter(mpeg4Filter);
+        jfc.setAcceptAllFileFilterUsed(false);
+        jfc.setCurrentDirectory(new File("."));
+
+        int returnValue = jfc.showOpenDialog(null);
+        
+        String path = jfc.getSelectedFile().toString();
+        
+        String replace = path.replace("\\", "/");
+        
+        pathFld.setText(replace);
+                
+        
     }
     
     

@@ -63,7 +63,7 @@ public class MovieDBDAO implements MovieDalFacade{
                 String length = rs.getString("length");
                 int relDate = rs.getInt("date");
                 
-                Movie mov = new Movie(id, category, title, length, rating, relDate, path);
+                Movie mov = new Movie(title, length, path);
                 allMovies.add(mov);
             }
             
@@ -79,14 +79,13 @@ public class MovieDBDAO implements MovieDalFacade{
     @Override
     public boolean createMovie(Movie movie) {
         try (Connection con = dbConnection.getConnection()) {
-            String sql = "INSERT INTO Movie (title = ?, lenght = ?, path = ?, relDate = ?, genre = ?) VALUES (?,?,?,?,?);";
+            String sql = "INSERT INTO Movie (title,length,path) VALUES (?,?,?);";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setString(1, movie.getTitle());
             stmt.setString(2, movie.getLength());
             stmt.setString(3, movie.getPath());
-            stmt.setInt(4, movie.getRelDate());
-            stmt.setString(5, movie.getCategory());
+
 
             int updatedRows = stmt.executeUpdate();
 
