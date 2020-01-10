@@ -36,4 +36,9 @@ public class CategoryManager
         
     }
     
+    public void removeGenre(Genre g) throws DalException, SQLException{
+        categoryDBDAO.deleteGenre(g);
+        
+    }
+    
 }

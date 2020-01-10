@@ -88,6 +88,11 @@ public class CategoryDBDAO
         
         return false;
     }
+
+    
+    public boolean deleteMovie(Genre genre) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

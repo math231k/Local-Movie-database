@@ -79,6 +79,10 @@ public class AppModel
         categoryManager.createGenre(g);
         
     }
+
+    void removeGenre(Genre g) throws DalException, SQLException {
+        categoryManager.removeGenre(g);
+    }
     
 
 

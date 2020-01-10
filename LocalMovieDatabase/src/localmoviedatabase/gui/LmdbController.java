@@ -179,6 +179,8 @@ public class LmdbController implements Initializable
     @FXML
     private void removeCategory(ActionEvent event)
     {
+        Genre g = categoryTableView.getSelectionModel().getSelectedItem();
+        model.removeGenre(g);
     }
 
     @FXML
