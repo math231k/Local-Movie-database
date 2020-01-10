@@ -90,8 +90,8 @@ public class AppModel
         
     }
 
-    void removeGenre(Genre g) throws DalException, SQLException {
-        categoryManager.removeGenre(g);
+    void removeGenre(Genre g) {
+    categoryManager.removeGenre(g);
     }
     
 

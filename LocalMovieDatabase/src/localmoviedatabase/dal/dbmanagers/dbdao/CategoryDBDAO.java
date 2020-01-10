@@ -89,9 +89,22 @@ public class CategoryDBDAO
         return false;
     }
 
-    
-    public boolean deleteGenre(Genre genre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean removeGenre(Genre g) {
+    try (Connection con = dbConnection.getConnection()) {
+            String sql = "DELETE FROM Genre WHERE genreName = ?;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, g.getGenreName());
+            int updatedRows = stmt.executeUpdate();
+
+            return updatedRows > 0;
+            
+        } catch (SQLServerException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
     }
     
     
