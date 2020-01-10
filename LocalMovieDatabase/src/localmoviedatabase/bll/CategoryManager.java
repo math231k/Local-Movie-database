@@ -32,8 +32,19 @@ public class CategoryManager
     }
     
     public void createGenre(Genre g) throws DalException, SQLException{
-        categoryDBDAO.createGenre(g);
         
+        if (g.getId() == 0)
+        {
+            categoryDBDAO.createGenre(g);
+        } /*else
+        {
+            categoryDBDAO.(g);
+        }*/
+    }
+
+    public void removeGenre(Genre g) {
+        categoryDBDAO.removeGenre(g);
+    
     }
     
 }

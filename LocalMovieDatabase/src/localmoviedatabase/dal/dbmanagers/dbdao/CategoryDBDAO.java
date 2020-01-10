@@ -88,6 +88,23 @@ public class CategoryDBDAO
         
         return false;
     }
+
+    public boolean removeGenre(Genre g) {
+    try (Connection con = dbConnection.getConnection()) {
+            String sql = "DELETE FROM Genre WHERE genreName = ?;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, g.getGenreName());
+            int updatedRows = stmt.executeUpdate();
+
+            return updatedRows > 0;
+            
+        } catch (SQLServerException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     
     
 }

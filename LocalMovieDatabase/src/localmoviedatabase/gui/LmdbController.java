@@ -177,8 +177,13 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void removeCategory(ActionEvent event)
+    private void removeCategory(ActionEvent event) throws DalException
     {
+        Genre g = categoryTableView.getSelectionModel().getSelectedItem();
+        model.removeGenre(g);
+        System.out.println(g.getId());
+        model.getCategories();
+        
     }
 
     @FXML
