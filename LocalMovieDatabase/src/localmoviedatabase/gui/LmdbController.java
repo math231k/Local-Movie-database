@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.AmbientLight;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -221,8 +222,16 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void editMovie(ActionEvent event)
+    private void editMovie(ActionEvent event) throws IOException
     {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/localmoviedatabase/gui/views/editMovie.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.setTitle("Edit movie");
+            stage.showAndWait();
+            stage.setAlwaysOnTop(true);
+ 
     }
 
     @FXML
@@ -278,6 +287,5 @@ public class LmdbController implements Initializable
                 
         
     }
-    
     
 }
