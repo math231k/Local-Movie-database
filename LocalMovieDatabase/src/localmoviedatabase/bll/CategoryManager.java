@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import localmoviedatabase.be.Genre;
+import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DalException;
 import localmoviedatabase.dal.dbmanagers.dbdao.CategoryDBDAO;
 
@@ -18,6 +19,8 @@ import localmoviedatabase.dal.dbmanagers.dbdao.CategoryDBDAO;
  */
 public class CategoryManager
 {
+
+    
     private CategoryDBDAO categoryDBDAO;
 
     public CategoryManager() throws IOException
@@ -41,6 +44,12 @@ public class CategoryManager
         categoryDBDAO.removeGenre(g);
     
     }
+
+    public void addMovieToCategory(Movie m, Genre g) {
+        categoryDBDAO.addMovieToCategory(m, g);
+    }
+    
+    
     
     
 }

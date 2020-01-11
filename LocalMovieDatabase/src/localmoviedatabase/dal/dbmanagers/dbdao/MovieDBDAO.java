@@ -64,6 +64,7 @@ public class MovieDBDAO implements MovieDalFacade{
                 int relDate = rs.getInt("date");
                 
                 Movie mov = new Movie(title, length, path);
+                mov.setId(id);
                 allMovies.add(mov);
             }
             
@@ -75,29 +76,6 @@ public class MovieDBDAO implements MovieDalFacade{
         }
     }
     
-
-    @Override
-    public boolean createMovie(Movie movie) {
-        try (Connection con = dbConnection.getConnection()) {
-            String sql = "INSERT INTO Movie (title,length,path) VALUES (?,?,?);";
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            stmt.setString(1, movie.getTitle());
-            stmt.setString(2, movie.getLength());
-            stmt.setString(3, movie.getPath());
-
-
-            int updatedRows = stmt.executeUpdate();
-
-            return updatedRows > 0;
-
-        } catch (SQLServerException ex) {
-            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
 
     @Override
     public boolean deleteMovie(Movie movie) {
@@ -134,6 +112,28 @@ public class MovieDBDAO implements MovieDalFacade{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
-    
+    @Override
+    public boolean createMovie(Movie movie) {
+
+        try (Connection con = dbConnection.getConnection()) {
+            String sql = "INSERT INTO Movie (title, length, path) VALUES (?,?,?);";
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setString(1, movie.getTitle());
+            stmt.setString(2, movie.getLength());
+            stmt.setString(3, movie.getPath());
+            
+            int updatedRows = stmt.executeUpdate();
+
+            return updatedRows > 0;
+
+        } catch (SQLServerException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+   
+
 }

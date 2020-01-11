@@ -102,6 +102,8 @@ public class LmdbController implements Initializable
     private TextField pathFld;
     @FXML
     private Button findMoviePath;
+    @FXML
+    private Button addToCategory;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -179,8 +181,6 @@ public class LmdbController implements Initializable
         Genre g = new Genre(catNameFld.getText());
         model.createGenre(g);
         model.getCategories();
-        
-        System.out.println(g.getId());
        
     }
 
@@ -285,6 +285,14 @@ public class LmdbController implements Initializable
         
         pathFld.setText(replace);
                 
+        
+    }
+
+    @FXML
+    private void AddMovieToCategory(ActionEvent event) {
+    
+    model.addMovieToCategory(movieTableView.getSelectionModel().getSelectedItem(),
+            categoryTableView.getSelectionModel().getSelectedItem());
         
     }
     

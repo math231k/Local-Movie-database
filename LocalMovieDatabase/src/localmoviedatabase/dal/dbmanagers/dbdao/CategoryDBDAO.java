@@ -14,6 +14,7 @@ import java.util.Locale.Category;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import localmoviedatabase.be.Genre;
+import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DBSettings;
 import localmoviedatabase.dal.dbaccess.DalException;
 
@@ -54,6 +55,7 @@ public class CategoryDBDAO
                 int genreId = rs.getInt("genreId");
                 
                 Genre gen = new Genre(genreName);
+                gen.setId(genreId);
                 allCategories.add(gen);
             }
             
@@ -106,7 +108,40 @@ public class CategoryDBDAO
         return false;
 
     }
-    
+
+    public boolean addMovieToCategory(Movie m, Genre g) {
+        try (Connection con = dbConnection.getConnection()) {
+            String sql = "INSERT INTO GenreMovies (genreId, movieId) VALUES (?,?);";
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, g.getId());
+            stmt.setInt(2, m.getId());
+
+            int updatedRows = stmt.executeUpdate();
+
+            return updatedRows > 0;
+
+        } catch (SQLServerException ex) {
+            Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+   
+    public List<Movie> getMoviesFromGenre(){
+        try(Connection con = dbConnection.getConnection()){
+            String sql = "SELECT * FROM genreMovies WHERE genreId = ? VALUES (?);";
+            
+            
+        
+        } catch (SQLServerException ex) {
+            Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
 }
         

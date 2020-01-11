@@ -93,6 +93,12 @@ public class AppModel
     void removeGenre(Genre g) {
     categoryManager.removeGenre(g);
     }
+
+    void addMovieToCategory(Movie m, Genre g) {
+    categoryManager.addMovieToCategory(m, g);
+    }
+
+ 
     
 
 

@@ -7,6 +7,7 @@ package localmoviedatabase.bll;
 
 import java.io.IOException;
 import java.util.List;
+import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DalException;
 import localmoviedatabase.dal.dbmanagers.dbdao.MovieDBDAO;
@@ -44,7 +45,9 @@ public class MovieManager
     public void updateMovie(Movie m) {
         movieDBDAO.updateMovie(m);
     }
-    
+
+
+
     
     
     

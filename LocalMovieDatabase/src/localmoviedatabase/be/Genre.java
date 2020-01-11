@@ -54,4 +54,8 @@ public class Genre
     {
         return movies;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
