@@ -118,13 +118,13 @@ public class MovieDBDAO implements MovieDalFacade{
         try (Connection con = dbConnection.getConnection()) {
             
             String title = movie.getTitle();
-            String rating = movie.getRating();
+            int rating = movie.getRating();
             int movieId = movie.getId();
             
             String sql = "UPDATE Movie SET title=?, rating=? WHERE movieId=?";
             PreparedStatement prst = con.prepareStatement(sql);
             prst.setString(1, title);
-            prst.setString(2, rating);
+            prst.setInt(2, rating);
             prst.setInt(3, movieId);
             int affectedRows = prst.executeUpdate();
             

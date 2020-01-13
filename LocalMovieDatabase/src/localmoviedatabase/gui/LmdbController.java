@@ -62,7 +62,7 @@ public class LmdbController implements Initializable
     private MockMovieManager mmm = new MockMovieManager();
     private SearchMovies search = new SearchMovies();
     private AppModel model;
-    public static String getRating;
+    public static int getRating;
     public static int getId;
     public static int getGenreId;
     public static int getRelDate;
@@ -285,7 +285,7 @@ public class LmdbController implements Initializable
         }
     }
 
-   /* @FXML
+   @FXML
     private void searchMovie(KeyEvent event) throws DalException, IOException
     {
         String input = searchMovie.getText();
@@ -299,7 +299,7 @@ public class LmdbController implements Initializable
         {
             categoryTable();
         }
-    }*/
+    }
 
 
     @FXML
@@ -307,7 +307,7 @@ public class LmdbController implements Initializable
         Movie moToBeAdded = movieTableView.getSelectionModel().getSelectedItem();
         Genre geToBeAdded = categoryTableView.getSelectionModel().getSelectedItem();
         
-        model.addMovieToCategory(moToBeAdded);
+        model.addMovieToCategory(moToBeAdded, geToBeAdded);
         model.fetchMoviesFromGenre(geToBeAdded);
         System.out.println("Movie Added");
     }
