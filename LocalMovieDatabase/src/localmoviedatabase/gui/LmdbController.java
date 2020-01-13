@@ -109,7 +109,7 @@ public class LmdbController implements Initializable
         movieRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
         
 
-        categoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryName.setCellValueFactory(new PropertyValueFactory<>("genreName"));
 
         
             movieTableView.setItems(model.getMovies());

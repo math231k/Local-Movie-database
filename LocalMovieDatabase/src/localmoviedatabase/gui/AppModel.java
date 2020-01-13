@@ -115,11 +115,13 @@ public class AppModel
     
     public ObservableList<Genre> getCategories(){
         categories.clear();
+        fetchCategories();
         return categories;
     }
     
     public ObservableList<Movie> getMovies(){
         movies.clear();
+        fetchMovies();
         return movies;
     }
     
