@@ -36,7 +36,7 @@ public class AppModel
     private Genre currentlySelectedGenre;
 
     
-    public AppModel()
+    public AppModel() throws IOException, DalException
     {
         movieManager = new MovieManager();
         categoryManager = new CategoryManager();
@@ -50,7 +50,7 @@ public class AppModel
         categories.addAll(categoryManager.getAllCategories());
     }        
     
-    public void fetchMovies()
+    public void fetchMovies() throws IOException, DalException
     {
         movies.clear();
         movies.addAll(movieManager.getAllMovies());
@@ -120,7 +120,7 @@ public class AppModel
         return categories;
     }
     
-    public ObservableList<Movie> getMovies(){
+    public ObservableList<Movie> getMovies() throws IOException, DalException{
         movies.clear();
         fetchMovies();
         return movies;
