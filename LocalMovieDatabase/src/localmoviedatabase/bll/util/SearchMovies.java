@@ -17,6 +17,12 @@ import localmoviedatabase.be.Movie;
  */
 public class SearchMovies {
 
+    /**
+     * searches the database for a specific movie
+     * @param searchBase the list to be searched
+     * @param query the Strink to be searched for
+     * @return 
+     */
     public List<Movie> searchMovie(List<Movie> searchBase, String query) {
         List<Movie> output = new ArrayList<>();
 
@@ -29,6 +35,12 @@ public class SearchMovies {
 
         return output;
     }
+    /**
+     * Searches the database for a specifik genre
+     * @param searchBase the genre list to be searched through
+     * @param query the String to be searched for
+     * @return a list of genre results
+     */
     public List<Genre> searchCategory(List<Genre> searchBase, String query) {
         List<Genre> output = new ArrayList<>();
 
