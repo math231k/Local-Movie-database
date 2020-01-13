@@ -85,6 +85,13 @@ public class AppModel
         return result;
     }
     
+    public ObservableList<Genre> searchGenre(String input) throws DalException, IOException{
+        List<Genre> filter = search.searchCategory(getCategories(),input);
+        
+        ObservableList<Genre> result = FXCollections.observableList(filter);
+        return result;
+    }
+    
     public void noMovieSelected(){
         Alert noSelectionAlert = new Alert(Alert.AlertType.ERROR);
                 
