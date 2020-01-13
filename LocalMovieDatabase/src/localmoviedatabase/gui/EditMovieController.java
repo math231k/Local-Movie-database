@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import localmoviedatabase.be.Movie;
@@ -37,6 +38,8 @@ public class EditMovieController implements Initializable
     private TextField txtName;
     @FXML
     private TextField txtRating;
+    @FXML
+    private Label ratingInfo;
 
     public void EditMovieController()
     {
@@ -63,14 +66,16 @@ public class EditMovieController implements Initializable
         
         int rating = Integer.parseInt(txtRating.getText());
         
+        if (rating > 0 && rating < 11) {
         Movie movie = new Movie(LmdbController.getId, rating, txtName.getText().trim());
         appModel.updateMovie(movie);
         
         Stage stage = (Stage) saveEditMovie.getScene().getWindow();
         stage.close();
-        
-        
-        
+        }
+        else{
+        ratingInfo.setText("Invalid Rating!");
+        }
     }
 
     @FXML

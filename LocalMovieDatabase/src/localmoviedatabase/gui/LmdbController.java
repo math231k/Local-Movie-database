@@ -26,6 +26,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,6 +38,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
@@ -83,11 +85,7 @@ public class LmdbController implements Initializable
     @FXML
     private TableView<Genre> categoryTableView;
     @FXML
-    private Button categoryAdd;
-    @FXML
     private Button categoryRemove;
-    @FXML
-    private Button movieAdd;
     @FXML
     private Button movieRemove;
     @FXML
@@ -98,10 +96,14 @@ public class LmdbController implements Initializable
     private Button playButton;
     @FXML
     private Button categoryEdit;
-    @FXML
     private MediaView mediaView;
-    @FXML
     private TextField catNameFld;
+    @FXML
+    private Button addToCategory;
+    @FXML
+    private ListView<?> genreMoviesLst;
+    @FXML
+    private Text genreTxt;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -175,7 +177,6 @@ public class LmdbController implements Initializable
         
     }
 
-    @FXML
     private void addCategory(ActionEvent event) throws DalException, SQLException
     {
         
@@ -194,7 +195,6 @@ public class LmdbController implements Initializable
         model.removeGenre(g);
     }
 
-    @FXML
     private void addMovie(ActionEvent event)
     {
         JFileChooser jfc = new JFileChooser();
@@ -275,6 +275,11 @@ public class LmdbController implements Initializable
         String input = searchMovie.getText();
         ObservableList<Movie> result = model.searchMovie(input);
         movieTableView.setItems(result);
+    }
+
+    @FXML
+    private void AddMovieToCategory(ActionEvent event)
+    {
     }
     
     
