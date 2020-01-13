@@ -50,7 +50,7 @@ public class AppModel
         categories.addAll(categoryManager.getAllCategories());
     }        
     
-    public void fetchMovies() throws IOException, DalException
+    public void fetchMovies()
     {
         movies.clear();
         movies.addAll(movieManager.getAllMovies());
@@ -73,9 +73,15 @@ public class AppModel
         movieManager.removeMovie(m);
     }
     
-    public void updateMovie(Movie m) throws DalException, IOException{
+    public void updateMovie(Movie m) throws IOException, DalException {
         movieManager.updateMovie(m);
         getMovies();
+    }
+    
+    public void updateCategory(Genre g)
+    {
+        categoryManager.updateGenre(g);
+        getCategories();
     }
     
     public ObservableList<Movie> searchMovie(String input) throws DalException, IOException{
@@ -120,7 +126,7 @@ public class AppModel
         return categories;
     }
     
-    public ObservableList<Movie> getMovies() throws IOException, DalException{
+    public ObservableList<Movie> getMovies() {
         movies.clear();
         fetchMovies();
         return movies;

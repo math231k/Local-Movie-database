@@ -52,14 +52,14 @@ public class CategoryDBDAO
             String sql = "SELECT * FROM Genre;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            ArrayList<Genre> allCategories = new ArrayList<>();
+            List<Genre> allCategories = new ArrayList<>();
             while (rs.next())
             {
                 String genreName = rs.getString("genreName");
                 int genreId = rs.getInt("genreId");
                 
                 Genre gen = new Genre(genreName);
-                //gen.setId(genreId);
+                gen.setId(genreId);
                 allCategories.add(gen);
             }
             
@@ -150,6 +150,32 @@ public class CategoryDBDAO
             Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+  
+    public boolean updateCategory(Genre g)
+    {
+        try (Connection con = dbConnection.getConnection())
+        {
+            String genreName = g.getGenreName();
+            int genreId = g.getId();
+            
+            String sql = "UPDATE Genre SET genreName=? WHERE genreId=?";
+            PreparedStatement prst = con.prepareStatement(sql);
+            prst.setString(1, genreName);
+            prst.setInt(2, genreId);
+            int affectedRows = prst.executeUpdate();
+            
+            return affectedRows > 0;
+              
+        } catch (SQLServerException ex)
+        {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
 }

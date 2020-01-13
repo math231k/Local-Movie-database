@@ -59,6 +59,7 @@ public class LmdbController implements Initializable
     private AppModel model;
     public static int getRating;
     public static int getId;
+    public static int getGenreId;
     public static int getRelDate;
     public static String getTitle;
     public static String getGenre;
@@ -232,7 +233,7 @@ public class LmdbController implements Initializable
         if(!movieTableView.getSelectionModel().isEmpty())
         {
         Movie editMovie = movieTableView.getSelectionModel().getSelectedItem();
-        getId = editMovie.getId();
+        getGenreId = editMovie.getId();
         getRating = editMovie.getRating();
         getTitle = editMovie.getTitle();
         
@@ -274,8 +275,27 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void editCategory(ActionEvent event)
+    private void editCategory(ActionEvent event) throws IOException, DalException
     {
+        if(!categoryTableView.getSelectionModel().isEmpty())
+        {
+        Genre category = categoryTableView.getSelectionModel().getSelectedItem();
+        getGenreId = category.getId();
+        getTitle = category.getGenreName();
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/localmoviedatabase/gui/views/EditCategory.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.showAndWait();
+        stage.setTitle("Edit category");
+        stage.setAlwaysOnTop(true);
+        categoryTableView.getColumns().clear();
+        categoryTable();
+        } else
+        {
+            System.out.println("Please select a category to edit");
+        }
     }
 
     @FXML
