@@ -27,12 +27,16 @@ public class CategoryDBDAO
     
     private DBSettings dbConnection;
 
-    public CategoryDBDAO() throws IOException
+    public CategoryDBDAO()
     {
-        dbConnection = new DBSettings();
+        try {
+            dbConnection = new DBSettings();
+        } catch (IOException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public List<Genre> getAllCategories() throws DalException
+    public List<Genre> getAllCategories()
     {
         
         try
@@ -63,11 +67,11 @@ public class CategoryDBDAO
         } catch (SQLException ex)
         {
             ex.printStackTrace();
-            throw new DalException();
-        }        
+        }
+        return null;        
     }
     
-    public Boolean createGenre(Genre g) throws SQLServerException, SQLException{
+    public Boolean createGenre(Genre g){
         try(Connection con = dbConnection.getConnection()){
             
             String sql = "INSERT INTO Genre (genreName) VALUES (?);";
@@ -93,9 +97,9 @@ public class CategoryDBDAO
 
     public boolean removeGenre(Genre g) {
     try (Connection con = dbConnection.getConnection()) {
-            String sql = "DELETE FROM Genre WHERE genreName = ?;";
+            String sql = "DELETE FROM Genre WHERE genreId = ?;";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, g.getGenreName());
+            stmt.setInt(1, g.getId());
             int updatedRows = stmt.executeUpdate();
 
             return updatedRows > 0;
@@ -111,27 +115,33 @@ public class CategoryDBDAO
 
     public boolean addMovieToCategory(Movie m, Genre g) {
         try (Connection con = dbConnection.getConnection()) {
-            String sql = "INSERT INTO GenreMovies (genreId, movieId) VALUES (?,?);";
-            PreparedStatement stmt = con.prepareStatement(sql);
+           String sql = "INSERT INTO GenreMovies(genreId, MovieId) VALUES (?,?);";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            System.out.println(g.getId() +" "+m.getId() );
+            pstm.setInt(1, g.getId());
+            pstm.setInt(2, m.getId());
+            
 
-            stmt.setInt(1, g.getId());
-            stmt.setInt(2, m.getId());
-
-            int updatedRows = stmt.executeUpdate();
+            int updatedRows = pstm.executeUpdate();
 
             return updatedRows > 0;
 
         } catch (SQLServerException ex) {
-            Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
    
-    public List<Movie> getMoviesFromGenre(){
+    public List<Movie> getMoviesFromGenre(Genre g){
         try(Connection con = dbConnection.getConnection()){
             String sql = "SELECT * FROM genreMovies WHERE genreId = ? VALUES (?);";
+            
+            PreparedStatement pstm = con.prepareStatement(sql);
+            
+            pstm.setInt(1, g.getId());
+            
             
             
         

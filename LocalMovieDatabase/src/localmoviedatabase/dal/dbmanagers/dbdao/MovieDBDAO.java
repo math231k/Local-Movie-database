@@ -31,12 +31,16 @@ public class MovieDBDAO implements MovieDalFacade{
 
     private DBSettings dbConnection;
 
-    public MovieDBDAO() throws IOException
+    public MovieDBDAO()
     {
-        dbConnection = new DBSettings();
+        try {
+            dbConnection = new DBSettings();
+        } catch (IOException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public List<Movie> getAllMovies() throws DalException
+    public List<Movie> getAllMovies()
     {
         
         try
@@ -52,7 +56,7 @@ public class MovieDBDAO implements MovieDalFacade{
             String sql = "SELECT * FROM Movie;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            ArrayList<Movie> allMovies = new ArrayList<>();
+            List<Movie> allMovies = new ArrayList<>();
             while (rs.next())
             {
                 String title = rs.getString("title");
@@ -72,8 +76,9 @@ public class MovieDBDAO implements MovieDalFacade{
         } catch (SQLException ex)
         {
             ex.printStackTrace();
-            throw new DalException();
+            
         }
+        return null;
     }
     
 

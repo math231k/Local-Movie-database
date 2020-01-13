@@ -23,18 +23,18 @@ public class CategoryManager
     
     private CategoryDBDAO categoryDBDAO;
 
-    public CategoryManager() throws IOException
+    public CategoryManager()
     {
         categoryDBDAO = new CategoryDBDAO();
     }
     
     
-    public List<Genre> getAllCategories() throws DalException{
+    public List<Genre> getAllCategories(){
         return categoryDBDAO.getAllCategories();
         
     }
     
-    public void createGenre(Genre g) throws DalException, SQLException{
+    public void createGenre(Genre g){
         
             categoryDBDAO.createGenre(g);
         
@@ -45,8 +45,12 @@ public class CategoryManager
     
     }
 
-    public void addMovieToCategory(Movie m, Genre g) {
-        categoryDBDAO.addMovieToCategory(m, g);
+    public void addMovieToCategory(Movie movie, Genre genre) {
+        categoryDBDAO.addMovieToCategory(movie, genre);
+    }
+
+    public List<Movie> getAllMoviesInGenre(Genre g) {
+        return categoryDBDAO.getMoviesFromGenre(g);      
     }
     
     

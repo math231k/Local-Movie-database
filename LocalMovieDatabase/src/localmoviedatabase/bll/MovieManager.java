@@ -22,12 +22,12 @@ public class MovieManager
     private MovieDBDAO movieDBDAO;
 
     
-    public MovieManager() throws IOException
+    public MovieManager()
     {
         movieDBDAO = new MovieDBDAO();
     }
     
-    public List <Movie> getAllMovies() throws IOException, DalException
+    public List <Movie> getAllMovies()
     {
         return movieDBDAO.getAllMovies();
     }

@@ -27,6 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -38,6 +39,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
@@ -54,6 +56,14 @@ import localmoviedatabase.dal.dbmanagers.mockdatamanagers.MockMovieManager;
 public class LmdbController implements Initializable
 {
 
+    private final AppModel model = new AppModel();
+    private final MockMovieManager mmm = new MockMovieManager();
+    private final SearchMovies search = new SearchMovies(); 
+    private MediaView mediaView;
+    private TextField catNameFld;
+    private TextField setTitleFld;
+    private TextField pathFld;
+    
     private Label label;
     @FXML
     private TableColumn<Movie, String> movieTitle;
@@ -72,11 +82,7 @@ public class LmdbController implements Initializable
     @FXML
     private TableView<Genre> categoryTableView;
     @FXML
-    private Button categoryAdd;
-    @FXML
     private Button categoryRemove;
-    @FXML
-    private Button movieAdd;
     @FXML
     private Button movieRemove;
     @FXML
@@ -87,49 +93,32 @@ public class LmdbController implements Initializable
     private Button playButton;
     @FXML
     private Button categoryEdit;
-    
-    private MockMovieManager mmm = new MockMovieManager();
-    private SearchMovies search = new SearchMovies();
-
-    private AppModel model;
-    @FXML
-    private MediaView mediaView;
-    @FXML
-    private TextField catNameFld;
-    @FXML
-    private TextField setTitleFld;
-    @FXML
-    private TextField pathFld;
-    @FXML
-    private Button findMoviePath;
     @FXML
     private Button addToCategory;
+    private TableView<Movie> genreMovieTableView;
+    @FXML
+    private Text genreTxt;
+    @FXML
+    private ListView<Movie> genreMoviesLst;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        try
-        {
-            model = new AppModel();
-            try {
-                movieTable();
-            } catch (DalException ex) {
-                Logger.getLogger(LmdbController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                categoryTable();
-            } catch (DalException ex) {
-                Logger.getLogger(LmdbController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+ 
+        movieTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        movieRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        
+
+        categoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        
+            movieTableView.setItems(model.getMovies());
+            categoryTableView.setItems(model.getCategories());
+            //genreMovieTableView.setItems(model.getGenreMovieList());
             
-        } catch (IOException ex)
-        {
-            Logger.getLogger(LmdbController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        selectedMovie();
-        
+            selectedMovie();
+            
+    
     }
 
     private void movieTable() throws DalException, IOException
@@ -147,6 +136,11 @@ public class LmdbController implements Initializable
         categoryTableView.getColumns().clear();
         categoryTableView.setItems(model.getCategories());
         categoryTableView.getColumns().addAll(categoryName);
+    }
+    
+    private void genreMoviesTable()
+    {
+        genreMoviesLst.setItems(model.getGenreMovieList());
     }
 
     /**
@@ -174,7 +168,6 @@ public class LmdbController implements Initializable
         
     }
 
-    @FXML
     private void addCategory(ActionEvent event) throws DalException, SQLException
     {
         
@@ -194,15 +187,11 @@ public class LmdbController implements Initializable
         
     }
 
-    @FXML
     private void addMovie(ActionEvent event) throws DalException, IOException
     {
         
         String path = pathFld.getText();
-        //Media m = new Media(path);
-        //int length = (int) m.getDuration().toSeconds();
-        
-        
+
         
         Movie mo = new Movie(setTitleFld.getText(), 200 + "", path);
         
@@ -267,7 +256,6 @@ public class LmdbController implements Initializable
         movieTableView.setItems(result);
     }
 
-    @FXML
     private void FindPath(ActionEvent event) {
     JFileChooser jfc = new JFileChooser();
         FileNameExtensionFilter mp4Filter = new FileNameExtensionFilter(".mp4 Files", "mp4");
@@ -291,9 +279,15 @@ public class LmdbController implements Initializable
     @FXML
     private void AddMovieToCategory(ActionEvent event) {
     
-    model.addMovieToCategory(movieTableView.getSelectionModel().getSelectedItem(),
-            categoryTableView.getSelectionModel().getSelectedItem());
+            Movie selectedMovie = movieTableView.getSelectionModel().getSelectedItem();
+        
+            model.addMovieToCategory(selectedMovie);
+            model.getGenreMovieList();
+            
+            
         
     }
+    
+    
     
 }
