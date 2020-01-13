@@ -117,7 +117,6 @@ public class CategoryDBDAO
         try (Connection con = dbConnection.getConnection()) {
            String sql = "INSERT INTO GenreMovies(genreId, MovieId) VALUES (?,?);";
             PreparedStatement pstm = con.prepareStatement(sql);
-            System.out.println(g.getId() +" "+m.getId() );
             pstm.setInt(1, g.getId());
             pstm.setInt(2, m.getId());
             

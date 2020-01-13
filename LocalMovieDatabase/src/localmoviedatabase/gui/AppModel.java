@@ -64,8 +64,7 @@ public class AppModel
     }
 
 
-    void addMovie(Movie m) {
-        
+    void addMovie(Movie m) {       
         movieManager.addMovie(m);
     }
 

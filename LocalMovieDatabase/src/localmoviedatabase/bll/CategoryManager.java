@@ -50,7 +50,7 @@ public class CategoryManager
     }
 
     public List<Movie> getAllMoviesInGenre(Genre g) {
-        return categoryDBDAO.getMoviesFromGenre(g);      
+        return categoryDBDAO.getMoviesFromGenre(g);     
     }
     
     
