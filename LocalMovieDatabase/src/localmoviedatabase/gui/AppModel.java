@@ -104,7 +104,6 @@ public final class AppModel
         getCategories();
     }
     
-    public ObservableList<Movie> searchMovie(String input) throws DalException, IOException{
     
     /**
      * Returns a list with a search result consisting of movies
@@ -116,6 +115,7 @@ public final class AppModel
         
         ObservableList<Movie> result = FXCollections.observableList(filter);
         return result;
+    
     }
     
     /**

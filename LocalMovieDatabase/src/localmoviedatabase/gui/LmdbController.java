@@ -284,7 +284,7 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void searchMovie(KeyEvent event)
+    private void searchMovie(KeyEvent event) throws DalException, IOException
     {
         String input = searchMovie.getText();
         ObservableList<Movie> resultMovies = model.searchMovie(input);
