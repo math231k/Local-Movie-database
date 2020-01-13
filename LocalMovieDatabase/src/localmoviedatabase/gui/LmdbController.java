@@ -181,6 +181,7 @@ public class LmdbController implements Initializable
         model.removeGenre(g);
     }
 
+    @FXML
     private void addMovie(ActionEvent event)
     {
         JFileChooser jfc = new JFileChooser();
@@ -277,10 +278,6 @@ public class LmdbController implements Initializable
         }
     }
 
-    @FXML
-    private void AddMovieToCategory(ActionEvent event)
-    {
-    }
 
     @FXML
     private void AddMovieToCategory(ActionEvent event) {
