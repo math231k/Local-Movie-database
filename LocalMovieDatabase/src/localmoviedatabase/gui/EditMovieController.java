@@ -23,7 +23,7 @@ import localmoviedatabase.dal.dbaccess.DalException;
  *
  * @author Rizvan
  */
-public class EditMovieController implements Initializable
+public class EditMovieController extends LmdbController implements Initializable
 {
     
     private LmdbController mainController;
@@ -59,23 +59,26 @@ public class EditMovieController implements Initializable
     }    
 
     @FXML
-    private void saveEditMovie(ActionEvent event) throws IOException, DalException
+    private void saveEditMovie(ActionEvent event)
     {
         appModel = new AppModel();
         
         
         int rating = Integer.parseInt(txtRating.getText());
         
+
         if (rating > 0 && rating < 11) {
         Movie movie = new Movie(LmdbController.getId, rating, txtName.getText().trim());
         appModel.updateMovie(movie);
-        
+        movieTable();
         Stage stage = (Stage) saveEditMovie.getScene().getWindow();
         stage.close();
         }
+
         else{
         ratingInfo.setText("Invalid Rating!");
         }
+
     }
 
     @FXML

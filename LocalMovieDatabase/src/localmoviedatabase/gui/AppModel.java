@@ -24,7 +24,7 @@ import localmoviedatabase.dal.dbaccess.DalException;
  *
  * @author math2
  */
-public class AppModel
+public final class AppModel
 {
     
     private MovieManager movieManager;
@@ -36,7 +36,7 @@ public class AppModel
     private Genre currentlySelectedGenre;
 
     
-    public AppModel() throws IOException, DalException
+    public AppModel()
     {
         movieManager = new MovieManager();
         categoryManager = new CategoryManager();
@@ -44,19 +44,29 @@ public class AppModel
         fetchCategories();
     }
     
+    /**
+     * adds all database Genres to an ObservableList
+     */
     public void fetchCategories()
     {
         categories.clear();
         categories.addAll(categoryManager.getAllCategories());
     }        
     
-    public void fetchMovies() throws IOException, DalException
+    /**
+     * Adds all Movies to an Observable List
+     */
+    public void fetchMovies()
     {
         movies.clear();
         movies.addAll(movieManager.getAllMovies());
         
     }
     
+    /**
+     * adds all movies from a specified genre to an ObservableList
+     * @param genre 
+     */
     public void fetchMoviesFromGenre(Genre genre){
         moviesInGenre.clear();
         moviesInGenre.addAll(categoryManager.getAllMoviesInGenre(genre));
@@ -64,34 +74,59 @@ public class AppModel
     }
 
 
-
+    /**
+    * Adds a movie to the database
+    * @param m the movie to be added
+    */
     public void addMovie(Movie m) {
         movieManager.addMovie(m);
     }
 
+    /**
+     * Removes a movie from the database
+     * @param m the movie to be deleted
+     */
     public void removeMovie(Movie m) {
         movieManager.removeMovie(m);
     }
     
-    public void updateMovie(Movie m) throws DalException, IOException{
+    /**
+     * Updated a specified movie from the dataBase
+     * @param m the movie to be updated
+     */
+    public void updateMovie(Movie m){
         movieManager.updateMovie(m);
-        getMovies();
+        
     }
     
-    public ObservableList<Movie> searchMovie(String input) throws DalException, IOException{
+    
+    /**
+     * Returns a list with a search result consisting of movies
+     * @param input the String to compare to
+     * @return an ObservableList of movies
+     */
+    public ObservableList<Movie> searchMovie(String input){
         List<Movie> filter = search.searchMovie(getMovies(),input);
         
         ObservableList<Movie> result = FXCollections.observableList(filter);
         return result;
     }
     
-    public ObservableList<Genre> searchGenre(String input) throws DalException, IOException{
+    /**
+     * Returns a list with a search result consisting of genres
+     * @param input the String to compare to
+     * @return an ObservableList of genres
+     */
+    public ObservableList<Genre> searchGenre(String input){
         List<Genre> filter = search.searchCategory(getCategories(),input);
         
         ObservableList<Genre> result = FXCollections.observableList(filter);
         return result;
     }
     
+    /**
+     * creates a prompt warning the user that no movie is selected
+     */
     public void noMovieSelected(){
         Alert noSelectionAlert = new Alert(Alert.AlertType.ERROR);
                 
@@ -102,32 +137,58 @@ public class AppModel
                 noSelectionAlert.showAndWait();
     }
     
-    public void createGenre(Genre g) throws DalException, SQLException{
+    /**
+     * adds a new genre to the database
+     * @param g the genre to be added
+     */
+    public void createGenre(Genre g){
         categoryManager.createGenre(g);
         
     }
-
+    
+    /**
+     * removes a genre from the database
+     * @param g the genre to be deleted
+     */
     public void removeGenre(Genre g) {
     categoryManager.removeGenre(g);
     }
 
-    public void addMovieToCategory(Movie movie) {
-        categoryManager.addMovieToCategory(movie, currentlySelectedGenre);
-        fetchMoviesFromGenre(currentlySelectedGenre);
+    /**
+     * add a movie to a specified genre
+     * @param movie the movie to be added
+     * @param genre the genre to get the movie
+     */
+    public void addMovieToCategory(Movie movie, Genre genre) {
+        categoryManager.addMovieToCategory(movie, genre);
+        fetchMoviesFromGenre(genre);
     }
 
+    
+    /**
+     * 
+     * @return An Observablelist of movies in a genre
+     */
     public ObservableList<Movie> getGenreMovieList(){
         moviesInGenre.clear();
         return moviesInGenre;
     }
     
+    /**
+     * 
+     * @return an Observable list of genres
+     */
     public ObservableList<Genre> getCategories(){
         categories.clear();
         fetchCategories();
         return categories;
     }
     
-    public ObservableList<Movie> getMovies() throws IOException, DalException{
+    /**
+     * 
+     * @return An observable list of movies
+     */
+    public ObservableList<Movie> getMovies(){
         movies.clear();
         fetchMovies();
         return movies;
