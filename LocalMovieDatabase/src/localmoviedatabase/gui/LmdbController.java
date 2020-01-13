@@ -123,6 +123,9 @@ public class LmdbController implements Initializable
         } catch (IOException ex)
         {
             Logger.getLogger(LmdbController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DalException ex)
+        {
+            Logger.getLogger(LmdbController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
