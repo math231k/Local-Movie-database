@@ -104,6 +104,8 @@ public class LmdbController implements Initializable
     private ListView<?> genreMoviesLst;
     @FXML
     private Text genreTxt;
+    @FXML
+    private Button addMovie;
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -140,16 +142,16 @@ public class LmdbController implements Initializable
         movieTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         movieRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
         movieTableView.getColumns().clear();
-        movieTableView.setItems(model.getMovies());
         movieTableView.getColumns().addAll(movieTitle, movieRating);
+        movieTableView.setItems(model.getMovies());
     }
 
     private void categoryTable() throws DalException
     {
         categoryName.setCellValueFactory(new PropertyValueFactory<>("genreName"));
         categoryTableView.getColumns().clear();
-        categoryTableView.setItems(model.getCategories());
         categoryTableView.getColumns().addAll(categoryName);
+        categoryTableView.setItems(model.getCategories());
     }
 
     /**
@@ -195,6 +197,7 @@ public class LmdbController implements Initializable
         model.removeGenre(g);
     }
 
+    @FXML
     private void addMovie(ActionEvent event)
     {
         JFileChooser jfc = new JFileChooser();
