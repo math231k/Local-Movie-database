@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import localmoviedatabase.be.Genre;
+import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DalException;
 import localmoviedatabase.dal.dbmanagers.dbdao.CategoryDBDAO;
 
@@ -18,20 +19,22 @@ import localmoviedatabase.dal.dbmanagers.dbdao.CategoryDBDAO;
  */
 public class CategoryManager
 {
+
+    
     private CategoryDBDAO categoryDBDAO;
 
-    public CategoryManager() throws IOException
+    public CategoryManager()
     {
         categoryDBDAO = new CategoryDBDAO();
     }
     
     
-    public List<Genre> getAllCategories() throws DalException{
+    public List<Genre> getAllCategories(){
         return categoryDBDAO.getAllCategories();
         
     }
     
-    public void createGenre(Genre g) throws DalException, SQLException{
+    public void createGenre(Genre g){
         
             categoryDBDAO.createGenre(g);
         
@@ -41,6 +44,16 @@ public class CategoryManager
         categoryDBDAO.removeGenre(g);
     
     }
+
+    public void addMovieToCategory(Movie movie, Genre genre) {
+        categoryDBDAO.addMovieToCategory(movie, genre);
+    }
+
+    public List<Movie> getAllMoviesInGenre(Genre g) {
+        return categoryDBDAO.getMoviesFromGenre(g);      
+    }
+    
+    
     
     
 }

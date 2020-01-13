@@ -19,6 +19,7 @@ import localmoviedatabase.bll.MovieManager;
 import localmoviedatabase.bll.util.SearchMovies;
 import localmoviedatabase.dal.dbaccess.DalException;
 
+
 /**
  *
  * @author math2
@@ -30,28 +31,36 @@ public class AppModel
     private CategoryManager categoryManager;
     private ObservableList<Movie> movies = FXCollections.observableArrayList();
     private ObservableList<Genre> categories = FXCollections.observableArrayList();
+    private ObservableList<Movie> moviesInGenre = FXCollections.observableArrayList();
     private SearchMovies search = new SearchMovies();
+    private Genre currentlySelectedGenre;
 
     
-    public AppModel() throws IOException
+    public AppModel()
     {
         movieManager = new MovieManager();
         categoryManager = new CategoryManager();
+        fetchMovies();
+        fetchCategories();
     }
     
-    public ObservableList<Genre> getCategories() throws DalException
+    public void fetchCategories()
     {
         categories.clear();
         categories.addAll(categoryManager.getAllCategories());
-        return categories;
     }        
     
-    public ObservableList<Movie> getMovies() throws DalException, IOException
+    public void fetchMovies()
     {
         movies.clear();
         movies.addAll(movieManager.getAllMovies());
-        return movies;
         
+    }
+    
+    public void fetchMoviesFromGenre(Genre genre){
+        moviesInGenre.clear();
+        moviesInGenre.addAll(categoryManager.getAllMoviesInGenre(genre));
+        currentlySelectedGenre = genre;
     }
 
 
@@ -91,8 +100,30 @@ public class AppModel
         
     }
 
-    void removeGenre(Genre g) {
+    public void removeGenre(Genre g) {
     categoryManager.removeGenre(g);
+    }
+
+    public void addMovieToCategory(Movie movie) {
+        categoryManager.addMovieToCategory(movie, currentlySelectedGenre);
+        fetchMoviesFromGenre(currentlySelectedGenre);
+    }
+
+    public ObservableList<Movie> getGenreMovieList(){
+        moviesInGenre.clear();
+        return moviesInGenre;
+    }
+    
+    public ObservableList<Genre> getCategories(){
+        categories.clear();
+        fetchCategories();
+        return categories;
+    }
+    
+    public ObservableList<Movie> getMovies(){
+        movies.clear();
+        fetchMovies();
+        return movies;
     }
     
 

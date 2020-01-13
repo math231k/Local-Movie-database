@@ -2,17 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="614.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="localmoviedatabase.gui.LmdbController">
    <children>
-      <TableView fx:id="movieTableView" layoutX="312.0" layoutY="103.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="movieTableView" layoutX="627.0" layoutY="101.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="movieTitle" prefWidth="131.0" text="Movie title" />
           <TableColumn fx:id="movieRating" prefWidth="67.0" text="Rating" />
@@ -23,48 +23,46 @@
           <TableColumn fx:id="categoryName" prefWidth="199.0" text="Categories" />
         </columns>
       </TableView>
-      <Button fx:id="categoryAdd" layoutX="56.0" layoutY="381.0" mnemonicParsing="false" onAction="#addCategory" prefWidth="45.0" text="Add" />
       <Button fx:id="categoryRemove" layoutX="133.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeCategory" text="Remove" />
-      <Button fx:id="movieAdd" layoutX="312.0" layoutY="381.0" mnemonicParsing="false" onAction="#addMovie" prefWidth="45.0" text="Add" />
-      <Button fx:id="movieRemove" layoutX="312.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
-      <TextField fx:id="searchMovie" layoutX="312.0" layoutY="79.0" onKeyTyped="#searchMovie" prefHeight="25.0" prefWidth="200.0" promptText="search in movies" />
-      <Label layoutX="672.0" layoutY="322.0" text="Selected movie">
+      <Button fx:id="movieRemove" layoutX="627.0" layoutY="301.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
+      <TextField fx:id="searchMovie" layoutX="627.0" layoutY="77.0" onKeyTyped="#searchMovie" prefHeight="25.0" prefWidth="200.0" promptText="search in movies" />
+      <Label layoutX="404.0" layoutY="345.0" text="Selected movie">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="showTitle" alignment="CENTER" layoutX="638.0" layoutY="360.0">
+      <TextField fx:id="showTitle" alignment="CENTER" layoutX="370.0" layoutY="383.0">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="showCategory" alignment="CENTER" layoutX="638.0" layoutY="405.0">
+      <TextField fx:id="showCategory" alignment="CENTER" layoutX="370.0" layoutY="428.0">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="556.0" layoutY="365.0" text="Title:">
+      <Label layoutX="288.0" layoutY="388.0" text="Title:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="556.0" layoutY="410.0" text="Category:">
+      <Label layoutX="288.0" layoutY="433.0" text="Category:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="movieEdit" layoutX="375.0" layoutY="303.0" mnemonicParsing="false" onAction="#editMovie" text="Edit" />
-      <Label layoutX="556.0" layoutY="459.0" text="Rating:">
+      <Button fx:id="movieEdit" layoutX="690.0" layoutY="301.0" mnemonicParsing="false" onAction="#editMovie" text="Edit" />
+      <Label layoutX="288.0" layoutY="482.0" text="Rating:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="showRating" alignment="CENTER" layoutX="638.0" layoutY="454.0">
+      <TextField fx:id="showRating" alignment="CENTER" layoutX="370.0" layoutY="477.0">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="playButton" layoutX="682.0" layoutY="514.0" mnemonicParsing="false" onAction="#playSelectedMovie" text="Play movie">
+      <Button fx:id="playButton" layoutX="414.0" layoutY="537.0" mnemonicParsing="false" onAction="#playSelectedMovie" text="Play movie">
          <font>
             <Font size="14.0" />
          </font>
@@ -75,20 +73,13 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="688.0" layoutY="544.0" opacity="0.5" text="(opens in VLC)" />
-      <MediaView fx:id="mediaView" fitHeight="240.0" fitWidth="352.0" layoutX="512.0" layoutY="48.0" />
-      <Text layoutX="56.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a new category">
+      <Label layoutX="420.0" layoutY="567.0" opacity="0.5" text="(opens in VLC)" />
+      <Button fx:id="addToCategory" layoutX="56.0" layoutY="303.0" mnemonicParsing="false" onAction="#AddMovieToCategory" text="Add Movie" />
+      <ListView fx:id="genreMoviesLst" layoutX="345.0" layoutY="102.0" prefHeight="200.0" prefWidth="200.0" />
+      <Text fx:id="genreTxt" layoutX="347.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" wrappingWidth="59.0">
          <font>
-            <Font size="17.0" />
+            <Font size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="catNameFld" layoutX="115.0" layoutY="381.0" prefHeight="25.0" prefWidth="154.0" promptText="Name your new Category" />
-      <Text layoutX="312.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new movie">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Text>
-      <TextField layoutX="367.0" layoutY="381.0" promptText="Movie title" />
-      <Button layoutX="56.0" layoutY="303.0" mnemonicParsing="false" text="Add Movie" />
    </children>
 </AnchorPane>
