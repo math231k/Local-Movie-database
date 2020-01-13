@@ -24,6 +24,15 @@ public class Genre
         this.genreName = genreName;
     }
 
+    //constructor for editing category
+    public Genre(int id, String genreName)
+    {
+        this.id = id;
+        this.genreName = genreName;
+    }
+    
+    
+
     public String getGenreName()
     {
         return genreName;

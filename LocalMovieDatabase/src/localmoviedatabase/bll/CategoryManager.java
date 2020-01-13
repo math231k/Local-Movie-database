@@ -22,6 +22,7 @@ public class CategoryManager
 
     
     private CategoryDBDAO categoryDBDAO;
+    
 
     public CategoryManager()
     {
@@ -44,13 +45,18 @@ public class CategoryManager
         categoryDBDAO.removeGenre(g);
     
     }
+    
+    public void updateGenre(Genre g)
+    {
+        categoryDBDAO.updateCategory(g);
+    }
 
     public void addMovieToCategory(Movie movie, Genre genre) {
         categoryDBDAO.addMovieToCategory(movie, genre);
     }
 
     public List<Movie> getAllMoviesInGenre(Genre g) {
-        return categoryDBDAO.getMoviesFromGenre(g);      
+        return categoryDBDAO.getMoviesFromGenre(g);     
     }
     
     

@@ -47,7 +47,7 @@ public class MovieDBDAO implements MovieDalFacade{
     }
 
     
-
+/*
     @Override
     public boolean updateMovie(Movie movie) {
         try (Connection con = dbConnection.getConnection()) {
@@ -69,7 +69,7 @@ public class MovieDBDAO implements MovieDalFacade{
         }
         return false;
     }
-
+*/
     @Override
     public List<Movie> readMovie()
     {
@@ -111,6 +111,34 @@ public class MovieDBDAO implements MovieDalFacade{
         return null;
     }
     
+    
+
+    @Override
+    public boolean updateMovie(Movie movie) {
+        try (Connection con = dbConnection.getConnection()) {
+            
+            String title = movie.getTitle();
+            String rating = movie.getRating();
+            int movieId = movie.getId();
+            
+            String sql = "UPDATE Movie SET title=?, rating=? WHERE movieId=?";
+            PreparedStatement prst = con.prepareStatement(sql);
+            prst.setString(1, title);
+            prst.setString(2, rating);
+            prst.setInt(3, movieId);
+            int affectedRows = prst.executeUpdate();
+            
+            return affectedRows > 0;
+        } catch (SQLServerException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    
+
     @Override
     public boolean createMovie(Movie movie) {
 

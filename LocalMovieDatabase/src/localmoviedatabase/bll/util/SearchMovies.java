@@ -33,9 +33,26 @@ public class SearchMovies {
         List<Genre> output = new ArrayList<>();
 
         for (Genre genre : searchBase) {
+            /*
             if (genre.getGenreName().toLowerCase().contains(query.toLowerCase())
-                    /*|| genre.getCategory().toLowerCase().contains(query.toLowerCase())*/) {
+                    /*|| genre.getCategory().toLowerCase().contains(query.toLowerCase())) {
                 output.add(genre);
+            }
+            */
+            if (searchForMovie(genre.getMovies(),query) == true){
+                output.add(genre);
+            }
+        }
+
+        return output;
+    }
+    public boolean searchForMovie(List<Movie> searchBase, String query) {
+        boolean output = false;
+
+        for (Movie movie : searchBase) {
+            if (movie.getTitle().toLowerCase().contains(query.toLowerCase())
+                    /*|| genre.getCategory().toLowerCase().contains(query.toLowerCase())*/) {
+                output = true;
             }
         }
 

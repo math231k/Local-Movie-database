@@ -52,7 +52,7 @@ public class CategoryDBDAO
             String sql = "SELECT * FROM Genre;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            ArrayList<Genre> allCategories = new ArrayList<>();
+            List<Genre> allCategories = new ArrayList<>();
             while (rs.next())
             {
                 String genreName = rs.getString("genreName");
@@ -116,7 +116,6 @@ public class CategoryDBDAO
         try (Connection con = dbConnection.getConnection()) {
            String sql = "INSERT INTO GenreMovies(genreId, MovieId) VALUES (?,?);";
             PreparedStatement pstm = con.prepareStatement(sql);
-            System.out.println(g.getId() +" "+m.getId() );
             pstm.setInt(1, g.getId());
             pstm.setInt(2, m.getId());
             
@@ -130,6 +129,7 @@ public class CategoryDBDAO
         } catch (SQLException ex) {
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("Shit");
         return false;
     }
    
@@ -150,6 +150,32 @@ public class CategoryDBDAO
             Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+  
+    public boolean updateCategory(Genre g)
+    {
+        try (Connection con = dbConnection.getConnection())
+        {
+            String genreName = g.getGenreName();
+            int genreId = g.getId();
+            
+            String sql = "UPDATE Genre SET genreName=? WHERE genreId=?";
+            PreparedStatement prst = con.prepareStatement(sql);
+            prst.setString(1, genreName);
+            prst.setInt(2, genreId);
+            int affectedRows = prst.executeUpdate();
+            
+            return affectedRows > 0;
+              
+        } catch (SQLServerException ex)
+        {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
 }

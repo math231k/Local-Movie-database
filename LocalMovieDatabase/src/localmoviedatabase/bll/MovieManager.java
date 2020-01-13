@@ -25,7 +25,7 @@ public class MovieManager
         movieDBDAO = new MovieDBDAO();
     }
     
-    public List <Movie> getAllMovies()
+    public List<Movie> getAllMovies()
     {
         return movieDBDAO.readMovie();
     }
