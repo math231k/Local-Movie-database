@@ -24,7 +24,7 @@
         </columns>
       </TableView>
       <Button fx:id="categoryRemove" layoutX="133.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeCategory" text="Remove" />
-      <Button fx:id="movieRemove" layoutX="627.0" layoutY="301.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
+      <Button fx:id="movieRemove" layoutX="707.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
       <TextField fx:id="searchMovie" layoutX="627.0" layoutY="77.0" onKeyTyped="#searchMovie" prefHeight="25.0" prefWidth="200.0" promptText="search in movies" />
       <Label layoutX="404.0" layoutY="345.0" text="Selected movie">
          <font>
@@ -51,7 +51,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="movieEdit" layoutX="690.0" layoutY="301.0" mnemonicParsing="false" onAction="#editMovie" text="Edit" />
+      <Button fx:id="movieEdit" layoutX="770.0" layoutY="303.0" mnemonicParsing="false" onAction="#editMovie" text="Edit" />
       <Label layoutX="288.0" layoutY="482.0" text="Rating:">
          <font>
             <Font size="14.0" />
@@ -81,5 +81,6 @@
             <Font size="20.0" />
          </font>
       </Text>
+      <Button fx:id="addMovie" layoutX="627.0" layoutY="303.0" mnemonicParsing="false" onAction="#addMovie" text="Add Movie" />
    </children>
 </AnchorPane>

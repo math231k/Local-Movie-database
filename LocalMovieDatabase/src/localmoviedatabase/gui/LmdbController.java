@@ -103,9 +103,14 @@ public class LmdbController implements Initializable
     @FXML
     private Button addToCategory;
     @FXML
+
     private ListView<Movie> genreMoviesLst;
     @FXML
     private Text genreTxt;
+
+    @FXML
+    private Button addMovie;
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -121,16 +126,16 @@ public class LmdbController implements Initializable
         movieTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         movieRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
         movieTableView.getColumns().clear();
-        movieTableView.setItems(model.getMovies());
         movieTableView.getColumns().addAll(movieTitle, movieRating);
+        movieTableView.setItems(model.getMovies());
     }
 
     public void categoryTable()
     {
         categoryName.setCellValueFactory(new PropertyValueFactory<>("genreName"));
         categoryTableView.getColumns().clear();
-        categoryTableView.setItems(model.getCategories());
         categoryTableView.getColumns().addAll(categoryName);
+        categoryTableView.setItems(model.getCategories());
     }
 
     /**
@@ -207,6 +212,8 @@ public class LmdbController implements Initializable
     @FXML
     private void editMovie(ActionEvent event) throws IOException
     {
+        if(!movieTableView.getSelectionModel().isEmpty())
+        {
         Movie editMovie = movieTableView.getSelectionModel().getSelectedItem();
         getId = editMovie.getId();
         getRating = editMovie.getRating();
@@ -222,6 +229,10 @@ public class LmdbController implements Initializable
         stage.setAlwaysOnTop(true);
         movieTableView.getColumns().clear();
         movieTable();
+        } else
+        {
+            System.out.println("Please select a movie to edit");
+        }
  
     }
 
@@ -254,8 +265,21 @@ public class LmdbController implements Initializable
     private void searchMovie(KeyEvent event)
     {
         String input = searchMovie.getText();
-        ObservableList<Movie> result = model.searchMovie(input);
-        movieTableView.setItems(result);
+        ObservableList<Movie> resultMovies = model.searchMovie(input);
+        ObservableList<Genre> resultGenre = model.searchGenre(input);
+        movieTableView.setItems(resultMovies);
+        if (input.length()>0){
+            categoryTableView.setItems(resultGenre);
+        }
+        else
+        {
+            categoryTable();
+        }
+    }
+
+    @FXML
+    private void AddMovieToCategory(ActionEvent event)
+    {
     }
 
     @FXML

@@ -36,7 +36,7 @@ public final class AppModel
     private Genre currentlySelectedGenre;
 
     
-    public AppModel()
+    public AppModel() throws IOException, DalException
     {
         movieManager = new MovieManager();
         categoryManager = new CategoryManager();
@@ -50,7 +50,7 @@ public final class AppModel
         categories.addAll(categoryManager.getAllCategories());
     }        
     
-    public void fetchMovies()
+    public void fetchMovies() throws IOException, DalException
     {
         movies.clear();
         movies.addAll(movieManager.getAllMovies());
@@ -85,12 +85,19 @@ public final class AppModel
         return result;
     }
     
+    public ObservableList<Genre> searchGenre(String input) throws DalException, IOException{
+        List<Genre> filter = search.searchCategory(getCategories(),input);
+        
+        ObservableList<Genre> result = FXCollections.observableList(filter);
+        return result;
+    }
+    
     public void noMovieSelected(){
         Alert noSelectionAlert = new Alert(Alert.AlertType.ERROR);
                 
-                noSelectionAlert.setTitle("No Song");
-                noSelectionAlert.setHeaderText("Song not Selected");
-                noSelectionAlert.setContentText("Select a song to play");
+                noSelectionAlert.setTitle("No movie");
+                noSelectionAlert.setHeaderText("Movie not Selected");
+                noSelectionAlert.setContentText("Select a movie to play");
                 
                 noSelectionAlert.showAndWait();
     }
@@ -120,7 +127,7 @@ public final class AppModel
         return categories;
     }
     
-    public ObservableList<Movie> getMovies(){
+    public ObservableList<Movie> getMovies() throws IOException, DalException{
         movies.clear();
         fetchMovies();
         return movies;

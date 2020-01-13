@@ -59,7 +59,7 @@ public class CategoryDBDAO
                 int genreId = rs.getInt("genreId");
                 
                 Genre gen = new Genre(genreName);
-                gen.setId(genreId);
+                //gen.setId(genreId);
                 allCategories.add(gen);
             }
             
