@@ -229,6 +229,8 @@ public class LmdbController implements Initializable
     @FXML
     private void editMovie(ActionEvent event) throws IOException, DalException
     {
+        if(!movieTableView.getSelectionModel().isEmpty())
+        {
         Movie editMovie = movieTableView.getSelectionModel().getSelectedItem();
         getId = editMovie.getId();
         getRating = editMovie.getRating();
@@ -244,6 +246,10 @@ public class LmdbController implements Initializable
         stage.setAlwaysOnTop(true);
         movieTableView.getColumns().clear();
         movieTable();
+        } else
+        {
+            System.out.println("Please select a movie to edit");
+        }
  
     }
 

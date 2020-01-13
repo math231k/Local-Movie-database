@@ -88,9 +88,9 @@ public class AppModel
     public void noMovieSelected(){
         Alert noSelectionAlert = new Alert(Alert.AlertType.ERROR);
                 
-                noSelectionAlert.setTitle("No Song");
-                noSelectionAlert.setHeaderText("Song not Selected");
-                noSelectionAlert.setContentText("Select a song to play");
+                noSelectionAlert.setTitle("No movie");
+                noSelectionAlert.setHeaderText("Movie not Selected");
+                noSelectionAlert.setContentText("Select a movie to play");
                 
                 noSelectionAlert.showAndWait();
     }
