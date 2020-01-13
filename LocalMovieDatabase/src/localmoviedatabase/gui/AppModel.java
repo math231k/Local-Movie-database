@@ -24,11 +24,11 @@ import localmoviedatabase.dal.dbaccess.DalException;
  *
  * @author math2
  */
-public class AppModel
+public final class AppModel
 {
     
-    private MovieManager movieManager;
-    private CategoryManager categoryManager;
+    final private MovieManager movieManager;
+    final private CategoryManager categoryManager;
     private ObservableList<Movie> movies = FXCollections.observableArrayList();
     private ObservableList<Genre> categories = FXCollections.observableArrayList();
     private ObservableList<Movie> moviesInGenre = FXCollections.observableArrayList();
@@ -54,6 +54,7 @@ public class AppModel
     {
         movies.clear();
         movies.addAll(movieManager.getAllMovies());
+        
         
     }
     
@@ -115,11 +116,13 @@ public class AppModel
     
     public ObservableList<Genre> getCategories(){
         categories.clear();
+        fetchCategories();
         return categories;
     }
     
     public ObservableList<Movie> getMovies(){
         movies.clear();
+        fetchMovies();
         return movies;
     }
     

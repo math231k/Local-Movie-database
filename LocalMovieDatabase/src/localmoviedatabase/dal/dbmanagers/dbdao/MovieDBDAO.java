@@ -40,10 +40,40 @@ public class MovieDBDAO implements MovieDalFacade{
         }
     }
     
-    public List<Movie> getAllMovies()
+
+    @Override
+    public boolean deleteMovie(Movie movie) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+
+    @Override
+    public boolean updateMovie(Movie movie) {
+        try (Connection con = dbConnection.getConnection()) {
+           String sql = "UPDATE Songs SET id = ?, category = ?, title = ?, length = ?, relDate = ?, path = ?  WHERE id = ?;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, movie.getId());
+            stmt.setString(2, movie.getCategory());
+            stmt.setString(3, movie.getTitle());
+            stmt.setString(4, movie.getLength());
+            stmt.setInt(5, movie.getRelDate());
+            stmt.setString(6, movie.getPath());
+            
+            int updatedRows = stmt.executeUpdate();
+            return updatedRows > 0;
+        } catch (SQLServerException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public List<Movie> readMovie()
     {
-        
-        try
+    try
         {
             dbConnection = new DBSettings();
         } catch (IOException ex)
@@ -79,42 +109,6 @@ public class MovieDBDAO implements MovieDalFacade{
             
         }
         return null;
-    }
-    
-
-    @Override
-    public boolean deleteMovie(Movie movie) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-
-    @Override
-    public boolean updateMovie(Movie movie) {
-        try (Connection con = dbConnection.getConnection()) {
-           String sql = "UPDATE Songs SET id = ?, category = ?, title = ?, length = ?, relDate = ?, path = ?  WHERE id = ?;";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, movie.getId());
-            stmt.setString(2, movie.getCategory());
-            stmt.setString(3, movie.getTitle());
-            stmt.setString(4, movie.getLength());
-            stmt.setInt(5, movie.getRelDate());
-            stmt.setString(6, movie.getPath());
-            
-            int updatedRows = stmt.executeUpdate();
-            return updatedRows > 0;
-        } catch (SQLServerException ex) {
-            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
-    @Override
-    public List<Movie> readMovie()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override

@@ -109,19 +109,18 @@ public class LmdbController implements Initializable
         movieRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
         
 
-        categoryName.setCellValueFactory(new PropertyValueFactory<>("name"));
-
+        categoryName.setCellValueFactory(new PropertyValueFactory<>("name"));      
         
             movieTableView.setItems(model.getMovies());
             categoryTableView.setItems(model.getCategories());
             //genreMovieTableView.setItems(model.getGenreMovieList());
             
             selectedMovie();
-            
+            movieTable();
     
     }
 
-    private void movieTable() throws DalException, IOException
+    private void movieTable() 
     {
         movieTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         movieRating.setCellValueFactory(new PropertyValueFactory<>("rating"));

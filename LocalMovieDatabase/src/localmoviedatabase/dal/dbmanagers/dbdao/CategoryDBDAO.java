@@ -66,7 +66,6 @@ public class CategoryDBDAO
             return allCategories; 
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
         }
         return null;        
     }
