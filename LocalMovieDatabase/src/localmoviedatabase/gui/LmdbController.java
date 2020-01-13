@@ -26,6 +26,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -101,7 +102,7 @@ public class LmdbController implements Initializable
     @FXML
     private Button addToCategory;
     @FXML
-    private ListView<?> genreMoviesLst;
+    private ListView<Movie> genreMoviesLst;
     @FXML
     private Text genreTxt;
     @FXML
@@ -299,6 +300,24 @@ public class LmdbController implements Initializable
     {
     }
     
+    private void populateMoviesInGenreList() {
+        // custom rendering of the list cell
+        genreMoviesLst.setCellFactory(param -> new ListCell<Movie>() {
+            @Override
+            protected void updateItem(Movie item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null || item.getTitle() == null) {
+                    setText(null);
+                } else {
+                    setText((this.getIndex() + 1) + ". " + item.getTitle());
+                }
+            }
+        });
+
+        // add data to listview
+        genreMoviesLst.setItems(model.getGenreMovieList());
+    }
     
 }
 
