@@ -24,7 +24,7 @@ import localmoviedatabase.dal.dbaccess.DalException;
  *
  * @author math2
  */
-public class AppModel
+public final class AppModel
 {
     
     private MovieManager movieManager;
@@ -73,12 +73,12 @@ public class AppModel
         movieManager.removeMovie(m);
     }
     
-    public void updateMovie(Movie m) throws DalException, IOException{
+    public void updateMovie(Movie m){
         movieManager.updateMovie(m);
-        getMovies();
+        
     }
     
-    public ObservableList<Movie> searchMovie(String input) throws DalException, IOException{
+    public ObservableList<Movie> searchMovie(String input){
         List<Movie> filter = search.searchMovie(getMovies(),input);
         
         ObservableList<Movie> result = FXCollections.observableList(filter);
@@ -95,7 +95,7 @@ public class AppModel
                 noSelectionAlert.showAndWait();
     }
     
-    public void createGenre(Genre g) throws DalException, SQLException{
+    public void createGenre(Genre g){
         categoryManager.createGenre(g);
         
     }
@@ -104,9 +104,9 @@ public class AppModel
     categoryManager.removeGenre(g);
     }
 
-    public void addMovieToCategory(Movie movie) {
-        categoryManager.addMovieToCategory(movie, currentlySelectedGenre);
-        fetchMoviesFromGenre(currentlySelectedGenre);
+    public void addMovieToCategory(Movie movie, Genre genre) {
+        categoryManager.addMovieToCategory(movie, genre);
+        fetchMoviesFromGenre(genre);
     }
 
     public ObservableList<Movie> getGenreMovieList(){
