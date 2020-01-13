@@ -55,17 +55,18 @@ public class AppModel
     }
 
 
-    void addMovie(Movie m) {
+    public void addMovie(Movie m) {
         
         movieManager.addMovie(m);
     }
 
-    void removeMovie(Movie m) {
+    public void removeMovie(Movie m) {
         movieManager.removeMovie(m);
     }
     
-    void updateMovie(Movie m){
+    public void updateMovie(Movie m) throws DalException, IOException{
         movieManager.updateMovie(m);
+        getMovies();
     }
     
     public ObservableList<Movie> searchMovie(String input) throws DalException, IOException{

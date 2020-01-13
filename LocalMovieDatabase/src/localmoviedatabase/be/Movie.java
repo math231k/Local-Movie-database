@@ -31,8 +31,15 @@ public class Movie {
         this.path = path;
     }
 
+    //constructor for editing movies
+    public Movie(int id, int rating, String title)
+    {
+        this.id = id;
+        this.rating = rating;
+        this.title = title;
+    }
 
-  
+
     public String getTitle() {
         return title;
     }
@@ -49,19 +56,14 @@ public class Movie {
         this.length = length;
     }
 
-    public String getRating() {
-        return rating + "/10";
+    public int getRating() {
+        return rating;
     }
 
     public void setRating(int rating) {
-        if (rating > 0 && rating <= 10)
-        {
+        
         this.rating = rating;
-        }
-        else
-        {
-            System.out.println("Please select a rating from 1 to 10");
-        }
+   
     }
 
     public int getRelDate() {

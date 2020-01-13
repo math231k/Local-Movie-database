@@ -53,7 +53,19 @@ import localmoviedatabase.dal.dbmanagers.mockdatamanagers.MockMovieManager;
  */
 public class LmdbController implements Initializable
 {
-
+    private MockMovieManager mmm = new MockMovieManager();
+    private SearchMovies search = new SearchMovies();
+    private AppModel model;
+    public static int getRating;
+    public static int getId;
+    public static int getRelDate;
+    public static String getTitle;
+    public static String getGenre;
+    public static String getLength;
+    public static String getPath;
+    
+    
+    
     private Label label;
     @FXML
     private TableColumn<Movie, String> movieTitle;
@@ -87,11 +99,6 @@ public class LmdbController implements Initializable
     private Button playButton;
     @FXML
     private Button categoryEdit;
-    
-    private MockMovieManager mmm = new MockMovieManager();
-    private SearchMovies search = new SearchMovies();
-
-    private AppModel model;
     @FXML
     private MediaView mediaView;
     @FXML
@@ -159,7 +166,7 @@ public class LmdbController implements Initializable
                 {
                     showTitle.setText(newValue.getTitle());
                     showCategory.setText(newValue.getCategory());
-                    showRating.setText(newValue.getRating());
+                    showRating.setText(newValue.getRating() + "");
                 }
             }
         });
@@ -215,15 +222,23 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void editMovie(ActionEvent event) throws IOException
+    private void editMovie(ActionEvent event) throws IOException, DalException
     {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/localmoviedatabase/gui/views/editMovie.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.setTitle("Edit movie");
-            stage.showAndWait();
-            stage.setAlwaysOnTop(true);
+        Movie editMovie = movieTableView.getSelectionModel().getSelectedItem();
+        getId = editMovie.getId();
+        getRating = editMovie.getRating();
+        getTitle = editMovie.getTitle();
+        
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/localmoviedatabase/gui/views/editMovie.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.showAndWait();
+        stage.setTitle("Edit movie");
+        stage.setAlwaysOnTop(true);
+        movieTableView.getColumns().clear();
+        movieTable();
  
     }
 
