@@ -86,7 +86,7 @@ public class MovieDBDAO implements MovieDalFacade{
             String sql = "SELECT * FROM Movie;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            List<Movie> allMovies = new ArrayList<>();
+            ArrayList<Movie> allMovies = new ArrayList<>();
             while (rs.next())
             {
                 String title = rs.getString("title");
@@ -98,7 +98,7 @@ public class MovieDBDAO implements MovieDalFacade{
                 int relDate = rs.getInt("date");
                 
                 Movie mov = new Movie(id, rating, title);
-                mov.setId(id);
+                //mov.setId(id);
                 allMovies.add(mov);
             }
             

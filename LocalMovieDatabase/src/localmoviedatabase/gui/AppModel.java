@@ -95,6 +95,7 @@ public final class AppModel
 
     public void updateMovie(Movie m){
         movieManager.updateMovie(m);
+        getMovies();
         
     }
     

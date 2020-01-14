@@ -220,7 +220,7 @@ public class LmdbController implements Initializable
         if(!movieTableView.getSelectionModel().isEmpty())
         {
         Movie editMovie = movieTableView.getSelectionModel().getSelectedItem();
-        getGenreId = editMovie.getId();
+        getId = editMovie.getId();
         getRating = editMovie.getRating();
         getTitle = editMovie.getTitle();
         

@@ -70,7 +70,7 @@ public class EditMovieController extends LmdbController implements Initializable
         if (rating > 0 && rating < 11) {
         Movie movie = new Movie(LmdbController.getId, rating, txtName.getText().trim());
         appModel.updateMovie(movie);
-        movieTable();
+        
         Stage stage = (Stage) saveEditMovie.getScene().getWindow();
         stage.close();
         }
