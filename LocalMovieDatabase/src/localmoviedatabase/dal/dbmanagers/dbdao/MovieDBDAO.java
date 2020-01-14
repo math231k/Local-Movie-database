@@ -97,7 +97,7 @@ public class MovieDBDAO implements MovieDalFacade{
                 String length = rs.getString("length");
                 int relDate = rs.getInt("date");
                 
-                Movie mov = new Movie(title, length, path);
+                Movie mov = new Movie(id, rating, title);
                 mov.setId(id);
                 allMovies.add(mov);
             }
