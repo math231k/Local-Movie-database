@@ -127,6 +127,7 @@ public class LmdbController implements Initializable
         movieTable();
         categoryTable();
         selectedMovie();
+        selectedMovieFromGenre();
         }
 
     public void movieTable() 
@@ -157,6 +158,30 @@ public class LmdbController implements Initializable
         
         movieTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         movieTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Movie>() {
+            @Override
+            public void changed(ObservableValue<? extends Movie> arg0, Movie oldValue, Movie newValue)
+            {
+                if (newValue != null)
+                {
+                    showTitle.setText(newValue.getTitle());
+                    showCategory.setText(newValue.getCategory());
+                    showRating.setText(newValue.getRating() + "");
+                }
+            }
+        });
+        
+    }
+    /**
+     * shows information about selected movie
+     */
+    public void selectedMovieFromGenre()
+    {
+        showTitle.setEditable(false);
+        showCategory.setEditable(false);
+        showRating.setEditable(false);
+        
+        genreMoviesLst.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        genreMoviesLst.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Movie>() {
             @Override
             public void changed(ObservableValue<? extends Movie> arg0, Movie oldValue, Movie newValue)
             {
@@ -331,10 +356,11 @@ public class LmdbController implements Initializable
             protected void updateItem(Movie item, boolean empty) {
                 super.updateItem(item, empty);
 
-                if (empty || item == null || item.getTitle() == null) {
-                    setText(null);
+                if (empty || item == null || item.getTitle()== null) {
+                    //setText(null);
+                    setText((this.getIndex()+ 1) + ". Empty");
                 } else {
-                    setText((this.getIndex() + 1) + ". " + item.getTitle());
+                    setText((this.getIndex()+ 1) + ". " + item.getTitle());
                 }
             }
         });
@@ -349,16 +375,16 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void removeMovieFromCategory(ActionEvent event) {
-    Movie selectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
-    model.removeMovieFromGenre(selectedMovie, lastSelectedGenre);
-    populateMoviesInGenreList();
-    model.fetchMoviesFromGenre(lastSelectedGenre);
+    private void AddCategory(ActionEvent event)
+    {
     }
 
     @FXML
-    private void AddCategory(ActionEvent event)
-    {
+    private void removeMovieFromCategory(ActionEvent event) {
+    Movie selectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
+    model.removeMovieFromGenre(selectedMovie, lastSelectedGenre);
+    //populateMoviesInGenreList();
+    model.fetchMoviesFromGenre(lastSelectedGenre);
     }
    
 }

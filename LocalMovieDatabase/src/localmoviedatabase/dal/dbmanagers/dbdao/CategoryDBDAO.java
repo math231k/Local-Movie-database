@@ -196,12 +196,13 @@ public class CategoryDBDAO
       String sql = "DELETE FROM genreMovies WHERE movId = ? and genId = ?;";
             PreparedStatement stmt = con.prepareStatement(sql);
 
-            stmt.setInt(1, selectedGenre.getId());
-            stmt.setInt(2, selectedMovie.getId());
+            stmt.setInt(1, selectedMovie.getId());
+            stmt.setInt(2, selectedGenre.getId());
             
 
-            int updatedRows = stmt.executeUpdate();
-
+            //int updatedRows = stmt.executeUpdate();
+            stmt.executeUpdate();
+            stmt.close();
 
         } catch (SQLServerException ex) {
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);

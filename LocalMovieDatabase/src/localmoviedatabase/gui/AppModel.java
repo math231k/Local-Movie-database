@@ -206,6 +206,7 @@ public final class AppModel
     }
 
     void removeMovieFromGenre(Movie selectedMovie, Genre selectedGenre) {
+        selectedGenre.deleteMovie(selectedMovie);
         categoryManager.removeMovieFromGenre(selectedMovie, selectedGenre);
         fetchMoviesFromGenre(selectedGenre);
         fetchCategories();
