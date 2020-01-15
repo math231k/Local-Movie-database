@@ -23,7 +23,7 @@
           <TableColumn fx:id="categoryName" prefWidth="199.0" text="Categories" />
         </columns>
       </TableView>
-      <Button fx:id="categoryRemove" layoutX="133.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeCategory" text="Remove" />
+      <Button fx:id="categoryRemove" layoutX="150.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeCategory" text="Remove" />
       <Button fx:id="movieRemove" layoutX="707.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
       <TextField fx:id="searchMovie" layoutX="627.0" layoutY="77.0" onKeyTyped="#searchMovie" prefHeight="25.0" prefWidth="200.0" promptText="search in movies" />
       <Label layoutX="404.0" layoutY="345.0" text="Selected movie">
@@ -67,14 +67,14 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="categoryEdit" layoutX="198.0" layoutY="303.0" mnemonicParsing="false" onAction="#editCategory" text="Edit" />
+      <Button fx:id="categoryEdit" layoutX="215.0" layoutY="303.0" mnemonicParsing="false" onAction="#editCategory" text="Edit" />
       <Label layoutX="367.0" layoutY="14.0" text="Movie Manager" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       <Label layoutX="420.0" layoutY="567.0" opacity="0.5" text="(opens in VLC)" />
-      <Button fx:id="addToCategory" layoutX="56.0" layoutY="303.0" mnemonicParsing="false" onAction="#AddMovieToCategory" text="Add Movie" />
+      <Button fx:id="addCategory" layoutX="56.0" layoutY="303.0" mnemonicParsing="false" onAction="#AddCategory" text="Add Category" />
       <ListView fx:id="genreMoviesLst" layoutX="345.0" layoutY="102.0" onMouseClicked="#loadMovie" prefHeight="200.0" prefWidth="200.0" />
       <Text fx:id="genreTxt" layoutX="347.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" wrappingWidth="59.0">
          <font>
@@ -82,6 +82,7 @@
          </font>
       </Text>
       <Button fx:id="addMovie" layoutX="627.0" layoutY="303.0" mnemonicParsing="false" onAction="#addMovie" text="Add Movie" />
-      <Button fx:id="removeMovieFromCategoryBtn" layoutX="344.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeMovieFromCategory" text="Remove" />
+      <Button fx:id="removeMovieFromCategoryBtn" layoutX="485.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeMovieFromCategory" text="Remove" />
+      <Button fx:id="addToCategory1" layoutX="345.0" layoutY="303.0" mnemonicParsing="false" onAction="#AddMovieToCategory" text="Add Movie" />
    </children>
 </AnchorPane>

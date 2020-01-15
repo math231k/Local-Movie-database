@@ -105,8 +105,6 @@ public class LmdbController implements Initializable
     private MediaView mediaView;
     private TextField catNameFld;
     @FXML
-    private Button addToCategory;
-    @FXML
 
     private ListView<Movie> genreMoviesLst;
     @FXML
@@ -116,6 +114,10 @@ public class LmdbController implements Initializable
     private Button addMovie;
     @FXML
     private Button removeMovieFromCategoryBtn;
+    @FXML
+    private Button addCategory;
+    @FXML
+    private Button addToCategory1;
 
     
     @Override
@@ -352,6 +354,11 @@ public class LmdbController implements Initializable
     model.removeMovieFromGenre(selectedMovie, lastSelectedGenre);
     populateMoviesInGenreList();
     model.fetchMoviesFromGenre(lastSelectedGenre);
+    }
+
+    @FXML
+    private void AddCategory(ActionEvent event)
+    {
     }
    
 }
