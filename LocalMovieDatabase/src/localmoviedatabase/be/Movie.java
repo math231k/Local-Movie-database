@@ -19,6 +19,16 @@ public class Movie {
     private int relDate;
     private String path;
 
+    public Movie(int id, String category, String title, String length, int rating, int relDate, String path)
+    {
+        this.id = id;
+        this.category = category;
+        this.title = title;
+        this.length = length;
+        this.rating = rating;
+        this.relDate = relDate;
+        this.path = path;
+    }
 
     public Movie(String title, String length, String path)
     {
@@ -26,6 +36,9 @@ public class Movie {
         this.length = length;
         this.path = path;
     }
+
+    
+    
 
     //constructor for editing movies
     public Movie(int id, int rating, String title)

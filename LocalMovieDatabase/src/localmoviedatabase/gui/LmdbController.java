@@ -213,22 +213,17 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void addMovie(ActionEvent event)
+    private void addMovie(ActionEvent event) throws IOException
     {
-        JFileChooser jfc = new JFileChooser();
-        FileNameExtensionFilter mp4Filter = new FileNameExtensionFilter(".mp4 Files", "mp4");
-        FileNameExtensionFilter mpeg4Filter = new FileNameExtensionFilter(".mpeg4 Files", "mpeg4");
-        jfc.setFileFilter(mp4Filter);
-        jfc.setFileFilter(mpeg4Filter);
-        jfc.setAcceptAllFileFilterUsed(false);
-        jfc.setCurrentDirectory(new File("."));
-
-        int returnValue = jfc.showOpenDialog(null);
-        String path = jfc.getSelectedFile().toString();
-        String title = jfc.getSelectedFile().getName();
         
-        Media m = new Media(jfc.getSelectedFile().getPath());
-        
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/localmoviedatabase/gui/views/NewMovie.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.showAndWait();
+        stage.setTitle("New movie");
+        stage.setAlwaysOnTop(true);
+        movieTable();
        
         
     }
