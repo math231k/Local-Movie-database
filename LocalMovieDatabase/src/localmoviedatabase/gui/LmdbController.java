@@ -196,22 +196,20 @@ public class LmdbController implements Initializable
         
     }
 
-    private void addCategory(ActionEvent event) throws DalException, SQLException
-    {
-        
-        Genre g = new Genre(catNameFld.getText());
-        model.createGenre(g);
-        model.getCategories();
-        
-        System.out.println(g.getId());
-       
-    }
+  
 
     @FXML
     private void removeCategory(ActionEvent event)
     {
+        if(!categoryTableView.getSelectionModel().isEmpty())
+        {
         Genre g = categoryTableView.getSelectionModel().getSelectedItem();
         model.removeGenre(g);
+        
+        } else
+        {
+            System.out.println("Please select the category you want to remove");
+        }
     }
 
     @FXML
@@ -374,10 +372,6 @@ public class LmdbController implements Initializable
     
     }
 
-    @FXML
-    private void AddCategory(ActionEvent event)
-    {
-    }
 
     @FXML
     private void removeMovieFromCategory(ActionEvent event) {
@@ -385,6 +379,19 @@ public class LmdbController implements Initializable
     model.removeMovieFromGenre(selectedMovie, lastSelectedGenre);
     //populateMoviesInGenreList();
     model.fetchMoviesFromGenre(lastSelectedGenre);
+    }
+
+    @FXML
+    private void addCategory(ActionEvent event) throws IOException
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/localmoviedatabase/gui/views/NewCategory.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.showAndWait();
+        stage.setTitle("New category");
+        stage.setAlwaysOnTop(true);
+        categoryTable();
     }
    
 }

@@ -151,8 +151,10 @@ public final class AppModel
      * adds a new genre to the database
      * @param g the genre to be added
      */
-    public void createGenre(Genre g){
-        categoryManager.createGenre(g);
+    public void createGenre(String name){
+        Genre genre = categoryManager.createGenre(name);
+        categories.add(genre);
+        getCategories();
         
     }
     
@@ -162,6 +164,7 @@ public final class AppModel
      */
     public void removeGenre(Genre g) {
     categoryManager.removeGenre(g);
+    getCategories();
     }
 
     /**
