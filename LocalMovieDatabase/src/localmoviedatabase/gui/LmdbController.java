@@ -70,7 +70,7 @@ public class LmdbController implements Initializable
     public static String getGenre;
     public static String getLength;
     public static String getPath;
-    
+    public Genre lastSelectedGenre;
     
     
     private Label label;
@@ -114,6 +114,8 @@ public class LmdbController implements Initializable
 
     @FXML
     private Button addMovie;
+    @FXML
+    private Button removeMovieFromCategoryBtn;
 
     
     @Override
@@ -314,9 +316,10 @@ public class LmdbController implements Initializable
 
     @FXML
     private void getMoviesInCategory(MouseEvent event) {
-    Genre gen = categoryTableView.getSelectionModel().getSelectedItem();
-    model.fetchMoviesFromGenre(gen);
-    genreMoviesLst.setItems(model.getGenreMovieList());  
+        populateMoviesInGenreList();
+        Genre selectedGenre = categoryTableView.getSelectionModel().getSelectedItem();
+        lastSelectedGenre = selectedGenre;
+        model.fetchMoviesFromGenre(selectedGenre);
     }
     
     private void populateMoviesInGenreList() {
@@ -337,6 +340,19 @@ public class LmdbController implements Initializable
         // add data to listview
         genreMoviesLst.setItems(model.getGenreMovieList());
     }
+
+    @FXML
+    private void loadMovie(MouseEvent event) {
     
+    }
+
+    @FXML
+    private void removeMovieFromCategory(ActionEvent event) {
+    Movie selectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
+    model.removeMovieFromGenre(selectedMovie, lastSelectedGenre);
+    populateMoviesInGenreList();
+    model.fetchMoviesFromGenre(lastSelectedGenre);
+    }
+   
 }
 

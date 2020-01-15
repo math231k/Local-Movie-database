@@ -70,9 +70,11 @@ public final class AppModel
      * @param genre 
      */
     public void fetchMoviesFromGenre(Genre genre){
+        
         moviesInGenre.clear();
         moviesInGenre.addAll(categoryManager.getAllMoviesInGenre(genre));
         currentlySelectedGenre = genre;
+        
     }
 
 
@@ -201,6 +203,13 @@ public final class AppModel
         movies.clear();
         fetchMovies();
         return movies;
+    }
+
+    void removeMovieFromGenre(Movie selectedMovie, Genre selectedGenre) {
+        categoryManager.removeMovieFromGenre(selectedMovie, selectedGenre);
+        fetchMoviesFromGenre(selectedGenre);
+        fetchCategories();
+        
     }
     
 

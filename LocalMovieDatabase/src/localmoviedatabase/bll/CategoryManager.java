@@ -58,6 +58,19 @@ public class CategoryManager
     public List<Movie> getAllMoviesInGenre(Genre g) {
         return categoryDBDAO.getMoviesFromGenre(g);     
     }
+
+    public void removeMovieFromGenre(Movie selectedMovie, Genre selectedGenre) 
+    {
+        categoryDBDAO.removeMovieFromGenre(selectedMovie, selectedGenre);
+
+        List<Movie> remainingMovies = categoryDBDAO.getMoviesFromGenre(selectedGenre);
+        categoryDBDAO.removeAllCategoryMovies(selectedGenre);
+
+        for (Movie m : remainingMovies)
+        {
+            categoryDBDAO.addMovieToCategory(m, selectedGenre);
+        }
+    }
     
     
     
