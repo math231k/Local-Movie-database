@@ -57,6 +57,7 @@ public class CategoryDBDAO
             {
                 String genreName = rs.getString("genreName");
                 int genreId = rs.getInt("genreId");
+                //List<Movie> movieList = rs.getInt("genreMovies");
                 
                 Genre gen = new Genre(genreName);
                 gen.setId(genreId);
@@ -195,7 +196,8 @@ public class CategoryDBDAO
       try (Connection con = dbConnection.getConnection()) {
       String sql = "DELETE FROM genreMovies WHERE movId = ? and genId = ?;";
             PreparedStatement stmt = con.prepareStatement(sql);
-
+            System.out.println(selectedMovie.getTitle());
+            System.out.println(selectedGenre.getGenreName());
             stmt.setInt(1, selectedMovie.getId());
             stmt.setInt(2, selectedGenre.getId());
             
