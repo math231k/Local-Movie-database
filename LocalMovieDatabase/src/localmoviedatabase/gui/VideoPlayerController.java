@@ -42,7 +42,10 @@ public class VideoPlayerController extends LmdbController implements Initializab
     }    
 
     
-    
+    /**
+     * Plays the movie/clip
+     * @param event 
+     */
     @FXML
     private void playPause(ActionEvent event) {
         mp = new MediaPlayer(getMediaToPlay());

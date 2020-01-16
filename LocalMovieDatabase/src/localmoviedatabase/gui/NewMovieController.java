@@ -58,6 +58,10 @@ public class NewMovieController implements Initializable
         // TODO
     }    
 
+    /**
+     * Creates a new movie
+     * @param event 
+     */
     @FXML
     private void addMovie(ActionEvent event)
     {
@@ -78,6 +82,10 @@ public class NewMovieController implements Initializable
         stage.close();
     }
 
+    /**
+     * Cancel the stage without adding anything
+     * @param event 
+     */
     @FXML
     private void cancelMovie(ActionEvent event)
     {
