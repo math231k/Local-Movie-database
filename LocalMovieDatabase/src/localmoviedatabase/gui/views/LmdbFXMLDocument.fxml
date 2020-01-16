@@ -73,7 +73,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="420.0" layoutY="567.0" opacity="0.5" text="(opens in VLC)" />
       <Button fx:id="addCategory" layoutX="56.0" layoutY="303.0" mnemonicParsing="false" onAction="#addCategory" text="Add Category" />
       <ListView fx:id="genreMoviesLst" layoutX="345.0" layoutY="102.0" onMouseClicked="#loadMovie" prefHeight="200.0" prefWidth="200.0" />
       <Text fx:id="genreTxt" layoutX="347.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" wrappingWidth="59.0">

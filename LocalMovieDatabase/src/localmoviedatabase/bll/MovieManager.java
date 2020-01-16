@@ -31,9 +31,9 @@ public class MovieManager
         return movieDBDAO.readMovie();
     }
 
-    public Movie addMovie(String category, String title, String length, int rating, int relDate, String path) {
+    public Movie addMovie(String category, String title, int rating, int relDate, String path) {
         
-        movie = movieDBDAO.createMovie(category, title, length, rating, relDate, path);
+        movie = movieDBDAO.createMovie(category, title, rating, relDate, path);
         return movie;
         
     }
