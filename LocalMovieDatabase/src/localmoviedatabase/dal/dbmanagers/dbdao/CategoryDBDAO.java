@@ -148,15 +148,14 @@ public class CategoryDBDAO
             
             while (rs.next()) {
                 int Id = rs.getInt("Id");
+                int rating = rs.getInt("rating");
                 String title = rs.getString("title");
-                String length = rs.getString("length");
                 String path = rs.getString("path");
                 
 
-                Movie m = new Movie(title, length, path);
-                m.setId(Id);
+                Movie m = new Movie(Id, rating , title);
+                m.setPath(path);
                 
-
                 movies.add(m);
             }
             return movies;
@@ -204,8 +203,6 @@ public class CategoryDBDAO
             stmt.setInt(1, selectedMovie.getId());
             stmt.setInt(2, selectedGenre.getId());
             
-
-            //int updatedRows = stmt.executeUpdate();
             stmt.executeUpdate();
             stmt.close();
 

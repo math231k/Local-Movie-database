@@ -46,6 +46,7 @@ public class VideoPlayerController extends LmdbController implements Initializab
     @FXML
     private void playPause(ActionEvent event) {
         mp = new MediaPlayer(getMediaToPlay());
+        System.out.println(getMediaToPlay().getSource());
         mediaPlayer.setMediaPlayer(mp);
         mp.play();
     }  

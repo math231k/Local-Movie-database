@@ -10,46 +10,32 @@ package localmoviedatabase.gui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.AmbientLight;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.ContextMenuEvent;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import localmoviedatabase.bll.util.SearchMovies;
-import localmoviedatabase.dal.dbaccess.DalException;
 import localmoviedatabase.dal.dbmanagers.mockdatamanagers.MockMovieManager;
 
 
@@ -116,9 +102,7 @@ public class LmdbController implements Initializable
     @FXML
     private Button addToCategory1;
     @FXML
-    private TableView<Movie> genreMovieTableView;
-    @FXML
-    private TableColumn<Movie, String> titleClm;
+    private ListView<Movie> genreMoviesLst;
 
     
     @Override
@@ -129,7 +113,6 @@ public class LmdbController implements Initializable
         categoryTable();
         selectedMovie();
         selectedMovieFromGenre();
-        categoryMovieTable();
         }
 
     public void movieTable() 
@@ -149,13 +132,6 @@ public class LmdbController implements Initializable
         categoryTableView.setItems(model.getCategories());
     }
     
-    public void categoryMovieTable(){
-        titleClm.setCellValueFactory(new PropertyValueFactory<>("title"));
-        genreMovieTableView.getColumns().clear();
-        genreMovieTableView.getColumns().addAll(titleClm);
-        genreMovieTableView.setItems(model.getGenreMovieList());
-        
-    }
 
     /**
      * shows information about selected movie
@@ -190,8 +166,8 @@ public class LmdbController implements Initializable
         showCategory.setEditable(false);
         showRating.setEditable(false);
         
-        genreMovieTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        genreMovieTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Movie>() {
+        genreMoviesLst.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        genreMoviesLst.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Movie>() {
             @Override
             public void changed(ObservableValue<? extends Movie> arg0, Movie oldValue, Movie newValue)
             {
@@ -289,7 +265,7 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void editCategory(ActionEvent event) throws IOException, DalException
+    private void editCategory(ActionEvent event) throws IOException
     {
         if(!categoryTableView.getSelectionModel().isEmpty())
         {
@@ -313,7 +289,7 @@ public class LmdbController implements Initializable
     }
 
    @FXML
-    private void searchMovie(KeyEvent event) throws DalException, IOException
+    private void searchMovie(KeyEvent event)
     {
         String input = searchMovie.getText();
         ObservableList<Movie> resultMovies = model.searchMovie(input);
@@ -344,11 +320,12 @@ public class LmdbController implements Initializable
     private void getMoviesInCategory(MouseEvent event) {
         Genre selectedGenre = categoryTableView.getSelectionModel().getSelectedItem();
         lastSelectedGenre = selectedGenre;
-        model.fetchMoviesFromGenre(selectedGenre);
+        model.fetchMoviesFromGenre(lastSelectedGenre);
         addMoviesToGenreList();
     }
     
     public void addMoviesToGenreList(){
+        model.fetchMoviesFromGenre(lastSelectedGenre);
         ObservableList<Movie> oldMoviesInGenre = model.getGenreMovieList();
         ObservableList<Movie> moviesInGenre = model.getGenreMovieList();
         
@@ -356,7 +333,7 @@ public class LmdbController implements Initializable
         {
             moviesInGenre.add(movie);           
         }        
-        genreMovieTableView.setItems(moviesInGenre);
+        genreMoviesLst.setItems(moviesInGenre);
     }
     }
 
@@ -364,7 +341,7 @@ public class LmdbController implements Initializable
 
     @FXML
     private void removeMovieFromCategory(ActionEvent event) {
-    Movie selectedMovie = genreMovieTableView.getSelectionModel().getSelectedItem();
+    Movie selectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
     model.removeMovieFromGenre(selectedMovie, lastSelectedGenre);
     model.fetchMoviesFromGenre(lastSelectedGenre);
     }
@@ -383,26 +360,26 @@ public class LmdbController implements Initializable
     }
    
     public Media getMediaToPlay(){
-        String path = "Clips\\move.mp4";
-        System.out.println(path);
-        File file = new File(path);
-        Media media = new Media(file.toURI().toString());
-       
         
-        /*if(movieTableView.getSelectionModel().isEmpty()){
-        model.noMovieSelected();
-        }*/
-        return media;
+        if(getPath != null){
+            System.out.println(getPath);
+            File file = new File(getPath);
+            Media media = new Media(file.toURI().toString());
+            return media;
+        } else{
+            model.noMovieSelected();
+            return null;
+        }
+        
+        
     }
 
     @FXML
     private void setSelectedMovie(MouseEvent event) {
         lastSelectedMovie = movieTableView.getSelectionModel().getSelectedItem();
+        getPath= lastSelectedMovie.getPath();
         System.out.println(lastSelectedMovie.getPath());
     }
 
-    @FXML
-    private void getSelectedGenreMovie(MouseEvent event) {
-    }
 }
 
