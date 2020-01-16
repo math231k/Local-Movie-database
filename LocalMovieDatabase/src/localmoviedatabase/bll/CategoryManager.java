@@ -21,7 +21,7 @@ public class CategoryManager
 {
 
     
-    private CategoryDBDAO categoryDBDAO;
+    private final CategoryDBDAO categoryDBDAO;
     
 
     public CategoryManager()

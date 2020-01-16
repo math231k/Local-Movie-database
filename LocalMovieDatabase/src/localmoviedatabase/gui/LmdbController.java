@@ -103,11 +103,7 @@ public class LmdbController implements Initializable
     private Button playButton;
     @FXML
     private Button categoryEdit;
-    private MediaView mediaView;
-    private TextField catNameFld;
-    @FXML
-
-    private ListView<Movie> genreMoviesLst;
+    
     @FXML
     private Text genreTxt;
 
@@ -119,6 +115,10 @@ public class LmdbController implements Initializable
     private Button addCategory;
     @FXML
     private Button addToCategory1;
+    @FXML
+    private TableView<Movie> genreMovieTableView;
+    @FXML
+    private TableColumn<Movie, String> titleClm;
 
     
     @Override
@@ -129,6 +129,7 @@ public class LmdbController implements Initializable
         categoryTable();
         selectedMovie();
         selectedMovieFromGenre();
+        categoryMovieTable();
         }
 
     public void movieTable() 
@@ -146,6 +147,14 @@ public class LmdbController implements Initializable
         categoryTableView.getColumns().clear();
         categoryTableView.getColumns().addAll(categoryName);
         categoryTableView.setItems(model.getCategories());
+    }
+    
+    public void categoryMovieTable(){
+        titleClm.setCellValueFactory(new PropertyValueFactory<>("title"));
+        genreMovieTableView.getColumns().clear();
+        genreMovieTableView.getColumns().addAll(titleClm);
+        genreMovieTableView.setItems(model.getGenreMovieList());
+        
     }
 
     /**
@@ -181,8 +190,8 @@ public class LmdbController implements Initializable
         showCategory.setEditable(false);
         showRating.setEditable(false);
         
-        genreMoviesLst.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        genreMoviesLst.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Movie>() {
+        genreMovieTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        genreMovieTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Movie>() {
             @Override
             public void changed(ObservableValue<? extends Movie> arg0, Movie oldValue, Movie newValue)
             {
@@ -327,48 +336,36 @@ public class LmdbController implements Initializable
         
         model.addMovieToCategory(moToBeAdded, geToBeAdded);
         model.fetchMoviesFromGenre(geToBeAdded);
+        addMoviesToGenreList();
         System.out.println("Movie Added");
     }
 
     @FXML
     private void getMoviesInCategory(MouseEvent event) {
-        populateMoviesInGenreList();
         Genre selectedGenre = categoryTableView.getSelectionModel().getSelectedItem();
         lastSelectedGenre = selectedGenre;
         model.fetchMoviesFromGenre(selectedGenre);
+        addMoviesToGenreList();
     }
     
-    private void populateMoviesInGenreList() {
-        // custom rendering of the list cell
-        genreMoviesLst.setCellFactory(param -> new ListCell<Movie>() {
-            @Override
-            protected void updateItem(Movie item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null || item.getTitle()== null) {
-                    //setText(null);
-                    setText((this.getIndex()+ 1) + ". Empty");
-                } else {
-                    setText((this.getIndex()+ 1) + ". " + item.getTitle());
-                }
-            }
-        });
-
-        // add data to listview
-        genreMoviesLst.setItems(model.getGenreMovieList());
+    public void addMoviesToGenreList(){
+        ObservableList<Movie> oldMoviesInGenre = model.getGenreMovieList();
+        ObservableList<Movie> moviesInGenre = model.getGenreMovieList();
+        
+        for (Movie movie : oldMoviesInGenre) {
+        {
+            moviesInGenre.add(movie);           
+        }        
+        genreMovieTableView.setItems(moviesInGenre);
+    }
     }
 
-    @FXML
-    private void loadMovie(MouseEvent event) {
-    
-    }
 
 
     @FXML
     private void removeMovieFromCategory(ActionEvent event) {
-    Movie selectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
+    Movie selectedMovie = genreMovieTableView.getSelectionModel().getSelectedItem();
     model.removeMovieFromGenre(selectedMovie, lastSelectedGenre);
-    //populateMoviesInGenreList();
     model.fetchMoviesFromGenre(lastSelectedGenre);
     }
 
@@ -402,6 +399,10 @@ public class LmdbController implements Initializable
     private void setSelectedMovie(MouseEvent event) {
         lastSelectedMovie = movieTableView.getSelectionModel().getSelectedItem();
         System.out.println(lastSelectedMovie.getPath());
+    }
+
+    @FXML
+    private void getSelectedGenreMovie(MouseEvent event) {
     }
 }
 

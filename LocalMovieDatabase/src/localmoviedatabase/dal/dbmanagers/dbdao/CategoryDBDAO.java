@@ -10,13 +10,11 @@ import java.sql.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale.Category;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DBSettings;
-import localmoviedatabase.dal.dbaccess.DalException;
 
 /**
  *

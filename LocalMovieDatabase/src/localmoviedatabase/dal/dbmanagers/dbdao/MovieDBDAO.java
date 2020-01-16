@@ -115,6 +115,9 @@ public class MovieDBDAO implements MovieDalFacade{
                 Movie mov = new Movie(id, rating, title);
                 mov.setId(id);
                 mov.setPath(path);
+                mov.setTitle(title);
+                mov.setRating(rating);
+                mov.setRelDate(relDate);
                 allMovies.add(mov);
             }
             
