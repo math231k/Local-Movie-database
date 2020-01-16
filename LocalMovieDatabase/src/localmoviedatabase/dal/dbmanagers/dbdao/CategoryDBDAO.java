@@ -66,33 +66,37 @@ public class CategoryDBDAO
             return allCategories; 
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
         }
         return null;        
     }
     
-    public Boolean createGenre(Genre g){
+    public Genre createGenre(String name){
         try(Connection con = dbConnection.getConnection()){
             
-            String sql = "INSERT INTO Genre (genreName) VALUES (?);";
+            String sql = "INSERT INTO Genre VALUES (?);";
+            PreparedStatement pstm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstm.setString(1, name);
+            int affectedRows = pstm.executeUpdate();
+            if (affectedRows == 1)
+            {
+                ResultSet rs = pstm.getGeneratedKeys();
+                if (rs.next())
+                {
+                    int genreId = rs.getInt(1);
+                    Genre g1 = new Genre(genreId, name);
+                    return g1;
+                }
+            }
             
-            
-            PreparedStatement pstm = con.prepareStatement(sql);
-            
-            pstm.setString(1, g.getGenreName());
-            
-            int updatedRows = pstm.executeUpdate();
-
-            return updatedRows > 0;
-             
         } catch (SQLServerException ex) {
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
         
         
-        return false;
+        
     }
 
     public boolean removeGenre(Genre g) {
@@ -115,7 +119,7 @@ public class CategoryDBDAO
 
     public boolean addMovieToCategory(Movie m, Genre g) {
         try (Connection con = dbConnection.getConnection()) {
-           String sql = "INSERT INTO GenreMovies(genreId, MovieId) VALUES (?,?);";
+           String sql = "INSERT INTO GenreMovies(genId, movId) VALUES (?,?);";
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setInt(1, g.getId());
             pstm.setInt(2, m.getId());
@@ -130,25 +134,37 @@ public class CategoryDBDAO
         } catch (SQLException ex) {
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Shit");
         return false;
     }
    
-    public List<Movie> getMoviesFromGenre(Genre g){
-        try(Connection con = dbConnection.getConnection()){
-            String sql = "SELECT * FROM genreMovies WHERE genreId = ? VALUES (?);";
+    public List<Movie> getMoviesFromGenre(Genre genre){
+        try (Connection con = dbConnection.getConnection()) {
+            String sql = "SELECT * FROM genreMovies FULL OUTER JOIN Movie ON "
+                    + "genreMovies.movId = Movie.movieId WHERE genId = ? "
+                    + "ORDER BY movieId;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, genre.getId());
+            ResultSet rs = stmt.executeQuery();
+            List<Movie> movies = new ArrayList<>();
             
-            PreparedStatement pstm = con.prepareStatement(sql);
-            
-            pstm.setInt(1, g.getId());
-            
-            
-            
-        
+            while (rs.next()) {
+                int Id = rs.getInt("Id");
+                String title = rs.getString("title");
+                String length = rs.getString("length");
+                String path = rs.getString("path");
+                
+
+                Movie m = new Movie(title, length, path);
+                m.setId(Id);
+                
+
+                movies.add(m);
+            }
+            return movies;
         } catch (SQLServerException ex) {
-            Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -177,6 +193,46 @@ public class CategoryDBDAO
             Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public void removeMovieFromGenre(Movie selectedMovie, Genre selectedGenre) {
+      
+      try (Connection con = dbConnection.getConnection()) {
+      String sql = "DELETE FROM genreMovies WHERE movId = ? and genId = ?;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, selectedMovie.getId());
+            stmt.setInt(2, selectedGenre.getId());
+            
+
+            //int updatedRows = stmt.executeUpdate();
+            stmt.executeUpdate();
+            stmt.close();
+
+        } catch (SQLServerException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }
+
+    public void removeAllCategoryMovies(Genre selectedGenre) {
+        try (Connection con = dbConnection.getConnection()) {
+            String sql = "DELETE FROM GenreMovies WHERE genId = ?;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, selectedGenre.getId());
+
+            int updatedRows = stmt.executeUpdate();
+
+
+        } catch (SQLServerException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

@@ -31,8 +31,6 @@ public class Genre
         this.genreName = genreName;
     }
     
-    
-
     public String getGenreName()
     {
         return genreName;
@@ -51,6 +49,11 @@ public class Genre
     public int getId()
     {
         return id;
+    }
+    
+    public void deleteMovie(Movie movie) {
+        //movies.remove(movie);
+        System.out.println(movies);
     }
 
     public boolean addMovieToGenre(Movie movie)

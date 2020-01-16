@@ -27,13 +27,14 @@ import localmoviedatabase.dal.dbaccess.DalException;
 public final class AppModel
 {
     
-    private MovieManager movieManager;
-    private CategoryManager categoryManager;
+    final private MovieManager movieManager;
+    final private CategoryManager categoryManager;
     private ObservableList<Movie> movies = FXCollections.observableArrayList();
     private ObservableList<Genre> categories = FXCollections.observableArrayList();
     private ObservableList<Movie> moviesInGenre = FXCollections.observableArrayList();
     private SearchMovies search = new SearchMovies();
     private Genre currentlySelectedGenre;
+    private Movie movie;
 
     
     public AppModel()
@@ -62,6 +63,7 @@ public final class AppModel
         movies.clear();
         movies.addAll(movieManager.getAllMovies());
         
+        
     }
     
     /**
@@ -69,9 +71,11 @@ public final class AppModel
      * @param genre 
      */
     public void fetchMoviesFromGenre(Genre genre){
+        
         moviesInGenre.clear();
         moviesInGenre.addAll(categoryManager.getAllMoviesInGenre(genre));
         currentlySelectedGenre = genre;
+        
     }
 
 
@@ -79,8 +83,10 @@ public final class AppModel
     * Adds a movie to the database
     * @param m the movie to be added
     */
-    public void addMovie(Movie m) {
-        movieManager.addMovie(m);
+    public Movie addMovie(String category, String title, String length, int rating, int relDate, String path) {
+        movie = movieManager.addMovie(category, title, length, rating, relDate, path);
+        movies.add(movie);
+        return movie;
     }
 
     /**
@@ -89,11 +95,13 @@ public final class AppModel
      */
     public void removeMovie(Movie m) {
         movieManager.removeMovie(m);
+        getMovies();
     }
     
 
     public void updateMovie(Movie m){
         movieManager.updateMovie(m);
+        getMovies();
         
     }
     
@@ -104,7 +112,6 @@ public final class AppModel
         getCategories();
     }
     
-    public ObservableList<Movie> searchMovie(String input) throws DalException, IOException{
     
     /**
      * Returns a list with a search result consisting of movies
@@ -116,6 +123,7 @@ public final class AppModel
         
         ObservableList<Movie> result = FXCollections.observableList(filter);
         return result;
+    
     }
     
     /**
@@ -147,8 +155,10 @@ public final class AppModel
      * adds a new genre to the database
      * @param g the genre to be added
      */
-    public void createGenre(Genre g){
-        categoryManager.createGenre(g);
+    public void createGenre(String name){
+        Genre genre = categoryManager.createGenre(name);
+        categories.add(genre);
+        getCategories();
         
     }
     
@@ -158,6 +168,7 @@ public final class AppModel
      */
     public void removeGenre(Genre g) {
     categoryManager.removeGenre(g);
+    getCategories();
     }
 
     /**
@@ -199,6 +210,14 @@ public final class AppModel
         movies.clear();
         fetchMovies();
         return movies;
+    }
+
+    void removeMovieFromGenre(Movie selectedMovie, Genre selectedGenre) {
+        selectedGenre.deleteMovie(selectedMovie);
+        categoryManager.removeMovieFromGenre(selectedMovie, selectedGenre);
+        fetchMoviesFromGenre(selectedGenre);
+        fetchCategories();
+        
     }
     
 
