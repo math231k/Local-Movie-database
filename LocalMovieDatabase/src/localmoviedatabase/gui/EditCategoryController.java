@@ -28,11 +28,8 @@ public class EditCategoryController implements Initializable
     private LmdbController mainController;
     private AppModel appModel;
 
-    @FXML
     private TextField txtCategoryName;
-    @FXML
     private Button btnSaveCategory;
-    @FXML
     private Button btnCancelCategory;
 
     public void EditCategoryController()
@@ -51,7 +48,6 @@ public class EditCategoryController implements Initializable
         EditCategoryController();
     }    
 
-    @FXML
     private void saveEditCategory(ActionEvent event) throws IOException, DalException
     {
         appModel = new AppModel();
@@ -65,7 +61,6 @@ public class EditCategoryController implements Initializable
         
     }
 
-    @FXML
     private void cancelEditCategory(ActionEvent event)
     {
         Stage stage = (Stage) btnCancelCategory.getScene().getWindow();

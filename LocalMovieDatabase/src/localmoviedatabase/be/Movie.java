@@ -57,6 +57,10 @@ public class Movie {
         this.title = title;
     }
 
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public String getLength() {
         return length;
     }

@@ -7,6 +7,8 @@ package localmoviedatabase.gui;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -87,18 +90,38 @@ public class NewMovieController implements Initializable
     private void browsePath(ActionEvent event)
     {
         JFileChooser jfc = new JFileChooser();
-        FileNameExtensionFilter mp4Filter = new FileNameExtensionFilter(".mp4 Files", "mp4");
-        FileNameExtensionFilter mpeg4Filter = new FileNameExtensionFilter(".mpeg4 Files", "mpeg4");
-        jfc.setFileFilter(mp4Filter);
-        jfc.setFileFilter(mpeg4Filter);
+        FileNameExtensionFilter mp3Filter = new FileNameExtensionFilter(".mp4 Files", "mp4");
+        FileNameExtensionFilter wavFilter = new FileNameExtensionFilter(".mpeg4 Files", "mpeg4");
+        jfc.setFileFilter(mp3Filter);
+        jfc.setFileFilter(wavFilter);
         jfc.setAcceptAllFileFilterUsed(false);
         jfc.setCurrentDirectory(new File("."));
-        
+
         int returnValue = jfc.showOpenDialog(null);
-        String path = jfc.getSelectedFile().toString();
-        String title = jfc.getSelectedFile().getName();
-        
-        Media m = new Media(jfc.getSelectedFile().getPath());
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = jfc.getSelectedFile();
+
+            if (selectedFile.getAbsolutePath().contains("LocalMovieDatabase\\Clips")) {
+                Path absolutePath = Paths.get(selectedFile.getAbsolutePath());
+                Path pathToProject = Paths.get(System.getProperty("user.dir"));
+                Path relativePath = pathToProject.relativize(absolutePath);
+                txtPath.setText(relativePath.toString());
+            } else {
+                txtPath.setText(selectedFile.getAbsolutePath());
+            }
+
+            Media media = new Media(selectedFile.toURI().toString());
+
+            MediaPlayer mediaplayer = new MediaPlayer(media);
+
+            mediaplayer.setOnReady(() -> {
+                int time = (int) media.getDuration().toSeconds();
+
+                txtLength.setText(time + "");
+
+            });
+
+        }
     }
     
 }

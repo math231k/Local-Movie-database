@@ -113,7 +113,8 @@ public class MovieDBDAO implements MovieDalFacade{
                 int relDate = rs.getInt("date");
                 
                 Movie mov = new Movie(id, rating, title);
-                //mov.setId(id);
+                mov.setId(id);
+                mov.setPath(path);
                 allMovies.add(mov);
             }
             
@@ -177,6 +178,8 @@ public class MovieDBDAO implements MovieDalFacade{
                 {
                     int id = rs.getInt(1);
                     Movie mov = new Movie (id, category, title, length, rating, relDate, path);
+                    mov.setId(id);
+                    mov.setPath(path);
                     return mov;
                 }
             }
@@ -189,6 +192,5 @@ public class MovieDBDAO implements MovieDalFacade{
         return null;
       
     }
-   
-
+ 
 }

@@ -71,6 +71,7 @@ public class LmdbController implements Initializable
     public static String getLength;
     public static String getPath;
     public Genre lastSelectedGenre;
+    private Movie lastSelectedMovie;
     
     
     private Label label;
@@ -264,22 +265,17 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void playSelectedMovie(ActionEvent event)
+    private void playSelectedMovie(ActionEvent event) throws IOException
     {
-        if(!movieTableView.getSelectionModel().isEmpty()){
-        String path = movieTableView.getSelectionModel().getSelectedItem().getPath();
         
-        File file = new File(path);
-        Media media = new Media(file.toURI().toString());
-        MediaPlayer mp = new MediaPlayer(media);
         
-        mediaView.setMediaPlayer(mp);
-        mp.play();
-        }
-        
-        else if(movieTableView.getSelectionModel().isEmpty()){
-            model.noMovieSelected();
-        }
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/localmoviedatabase/gui/views/VideoPlayerView.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.showAndWait();
+        stage.setTitle("Movie Player");
+        stage.setAlwaysOnTop(true);
         
     }
 
@@ -389,5 +385,23 @@ public class LmdbController implements Initializable
         categoryTable();
     }
    
+    public Media getMediaToPlay(){
+        String path = "Clips\\move.mp4";
+        System.out.println(path);
+        File file = new File(path);
+        Media media = new Media(file.toURI().toString());
+       
+        
+        /*if(movieTableView.getSelectionModel().isEmpty()){
+        model.noMovieSelected();
+        }*/
+        return media;
+    }
+
+    @FXML
+    private void setSelectedMovie(MouseEvent event) {
+        lastSelectedMovie = movieTableView.getSelectionModel().getSelectedItem();
+        System.out.println(lastSelectedMovie.getPath());
+    }
 }
 

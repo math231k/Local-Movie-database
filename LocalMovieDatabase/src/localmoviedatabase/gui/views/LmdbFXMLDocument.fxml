@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="614.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="localmoviedatabase.gui.LmdbController">
    <children>
-      <TableView fx:id="movieTableView" layoutX="627.0" layoutY="101.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="movieTableView" layoutX="627.0" layoutY="101.0" onMouseClicked="#setSelectedMovie" prefHeight="200.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="movieTitle" prefWidth="131.0" text="Movie title" />
           <TableColumn fx:id="movieRating" prefWidth="67.0" text="Rating" />
@@ -46,7 +46,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="288.0" layoutY="433.0" text="Category:">
+      <Label layoutX="288.0" layoutY="433.0" text="Catergory">
          <font>
             <Font size="14.0" />
          </font>
