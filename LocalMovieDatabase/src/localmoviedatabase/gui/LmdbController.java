@@ -71,6 +71,7 @@ public class LmdbController implements Initializable
     public static String getLength;
     public static String getPath;
     public Genre lastSelectedGenre;
+    private Movie lastSelectedMovie;
     
     
     private Label label;
@@ -196,41 +197,34 @@ public class LmdbController implements Initializable
         
     }
 
-    private void addCategory(ActionEvent event) throws DalException, SQLException
-    {
-        
-        Genre g = new Genre(catNameFld.getText());
-        model.createGenre(g);
-        model.getCategories();
-        
-        System.out.println(g.getId());
-       
-    }
+  
 
     @FXML
     private void removeCategory(ActionEvent event)
     {
+        if(!categoryTableView.getSelectionModel().isEmpty())
+        {
         Genre g = categoryTableView.getSelectionModel().getSelectedItem();
         model.removeGenre(g);
+        
+        } else
+        {
+            System.out.println("Please select the category you want to remove");
+        }
     }
 
     @FXML
-    private void addMovie(ActionEvent event)
+    private void addMovie(ActionEvent event) throws IOException
     {
-        JFileChooser jfc = new JFileChooser();
-        FileNameExtensionFilter mp4Filter = new FileNameExtensionFilter(".mp4 Files", "mp4");
-        FileNameExtensionFilter mpeg4Filter = new FileNameExtensionFilter(".mpeg4 Files", "mpeg4");
-        jfc.setFileFilter(mp4Filter);
-        jfc.setFileFilter(mpeg4Filter);
-        jfc.setAcceptAllFileFilterUsed(false);
-        jfc.setCurrentDirectory(new File("."));
-
-        int returnValue = jfc.showOpenDialog(null);
-        String path = jfc.getSelectedFile().toString();
-        String title = jfc.getSelectedFile().getName();
         
-        Media m = new Media(jfc.getSelectedFile().getPath());
-        
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/localmoviedatabase/gui/views/NewMovie.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.showAndWait();
+        stage.setTitle("New movie");
+        stage.setAlwaysOnTop(true);
+        movieTable();
        
         
     }
@@ -271,22 +265,17 @@ public class LmdbController implements Initializable
     }
 
     @FXML
-    private void playSelectedMovie(ActionEvent event)
+    private void playSelectedMovie(ActionEvent event) throws IOException
     {
-        if(!movieTableView.getSelectionModel().isEmpty()){
-        String path = movieTableView.getSelectionModel().getSelectedItem().getPath();
         
-        File file = new File(path);
-        Media media = new Media(file.toURI().toString());
-        MediaPlayer mp = new MediaPlayer(media);
         
-        mediaView.setMediaPlayer(mp);
-        mp.play();
-        }
-        
-        else if(movieTableView.getSelectionModel().isEmpty()){
-            model.noMovieSelected();
-        }
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/localmoviedatabase/gui/views/VideoPlayerView.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.showAndWait();
+        stage.setTitle("Movie Player");
+        stage.setAlwaysOnTop(true);
         
     }
 
@@ -374,10 +363,6 @@ public class LmdbController implements Initializable
     
     }
 
-    @FXML
-    private void AddCategory(ActionEvent event)
-    {
-    }
 
     @FXML
     private void removeMovieFromCategory(ActionEvent event) {
@@ -386,6 +371,37 @@ public class LmdbController implements Initializable
     //populateMoviesInGenreList();
     model.fetchMoviesFromGenre(lastSelectedGenre);
     }
+
+    @FXML
+    private void addCategory(ActionEvent event) throws IOException
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/localmoviedatabase/gui/views/NewCategory.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.showAndWait();
+        stage.setTitle("New category");
+        stage.setAlwaysOnTop(true);
+        categoryTable();
+    }
    
+    public Media getMediaToPlay(){
+        String path = "Clips\\move.mp4";
+        System.out.println(path);
+        File file = new File(path);
+        Media media = new Media(file.toURI().toString());
+       
+        
+        /*if(movieTableView.getSelectionModel().isEmpty()){
+        model.noMovieSelected();
+        }*/
+        return media;
+    }
+
+    @FXML
+    private void setSelectedMovie(MouseEvent event) {
+        lastSelectedMovie = movieTableView.getSelectionModel().getSelectedItem();
+        System.out.println(lastSelectedMovie.getPath());
+    }
 }
 

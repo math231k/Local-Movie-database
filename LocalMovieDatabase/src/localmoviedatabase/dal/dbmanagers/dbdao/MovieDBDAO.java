@@ -42,8 +42,23 @@ public class MovieDBDAO implements MovieDalFacade{
     
 
     @Override
-    public boolean deleteMovie(Movie movie) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteMovie(Movie m) {
+        
+        try (Connection con = dbConnection.getConnection()) {
+            String sql = "DELETE FROM Movie WHERE movieId = ?;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, m.getId());
+            int updatedRows = stmt.executeUpdate();
+
+            return updatedRows > 0;
+            
+        } catch (SQLServerException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
     }
 
     
@@ -98,7 +113,8 @@ public class MovieDBDAO implements MovieDalFacade{
                 int relDate = rs.getInt("date");
                 
                 Movie mov = new Movie(id, rating, title);
-                //mov.setId(id);
+                mov.setId(id);
+                mov.setPath(path);
                 allMovies.add(mov);
             }
             
@@ -140,27 +156,41 @@ public class MovieDBDAO implements MovieDalFacade{
     
 
     @Override
-    public boolean createMovie(Movie movie) {
+    public Movie createMovie(String category, String title, String length, int rating, int relDate, String path) {
 
         try (Connection con = dbConnection.getConnection()) {
-            String sql = "INSERT INTO Movie (title, length, path) VALUES (?,?,?);";
-            PreparedStatement stmt = con.prepareStatement(sql);
+            String sql = "INSERT INTO Movie (title, length, path, genre, rating, date) VALUES (?,?,?,?,?,?);";
+            PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            stmt.setString(1, movie.getTitle());
-            stmt.setString(2, movie.getLength());
-            stmt.setString(3, movie.getPath());
+            stmt.setString(1, title);
+            stmt.setString(2, length);
+            stmt.setString(3, path);
+            stmt.setString(4, category);
+            stmt.setInt(5, rating);
+            stmt.setInt(6, relDate);
             
             int updatedRows = stmt.executeUpdate();
 
-            return updatedRows > 0;
+            if (updatedRows == 1)
+            {
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next())
+                {
+                    int id = rs.getInt(1);
+                    Movie mov = new Movie (id, category, title, length, rating, relDate, path);
+                    mov.setId(id);
+                    mov.setPath(path);
+                    return mov;
+                }
+            }
 
         } catch (SQLServerException ex) {
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return null;
+      
     }
-   
-
+ 
 }

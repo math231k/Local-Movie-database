@@ -34,6 +34,7 @@ public final class AppModel
     private ObservableList<Movie> moviesInGenre = FXCollections.observableArrayList();
     private SearchMovies search = new SearchMovies();
     private Genre currentlySelectedGenre;
+    private Movie movie;
 
     
     public AppModel()
@@ -82,8 +83,10 @@ public final class AppModel
     * Adds a movie to the database
     * @param m the movie to be added
     */
-    public void addMovie(Movie m) {
-        movieManager.addMovie(m);
+    public Movie addMovie(String category, String title, String length, int rating, int relDate, String path) {
+        movie = movieManager.addMovie(category, title, length, rating, relDate, path);
+        movies.add(movie);
+        return movie;
     }
 
     /**
@@ -92,6 +95,7 @@ public final class AppModel
      */
     public void removeMovie(Movie m) {
         movieManager.removeMovie(m);
+        getMovies();
     }
     
 
@@ -151,8 +155,10 @@ public final class AppModel
      * adds a new genre to the database
      * @param g the genre to be added
      */
-    public void createGenre(Genre g){
-        categoryManager.createGenre(g);
+    public void createGenre(String name){
+        Genre genre = categoryManager.createGenre(name);
+        categories.add(genre);
+        getCategories();
         
     }
     
@@ -162,6 +168,7 @@ public final class AppModel
      */
     public void removeGenre(Genre g) {
     categoryManager.removeGenre(g);
+    getCategories();
     }
 
     /**

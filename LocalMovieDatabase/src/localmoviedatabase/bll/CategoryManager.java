@@ -35,9 +35,10 @@ public class CategoryManager
         
     }
     
-    public void createGenre(Genre g){
+    public Genre createGenre(String name){
         
-            categoryDBDAO.createGenre(g);
+            Genre genre = categoryDBDAO.createGenre(name);
+            return genre;
         
     }
 

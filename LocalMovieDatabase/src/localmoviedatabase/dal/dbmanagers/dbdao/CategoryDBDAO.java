@@ -71,28 +71,33 @@ public class CategoryDBDAO
         return null;        
     }
     
-    public Boolean createGenre(Genre g){
+    public Genre createGenre(String name){
         try(Connection con = dbConnection.getConnection()){
             
-            String sql = "INSERT INTO Genre (genreName) VALUES (?);";
+            String sql = "INSERT INTO Genre VALUES (?);";
+            PreparedStatement pstm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstm.setString(1, name);
+            int affectedRows = pstm.executeUpdate();
+            if (affectedRows == 1)
+            {
+                ResultSet rs = pstm.getGeneratedKeys();
+                if (rs.next())
+                {
+                    int genreId = rs.getInt(1);
+                    Genre g1 = new Genre(genreId, name);
+                    return g1;
+                }
+            }
             
-            
-            PreparedStatement pstm = con.prepareStatement(sql);
-            
-            pstm.setString(1, g.getGenreName());
-            
-            int updatedRows = pstm.executeUpdate();
-
-            return updatedRows > 0;
-             
         } catch (SQLServerException ex) {
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
         
         
-        return false;
+        
     }
 
     public boolean removeGenre(Genre g) {
