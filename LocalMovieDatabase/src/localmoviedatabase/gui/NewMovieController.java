@@ -39,7 +39,6 @@ public class NewMovieController implements Initializable
     private TextField txtRating;
     @FXML
     private TextField txtYear;
-    @FXML
     private TextField txtLength;
     @FXML
     private TextField txtPath;
@@ -69,7 +68,7 @@ public class NewMovieController implements Initializable
         
         if (rating > 0 && rating < 11)
         {
-        appModel.addMovie(txtGenre.getText().trim(), txtTitle.getText().trim(), txtLength.getText().trim(), rating, relDate, txtPath.getText().trim());
+        appModel.addMovie(txtGenre.getText().trim(), txtTitle.getText().trim(), rating, relDate, txtPath.getText().trim());
         }
         else
         {

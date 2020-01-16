@@ -72,7 +72,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="420.0" layoutY="567.0" opacity="0.5" text="(opens in VLC)" />
       <Button fx:id="addCategory" layoutX="56.0" layoutY="303.0" mnemonicParsing="false" onAction="#addCategory" text="Add Category" />
       <Text fx:id="genreTxt" layoutX="347.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" wrappingWidth="59.0">
          <font>

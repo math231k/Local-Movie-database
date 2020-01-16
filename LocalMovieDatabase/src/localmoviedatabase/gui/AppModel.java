@@ -83,8 +83,8 @@ public final class AppModel
     * Adds a movie to the database
     * @param m the movie to be added
     */
-    public Movie addMovie(String category, String title, String length, int rating, int relDate, String path) {
-        movie = movieManager.addMovie(category, title, length, rating, relDate, path);
+    public Movie addMovie(String category, String title, int rating, int relDate, String path) {
+        movie = movieManager.addMovie(category, title, rating, relDate, path);
         movies.add(movie);
         return movie;
     }
