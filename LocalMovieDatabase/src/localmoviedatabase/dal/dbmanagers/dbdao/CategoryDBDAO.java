@@ -15,12 +15,13 @@ import java.util.logging.Logger;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DBSettings;
+import localmoviedatabase.dal.dbmanagers.facades.CategoryDalFacade;
 
 /**
  *
  * @author Rizvan
  */
-public class CategoryDBDAO
+public class CategoryDBDAO implements CategoryDalFacade
 {
     
     private DBSettings dbConnection;
@@ -34,6 +35,7 @@ public class CategoryDBDAO
         }
     }
     
+    @Override
     public List<Genre> getAllCategories()
     {
         
@@ -69,6 +71,7 @@ public class CategoryDBDAO
         return null;        
     }
     
+    @Override
     public Genre createGenre(String name){
         try(Connection con = dbConnection.getConnection()){
             
@@ -98,6 +101,7 @@ public class CategoryDBDAO
         
     }
 
+    @Override
     public boolean removeGenre(Genre g) {
     try (Connection con = dbConnection.getConnection()) {
             String sql = "DELETE FROM Genre WHERE genreId = ?;";
@@ -171,6 +175,7 @@ public class CategoryDBDAO
     }
     
   
+    @Override
     public boolean updateCategory(Genre g)
     {
         try (Connection con = dbConnection.getConnection())

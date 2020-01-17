@@ -5,10 +5,16 @@
  */
 package localmoviedatabase.dal.dbmanagers.facades;
 
+import java.util.List;
+import localmoviedatabase.be.Genre;
+
 /**
  *
  * @author math2
  */
-public interface CategoryDBDAOFacade {
-    
+public interface CategoryDalFacade {
+    List<Genre> getAllCategories();
+    Genre createGenre(String name);
+    boolean removeGenre(Genre g);
+    boolean updateCategory(Genre g);
 }
