@@ -24,17 +24,28 @@ public class CategoryManager
     private final CategoryDBDAO categoryDBDAO;
     
 
+    /**
+     * Constructor, initializes object
+     */
     public CategoryManager()
     {
         categoryDBDAO = new CategoryDBDAO();
     }
     
-    
+    /**
+     * Gets all categories from database
+     * @return 
+     */
     public List<Genre> getAllCategories(){
         return categoryDBDAO.getAllCategories();
         
     }
     
+    /**
+     * Creates a new category in the database
+     * @param name
+     * @return 
+     */
     public Genre createGenre(String name){
         
             Genre genre = categoryDBDAO.createGenre(name);
@@ -42,16 +53,25 @@ public class CategoryManager
         
     }
 
+    /**
+     * Removes a category from the database
+     * @param g 
+     */
     public void removeGenre(Genre g) {
         categoryDBDAO.removeGenre(g);
     
     }
     
+    /**
+     * Updates category from the database
+     * @param g 
+     */
     public void updateGenre(Genre g)
     {
         categoryDBDAO.updateCategory(g);
     }
 
+   
     public void addMovieToCategory(Movie movie, Genre genre) {
         categoryDBDAO.addMovieToCategory(movie, genre);
     }

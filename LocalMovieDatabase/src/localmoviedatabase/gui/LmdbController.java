@@ -105,6 +105,12 @@ public class LmdbController implements Initializable
     private ListView<Movie> genreMoviesLst;
 
     
+    /**
+     * initializes our table views and movie selection upon startup
+     * @param url
+     * @param rb 
+     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -118,6 +124,9 @@ public class LmdbController implements Initializable
         
         }
 
+    /**
+     * the list of movies
+     */
     public void movieTable() 
     {
         movieTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -127,6 +136,10 @@ public class LmdbController implements Initializable
         movieTableView.setItems(model.getMovies());
     }
 
+    
+    /**
+     * the list of categories
+     */
     public void categoryTable()
     {
         categoryName.setCellValueFactory(new PropertyValueFactory<>("genreName"));
@@ -187,6 +200,10 @@ public class LmdbController implements Initializable
 
   
 
+    /**
+     * Removes selected category
+     * @param event 
+     */
     @FXML
     private void removeCategory(ActionEvent event)
     {
@@ -201,6 +218,11 @@ public class LmdbController implements Initializable
         }
     }
 
+    /**
+     * Opens a new window to add a movie
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void addMovie(ActionEvent event) throws IOException
     {
@@ -217,6 +239,11 @@ public class LmdbController implements Initializable
         
     }
 
+    
+    /**
+     * Removes selected movie
+     * @param event 
+     */
     @FXML
     private void removeMovie(ActionEvent event)
     {
@@ -225,6 +252,11 @@ public class LmdbController implements Initializable
         
     }
 
+    /**
+     * Opens a new view to edit selected movie
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void editMovie(ActionEvent event) throws IOException
     {
@@ -252,6 +284,11 @@ public class LmdbController implements Initializable
  
     }
 
+    /**
+     * Plays the selected movie in a new view
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void playSelectedMovie(ActionEvent event) throws IOException
     {
@@ -267,6 +304,12 @@ public class LmdbController implements Initializable
         
     }
 
+    
+    /**
+     * Edit selected category in a new view
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void editCategory(ActionEvent event) throws IOException
     {
@@ -291,6 +334,11 @@ public class LmdbController implements Initializable
         }
     }
 
+    
+    /**
+     * Search function for movies
+     * @param event 
+     */
    @FXML
     private void searchMovie(KeyEvent event)
     {
@@ -308,6 +356,10 @@ public class LmdbController implements Initializable
     }
 
 
+    /**
+     * Adds a movie to a category
+     * @param event 
+     */
     @FXML
     private void AddMovieToCategory(ActionEvent event) {
         Movie moToBeAdded = movieTableView.getSelectionModel().getSelectedItem();

@@ -40,6 +40,11 @@ public class NewCategoryController implements Initializable
         // TODO
     }    
 
+    
+    /**
+     * Closes the stage without creating new category
+     * @param event 
+     */
     @FXML
     private void cancelNewCategory(ActionEvent event)
     {
@@ -47,6 +52,10 @@ public class NewCategoryController implements Initializable
         stage.close();
     }
 
+    /**
+     * Creates a new category
+     * @param event 
+     */
     @FXML
     private void saveNewCategory(ActionEvent event)
     {

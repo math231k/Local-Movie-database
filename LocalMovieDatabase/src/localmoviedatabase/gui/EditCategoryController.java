@@ -48,6 +48,12 @@ public class EditCategoryController implements Initializable
         EditCategoryController();
     }    
 
+    /**
+     * Save button to update changes in a category
+     * @param event
+     * @throws IOException
+     * @throws DalException 
+     */
     private void saveEditCategory(ActionEvent event) throws IOException, DalException
     {
         appModel = new AppModel();
@@ -61,6 +67,10 @@ public class EditCategoryController implements Initializable
         
     }
 
+    /**
+     * Closes the stage without updating
+     * @param event 
+     */
     private void cancelEditCategory(ActionEvent event)
     {
         Stage stage = (Stage) btnCancelCategory.getScene().getWindow();

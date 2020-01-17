@@ -20,17 +20,32 @@ public class MovieManager
     private final MovieDalFacade movieDBDAO;
     private Movie movie;
 
-    
+    /**
+     * Constructor, initializes object
+     */
     public MovieManager()
     {
         movieDBDAO = new MovieDBDAO();
     }
     
+    /**
+     * Gets all movies from the database
+     * @return 
+     */
     public List<Movie> getAllMovies()
     {
         return movieDBDAO.readMovie();
     }
 
+    /**
+     * Adds a new movie to the database
+     * @param category
+     * @param title
+     * @param rating
+     * @param relDate
+     * @param path
+     * @return 
+     */
     public Movie addMovie(String category, String title, int rating, int relDate, String path) {
         
         movie = movieDBDAO.createMovie(category, title, rating, relDate, path);
@@ -38,10 +53,18 @@ public class MovieManager
         
     }
 
+    /**
+     * Removes movie from database
+     * @param m 
+     */
     public void removeMovie(Movie m) {
         movieDBDAO.deleteMovie(m);
     }
 
+    /**
+     * Updates movie from database
+     * @param m 
+     */
     public void updateMovie(Movie m) {
         movieDBDAO.updateMovie(m);
     }

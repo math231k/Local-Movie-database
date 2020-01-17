@@ -36,7 +36,9 @@ public final class AppModel
     private Genre currentlySelectedGenre;
     private Movie movie;
 
-    
+    /**
+     * Constructor for app model
+     */
     public AppModel()
     {
         movieManager = new MovieManager();
@@ -98,7 +100,10 @@ public final class AppModel
         getMovies();
     }
     
-
+    /**
+     * Updates a movie from the database
+     * @param m to be updated
+     */
     public void updateMovie(Movie m){
         movieManager.updateMovie(m);
         getMovies();
@@ -106,6 +111,10 @@ public final class AppModel
     }
     
 
+    /**
+     * Updates a category from the database
+     * @param g to be updated
+     */
     public void updateCategory(Genre g)
     {
         categoryManager.updateGenre(g);
