@@ -160,6 +160,9 @@ public final class AppModel
                 noSelectionAlert.showAndWait();
     }
     
+    /**
+     * Created a promt reminding the user to delete certain movies
+     */
     public void deletionReminder(){
         Alert deletionReminderAlert = new Alert(Alert.AlertType.INFORMATION);
         deletionReminderAlert.setTitle("Reminder");
@@ -171,7 +174,7 @@ public final class AppModel
     
     /**
      * adds a new genre to the database
-     * @param g the genre to be added
+     * @param name the name of the movie you want to add
      */
     public void createGenre(String name){
         Genre genre = categoryManager.createGenre(name);
@@ -230,6 +233,11 @@ public final class AppModel
         return movies;
     }
 
+    /**
+     * Removes a Movie from a given Genre
+     * @param selectedMovie the movie to be removed
+     * @param selectedGenre the genre to have the movie removed
+     */
     public void removeMovieFromGenre(Movie selectedMovie, Genre selectedGenre) {
         categoryManager.removeMovieFromGenre(selectedMovie, selectedGenre);
         fetchMoviesFromGenre(selectedGenre);
