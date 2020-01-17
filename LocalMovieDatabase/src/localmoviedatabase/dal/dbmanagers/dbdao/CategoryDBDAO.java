@@ -222,26 +222,7 @@ public class CategoryDBDAO implements CategoryDalFacade
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
-    }
-
-    /*public void removeAllCategoryMovies(Genre selectedGenre) {
-        try (Connection con = dbConnection.getConnection()) {
-            String sql = "DELETE FROM GenreMovies WHERE movId = ?;";
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            stmt.setInt(1, selectedGenre.getId());
-
-            int updatedRows = stmt.executeUpdate();
-
-
-        } catch (SQLServerException ex) {
-            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }*/
-    
+    }    
 }
         
     

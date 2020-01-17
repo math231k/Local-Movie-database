@@ -6,21 +6,18 @@
 package localmoviedatabase.dal.dbmanagers.dbdao;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.io.IOException;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DBSettings;
-//import localmoviedatabase.dal.dbaccess.DalException;
 import localmoviedatabase.dal.dbmanagers.facades.MovieDalFacade;
 
 /**
@@ -62,29 +59,7 @@ public class MovieDBDAO implements MovieDalFacade{
     }
 
     
-/*
-    @Override
-    public boolean updateMovie(Movie movie) {
-        try (Connection con = dbConnection.getConnection()) {
-           String sql = "UPDATE Songs SET id = ?, category = ?, title = ?, length = ?, relDate = ?, path = ?  WHERE id = ?;";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, movie.getId());
-            stmt.setString(2, movie.getCategory());
-            stmt.setString(3, movie.getTitle());
-            stmt.setString(4, movie.getLength());
-            stmt.setInt(5, movie.getRelDate());
-            stmt.setString(6, movie.getPath());
-            
-            int updatedRows = stmt.executeUpdate();
-            return updatedRows > 0;
-        } catch (SQLServerException ex) {
-            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-*/
+
     @Override
     public List<Movie> readMovie()
     {
