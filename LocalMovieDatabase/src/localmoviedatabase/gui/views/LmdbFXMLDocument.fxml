@@ -26,43 +26,33 @@
       <Button fx:id="categoryRemove" layoutX="150.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeCategory" text="Remove" />
       <Button fx:id="movieRemove" layoutX="707.0" layoutY="303.0" mnemonicParsing="false" onAction="#removeMovie" text="Remove" />
       <TextField fx:id="searchMovie" layoutX="627.0" layoutY="77.0" onKeyTyped="#searchMovie" prefHeight="25.0" prefWidth="200.0" promptText="search in movies" />
-      <Label layoutX="404.0" layoutY="345.0" text="Selected movie">
+      <Label layoutX="404.0" layoutY="364.0" text="Selected movie">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="showTitle" alignment="CENTER" layoutX="370.0" layoutY="383.0">
+      <TextField fx:id="showTitle" alignment="CENTER" layoutX="370.0" layoutY="398.0">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="showCategory" alignment="CENTER" layoutX="370.0" layoutY="428.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </TextField>
-      <Label layoutX="288.0" layoutY="388.0" text="Title:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="288.0" layoutY="433.0" text="Catergory">
+      <Label layoutX="295.0" layoutY="403.0" text="Title:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <Button fx:id="movieEdit" layoutX="770.0" layoutY="303.0" mnemonicParsing="false" onAction="#editMovie" text="Edit" />
-      <Label layoutX="288.0" layoutY="482.0" text="Rating:">
+      <Label layoutX="288.0" layoutY="450.0" text="Rating:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="showRating" alignment="CENTER" layoutX="370.0" layoutY="477.0">
+      <TextField fx:id="showRating" alignment="CENTER" layoutX="369.0" layoutY="445.0">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="playButton" layoutX="414.0" layoutY="537.0" mnemonicParsing="false" onAction="#playSelectedMovie" text="Play movie">
+      <Button fx:id="playButton" layoutX="413.0" layoutY="518.0" mnemonicParsing="false" onAction="#playSelectedMovie" text="Play movie">
          <font>
             <Font size="14.0" />
          </font>
