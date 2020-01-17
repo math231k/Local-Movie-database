@@ -57,6 +57,10 @@ public class EditMovieController extends LmdbController implements Initializable
         EditMovieController();
     }    
 
+    /**
+     * saves the edits done to the movie
+     * @param event the event that runs the code
+     */
     @FXML
     private void saveEditMovie(ActionEvent event)
     {
@@ -80,6 +84,10 @@ public class EditMovieController extends LmdbController implements Initializable
 
     }
 
+    /**
+     * cancels the edit of the movie
+     * @param event the event that runs the code
+     */
     @FXML
     private void cancelEditMovie(ActionEvent event)
     {

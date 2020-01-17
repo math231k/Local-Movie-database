@@ -24,49 +24,44 @@ public class Genre
         this.genreName = genreName;
     }
 
-    //constructor for editing category
     public Genre(int id, String genreName)
     {
         this.id = id;
         this.genreName = genreName;
     }
     
+    /**
+     * Gets the name of the genre
+     * @return the name of the genre as a String
+     */
     public String getGenreName()
     {
         return genreName;
     }
 
+    /**
+     * Sets the name of the genre
+     * @param genreName the name to be set
+     */
     public void setGenreName(String genreName)
     {
         this.genreName = genreName;
     }
 
-    public List<Movie> getMovies()
-    {
-        return movies;
-    }
 
+    /**
+     * gets the id of the genre
+     * @return the id as an integer
+     */
     public int getId()
     {
         return id;
     }
-    
-    public void deleteMovie(Movie movie) {
-        //movies.remove(movie);
-        System.out.println(movies);
-    }
 
-    public boolean addMovieToGenre(Movie movie)
-    {
-        movies.add(movie);
-        return true;
-    }
-
-    public List<Movie> getGenreMovieList()
-    {
-        return movies;
-    }
-
+    /**
+     * Sets the id of the genre
+     * @param id the id to be set
+     */
     public void setId(int id) {
         this.id = id;
     }

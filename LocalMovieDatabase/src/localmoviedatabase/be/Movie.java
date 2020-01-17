@@ -29,17 +29,6 @@ public class Movie {
         this.path = path;
     }
 
-    public Movie(String title, String length, String path)
-    {
-        this.title = title;
-        this.length = length;
-        this.path = path;
-    }
-
-    
-    
-
-    //constructor for editing movies
     public Movie(int id, int rating, String title)
     {
         this.id = id;
@@ -47,67 +36,92 @@ public class Movie {
         this.title = title;
     }
 
-
+    /**
+     * gets the title of the movie
+     * @return the title as a String
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * sets the title of the movie
+     * @param title the title to be set
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * sets the path of the movie file
+     * @param path the path to be set
+     */
     public void setPath(String path) {
         this.path = path;
     }
-
-    public String getLength() {
-        return length;
-    }
-
-    public void setLength(String length) {
-        this.length = length;
-    }
-
+    
+    /**
+     * gets the rating of the Movie
+     * @return the rating as an integer
+     */
     public int getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
-        
-        this.rating = rating;
-   
+    /**
+     * sets the rating of the movie
+     * @param rating the rating to be set
+     */
+    public void setRating(int rating) {       
+        this.rating = rating;  
     }
 
+    
+    /**
+     * gets the release date of the movie
+     * @return the release date as an int
+     */
     public int getRelDate() {
         return relDate;
     }
 
+    /**
+     * sets the release date of the movie
+     * @param relDate the release date to be set
+     */
     public void setRelDate(int relDate) {
         this.relDate = relDate;
     }
 
+    /**
+     * gets the id of the movie
+     * @return the id as an integer
+     */
     public int getId() {
         return id;
     }
+    
+    /**
+     * prints some movie data as a String
+     * @return A String with some movie data
+     */
     @Override
     public String toString(){
-        return (title +" "+ length +" "+ rating);
-    }
-
-    public String getCategory()
-    {
-        return category;
-    }
-
-    public void setCategory(String category)
-    {
-        this.category = category;
+        return (title +" "+ rating);
     }
     
+    /**
+     * gets the path from the move
+     * @return the path as a String
+     */
     public String getPath() {
         return path;
     }
 
+    /**
+     * sets the id of the Movie
+     * @param id the id to be set
+     */
     public void setId(int id) {
         this.id = id;
     }

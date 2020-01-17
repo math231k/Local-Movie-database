@@ -30,7 +30,7 @@ public class MovieManager
     
     /**
      * Gets all movies from the database
-     * @return 
+     * @return a list of movie Objects
      */
     public List<Movie> getAllMovies()
     {
@@ -55,7 +55,7 @@ public class MovieManager
 
     /**
      * Removes movie from database
-     * @param m 
+     * @param m the movie to be removed
      */
     public void removeMovie(Movie m) {
         movieDBDAO.deleteMovie(m);
@@ -63,7 +63,7 @@ public class MovieManager
 
     /**
      * Updates movie from database
-     * @param m 
+     * @param m the movie to be updated
      */
     public void updateMovie(Movie m) {
         movieDBDAO.updateMovie(m);

@@ -37,7 +37,11 @@ public class MovieDBDAO implements MovieDalFacade{
         }
     }
     
-
+    /**
+     * deletes a movie From the database
+     * @param m the movie to be deleted
+     * @return true if the movie was deleted
+     */
     @Override
     public boolean deleteMovie(Movie m) {
         
@@ -59,7 +63,10 @@ public class MovieDBDAO implements MovieDalFacade{
     }
 
     
-
+    /**
+     * reads all movies in the database
+     * @return a list of Movie objects 
+     */
     @Override
     public List<Movie> readMovie()
     {
@@ -106,7 +113,11 @@ public class MovieDBDAO implements MovieDalFacade{
     }
     
     
-
+    /**
+     * updates the data of a movie in the database
+     * @param movie the movie to be updated
+     * @return true uf the movie was updated
+     */
     @Override
     public boolean updateMovie(Movie movie) {
         try (Connection con = dbConnection.getConnection()) {
@@ -132,7 +143,15 @@ public class MovieDBDAO implements MovieDalFacade{
     }
 
     
-
+    /**
+     * Creates a new movie in the database
+     * @param category
+     * @param title
+     * @param rating
+     * @param relDate
+     * @param path
+     * @return the movie which was vreated
+     */
     @Override
     public Movie createMovie(String category, String title, int rating, int relDate, String path) {
 

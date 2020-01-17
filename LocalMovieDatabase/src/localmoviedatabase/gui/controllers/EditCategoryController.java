@@ -49,9 +49,7 @@ public class EditCategoryController implements Initializable
 
     /**
      * Save button to update changes in a category
-     * @param event
-     * @throws IOException
-     * @throws DalException 
+     * @param event the event that runs the code
      */
     private void saveEditCategory(ActionEvent event)
     {
@@ -68,7 +66,7 @@ public class EditCategoryController implements Initializable
 
     /**
      * Closes the stage without updating
-     * @param event 
+     * @param event the event that runs the code
      */
     private void cancelEditCategory(ActionEvent event)
     {

@@ -34,24 +34,7 @@ public class SearchMovies {
 
         return output;
     }
-    /**
-     * Searches the database for a specifik genre
-     * @param searchBase the genre list to be searched through
-     * @param query the String to be searched for
-     * @return a list of genre results
-     */
-    public List<Genre> searchCategory(List<Genre> searchBase, String query) {
-        List<Genre> output = new ArrayList<>();
 
-        for (Genre genre : searchBase) {
-         
-            if (searchForMovie(genre.getMovies(),query) == true){
-                output.add(genre);
-            }
-        }
-
-        return output;
-    }
     public boolean searchForMovie(List<Movie> searchBase, String query) {
         boolean output = false;
 

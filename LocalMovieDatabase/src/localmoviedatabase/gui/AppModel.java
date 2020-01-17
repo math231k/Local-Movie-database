@@ -66,7 +66,7 @@ public final class AppModel
     
     /**
      * adds all movies from a specified genre to an ObservableList
-     * @param genre 
+     * @param genre the genre from where to fetch the movies
      */
     public void fetchMoviesFromGenre(Genre genre){
         
@@ -145,18 +145,6 @@ public final class AppModel
     }
     
     /**
-     * Returns a list with a search result consisting of genres
-     * @param input the String to compare to
-     * @return an ObservableList of genres
-     */
-    public ObservableList<Genre> searchGenre(String input){
-        List<Genre> filter = search.searchCategory(getCategories(),input);
-        
-        ObservableList<Genre> result = FXCollections.observableList(filter);
-        return result;
-    }
-    
-    /**
      * creates a prompt warning the user that no movie is selected
      */
     public void noMovieSelected(){
@@ -180,6 +168,9 @@ public final class AppModel
         deletionReminderAlert.showAndWait();
    }
     
+   /**
+    * Creates a promt alerting the user that the movie already exists within the database
+    */
    public void movieAlreadyExists(){
        Alert alreadyExist = new Alert(Alert.AlertType.ERROR);
        alreadyExist.setTitle("Movie Already Exists");
@@ -220,7 +211,7 @@ public final class AppModel
 
     
     /**
-     * 
+     * gets the list of movies in a genre
      * @return An Observablelist of movies in a genre
      */
     public ObservableList<Movie> getGenreMovieList(){
@@ -229,7 +220,7 @@ public final class AppModel
     }
     
     /**
-     * 
+     * gets the genres in the database
      * @return an Observable list of genres
      */
     public ObservableList<Genre> getCategories(){
@@ -240,7 +231,7 @@ public final class AppModel
     
 
     /**
-     * 
+     * gets the movies in the database
      * @return An observable list of movies
      */
     public ObservableList<Movie> getMovies(){
