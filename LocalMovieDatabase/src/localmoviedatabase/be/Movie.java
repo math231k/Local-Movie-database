@@ -12,17 +12,15 @@ package localmoviedatabase.be;
 public class Movie {
 
     private int id;  
-    private String category;
     private String title;
     private String length;
     private int rating;
     private int relDate;
     private String path;
 
-    public Movie(int id, String category, String title, int rating, int relDate, String path)
+    public Movie(int id, String title, int rating, int relDate, String path)
     {
         this.id = id;
-        this.category = category;
         this.title = title;
         this.rating = rating;
         this.relDate = relDate;
@@ -94,15 +92,6 @@ public class Movie {
         return (title +" "+ length +" "+ rating);
     }
 
-    public String getCategory()
-    {
-        return category;
-    }
-
-    public void setCategory(String category)
-    {
-        this.category = category;
-    }
     
     public String getPath() {
         return path;

@@ -80,8 +80,8 @@ public final class AppModel
     /**
     * Adds a movie to the database and checks to see if movie already added
     */
-    public Movie addMovie(String category, String title, int rating, int relDate, String path) {
-        movie = new Movie(rating, category, title, rating, relDate, path);
+    public Movie addMovie(String title, int rating, int relDate, String path) {
+        movie = new Movie(rating, title, rating, relDate, path);
         String repeatCheck;
         boolean canAdd = true;
         for (Movie mov : movies) {
@@ -92,7 +92,7 @@ public final class AppModel
         }
         if(canAdd){
         movies.add(movie);
-        movieManager.addMovie(category, title, rating, relDate, path);
+        movieManager.addMovie(title, rating, relDate, path);
         return movie;
         }else {
             movieAlreadyExists();

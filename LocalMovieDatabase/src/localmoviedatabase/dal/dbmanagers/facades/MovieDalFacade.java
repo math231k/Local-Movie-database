@@ -13,7 +13,7 @@ import localmoviedatabase.be.Movie;
  * @author math2
  */
 public interface MovieDalFacade {
-    public Movie createMovie(String category, String title, int rating, int relDate, String path);
+    public Movie createMovie(String title, int rating, int relDate, String path);
     public boolean deleteMovie(Movie movie);
     public List<Movie> readMovie();
     public boolean updateMovie(Movie movie);
