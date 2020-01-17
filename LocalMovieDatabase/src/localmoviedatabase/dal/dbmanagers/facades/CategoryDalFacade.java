@@ -9,6 +9,6 @@ package localmoviedatabase.dal.dbmanagers.facades;
  *
  * @author math2
  */
-public interface CategoryDBDAOFacade {
+public interface CategoryDalFacade {
     
 }
