@@ -46,12 +46,12 @@ public class LmdbController implements Initializable
     //private final MockMovieManager mmm = new MockMovieManager();
     //private final SearchMovies search = new SearchMovies();
     private AppModel model;
-    public static int getRating;
-    public static int getId;
-    public static int getGenreId;
-    public static String getTitle;
-    public static String getPath;
-    public Genre lastSelectedGenre;
+    private static int getRating;
+    private static int getId;
+    private static int getGenreId;
+    private static String getTitle;
+    private static String getPath;
+    private Genre lastSelectedGenre;
     private Movie lastSelectedMovie;
     
     
@@ -437,5 +437,26 @@ public class LmdbController implements Initializable
         System.out.println(lastSelectedMovie.toString());
     }
 
+    public static int getGetRating() {
+        return getRating;
+    }
+
+    public static int getGetId() {
+        return getId;
+    }
+
+    public static int getGetGenreId() {
+        return getGenreId;
+    }
+
+    public static String getGetTitle() {
+        return getTitle;
+    }
+
+    public static String getGetPath() {
+        return getPath;
+    }
+    
+    
 }
 

@@ -5,19 +5,15 @@
  */
 package localmoviedatabase.gui;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
-import javafx.scene.media.Media;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.bll.CategoryManager;
 import localmoviedatabase.bll.MovieManager;
 import localmoviedatabase.bll.util.SearchMovies;
-import localmoviedatabase.dal.dbaccess.DalException;
 
 
 /**
@@ -29,10 +25,10 @@ public final class AppModel
     
     final private MovieManager movieManager;
     final private CategoryManager categoryManager;
-    private ObservableList<Movie> movies = FXCollections.observableArrayList();
-    private ObservableList<Genre> categories = FXCollections.observableArrayList();
-    private ObservableList<Movie> moviesInGenre = FXCollections.observableArrayList();
-    private SearchMovies search = new SearchMovies();
+    private final ObservableList<Movie> movies = FXCollections.observableArrayList();
+    private final ObservableList<Genre> categories = FXCollections.observableArrayList();
+    private final ObservableList<Movie> moviesInGenre = FXCollections.observableArrayList();
+    private final SearchMovies search = new SearchMovies();
     private Genre currentlySelectedGenre;
     private Movie movie;
 
@@ -83,7 +79,6 @@ public final class AppModel
 
     /**
     * Adds a movie to the database
-    * @param m the movie to be added
     */
     public Movie addMovie(String category, String title, int rating, int relDate, String path) {
         movie = movieManager.addMovie(category, title, rating, relDate, path);

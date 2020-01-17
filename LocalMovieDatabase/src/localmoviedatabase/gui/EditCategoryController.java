@@ -9,13 +9,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import localmoviedatabase.be.Genre;
-import localmoviedatabase.dal.dbaccess.DalException;
+//import localmoviedatabase.dal.dbaccess.DalException;
 
 /**
  * FXML Controller class
@@ -34,7 +33,7 @@ public class EditCategoryController implements Initializable
 
     public void EditCategoryController()
     {
-        txtCategoryName.setText(LmdbController.getTitle);
+        txtCategoryName.setText(LmdbController.getGetTitle());
     }
 
     
@@ -54,11 +53,11 @@ public class EditCategoryController implements Initializable
      * @throws IOException
      * @throws DalException 
      */
-    private void saveEditCategory(ActionEvent event) throws IOException, DalException
+    private void saveEditCategory(ActionEvent event)
     {
         appModel = new AppModel();
         
-        Genre category = new Genre(LmdbController.getGenreId, txtCategoryName.getText().trim());
+        Genre category = new Genre(LmdbController.getGetGenreId(), txtCategoryName.getText().trim());
         appModel.updateCategory(category);
         
         Stage stage = (Stage) btnSaveCategory.getScene().getWindow();

@@ -25,6 +25,7 @@ import javafx.scene.media.MediaView;
 public class VideoPlayerController extends LmdbController implements Initializable {
 
     private MediaPlayer mp;
+    private boolean isPaused;
     
     @FXML
     private MediaView mediaPlayer;
@@ -38,7 +39,7 @@ public class VideoPlayerController extends LmdbController implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        isPaused = false;
     }    
 
     

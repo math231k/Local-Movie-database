@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package localmoviedatabase.dal.dbaccess;
+package localmoviedatabase.dal.dbmanagers.facades;
 
 /**
  *
- * @author Rizvan
+ * @author math2
  */
-public class DalException extends Exception
-{
+public interface CategoryDBDAOFacade {
     
 }

@@ -20,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DBSettings;
-import localmoviedatabase.dal.dbaccess.DalException;
+//import localmoviedatabase.dal.dbaccess.DalException;
 import localmoviedatabase.dal.dbmanagers.facades.MovieDalFacade;
 
 /**

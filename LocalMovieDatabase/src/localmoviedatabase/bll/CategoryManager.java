@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
-import localmoviedatabase.dal.dbaccess.DalException;
+//import localmoviedatabase.dal.dbaccess.DalException;
 import localmoviedatabase.dal.dbmanagers.dbdao.CategoryDBDAO;
 
 /**

@@ -5,7 +5,6 @@
  */
 package localmoviedatabase.gui;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import localmoviedatabase.be.Movie;
-import localmoviedatabase.dal.dbaccess.DalException;
 
 /**
  * FXML Controller class
@@ -43,8 +41,8 @@ public class EditMovieController extends LmdbController implements Initializable
 
     public void EditMovieController()
     {
-        txtName.setText(LmdbController.getTitle);
-        txtRating.setText("" + LmdbController.getRating);
+        txtName.setText(LmdbController.getGetTitle());
+        txtRating.setText("" + LmdbController.getGetRating());
     }
     
     
@@ -68,7 +66,7 @@ public class EditMovieController extends LmdbController implements Initializable
         
 
         if (rating > 0 && rating < 11) {
-        Movie movie = new Movie(LmdbController.getId, rating, txtName.getText().trim());
+        Movie movie = new Movie(LmdbController.getGetId(), rating, txtName.getText().trim());
         appModel.updateMovie(movie);
         
         Stage stage = (Stage) saveEditMovie.getScene().getWindow();
