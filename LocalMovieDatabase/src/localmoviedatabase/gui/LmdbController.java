@@ -113,6 +113,9 @@ public class LmdbController implements Initializable
         categoryTable();
         selectedMovie();
         selectedMovieFromGenre();
+        
+        genreMoviesLst.setItems(model.getGenreMovieList());
+        
         }
 
     public void movieTable() 
@@ -312,16 +315,15 @@ public class LmdbController implements Initializable
         
         model.addMovieToCategory(moToBeAdded, geToBeAdded);
         model.fetchMoviesFromGenre(geToBeAdded);
-        addMoviesToGenreList();
+        //addMoviesToGenreList();
         System.out.println("Movie Added");
     }
 
     @FXML
     private void getMoviesInCategory(MouseEvent event) {
         Genre selectedGenre = categoryTableView.getSelectionModel().getSelectedItem();
+        model.fetchMoviesFromGenre(selectedGenre);
         lastSelectedGenre = selectedGenre;
-        model.fetchMoviesFromGenre(lastSelectedGenre);
-        addMoviesToGenreList();
     }
     
     public void addMoviesToGenreList(){
@@ -341,9 +343,10 @@ public class LmdbController implements Initializable
 
     @FXML
     private void removeMovieFromCategory(ActionEvent event) {
-    Movie selectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
-    model.removeMovieFromGenre(selectedMovie, lastSelectedGenre);
+    //Movie selectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
+    model.removeMovieFromGenre(lastSelectedMovie, lastSelectedGenre);
     model.fetchMoviesFromGenre(lastSelectedGenre);
+    
     }
 
     @FXML
@@ -379,6 +382,12 @@ public class LmdbController implements Initializable
         lastSelectedMovie = movieTableView.getSelectionModel().getSelectedItem();
         getPath= lastSelectedMovie.getPath();
         System.out.println(lastSelectedMovie.getPath());
+    }
+
+    @FXML
+    private void setSlectedMovie(MouseEvent event) {
+        lastSelectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
+        System.out.println(lastSelectedMovie.toString());
     }
 
 }

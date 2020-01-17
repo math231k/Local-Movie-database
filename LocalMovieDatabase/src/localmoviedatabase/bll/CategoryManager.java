@@ -64,13 +64,18 @@ public class CategoryManager
     {
         categoryDBDAO.removeMovieFromGenre(selectedMovie, selectedGenre);
 
-        List<Movie> remainingMovies = categoryDBDAO.getMoviesFromGenre(selectedGenre);
+        /*List<Movie> remainingMovies = categoryDBDAO.getMoviesFromGenre(selectedGenre);
         categoryDBDAO.removeAllCategoryMovies(selectedGenre);
-
+        
         for (Movie m : remainingMovies)
         {
+            if(m == selectedMovie){
+                
+            }
+            System.out.println(m.toString());
             categoryDBDAO.addMovieToCategory(m, selectedGenre);
-        }
+        }*/
+        
     }
     
     

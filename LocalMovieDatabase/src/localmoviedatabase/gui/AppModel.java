@@ -212,8 +212,7 @@ public final class AppModel
         return movies;
     }
 
-    void removeMovieFromGenre(Movie selectedMovie, Genre selectedGenre) {
-        selectedGenre.deleteMovie(selectedMovie);
+    public void removeMovieFromGenre(Movie selectedMovie, Genre selectedGenre) {
         categoryManager.removeMovieFromGenre(selectedMovie, selectedGenre);
         fetchMoviesFromGenre(selectedGenre);
         fetchCategories();

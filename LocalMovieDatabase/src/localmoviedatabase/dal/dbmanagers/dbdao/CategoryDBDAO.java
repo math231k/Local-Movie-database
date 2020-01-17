@@ -120,6 +120,7 @@ public class CategoryDBDAO
         try (Connection con = dbConnection.getConnection()) {
            String sql = "INSERT INTO GenreMovies(genId, movId) VALUES (?,?);";
             PreparedStatement pstm = con.prepareStatement(sql);
+           
             pstm.setInt(1, g.getId());
             pstm.setInt(2, m.getId());
             
@@ -155,8 +156,10 @@ public class CategoryDBDAO
 
                 Movie m = new Movie(Id, rating , title);
                 m.setPath(path);
-                
+
+                if (m.getTitle()!=null){
                 movies.add(m);
+                }
             }
             return movies;
         } catch (SQLServerException ex) {
@@ -196,12 +199,14 @@ public class CategoryDBDAO
     public void removeMovieFromGenre(Movie selectedMovie, Genre selectedGenre) {
       
       try (Connection con = dbConnection.getConnection()) {
-      String sql = "DELETE FROM genreMovies WHERE movId = ? and genId = ?;";
+      String sql = "DELETE FROM genreMovies WHERE id = ? and genId = ?;";
             PreparedStatement stmt = con.prepareStatement(sql);
-            System.out.println(selectedMovie.getTitle());
-            System.out.println(selectedGenre.getGenreName());
+            System.out.println(selectedMovie.getId());
+            System.out.println(selectedGenre.getId());
             stmt.setInt(1, selectedMovie.getId());
             stmt.setInt(2, selectedGenre.getId());
+            
+            
             
             stmt.executeUpdate();
             stmt.close();
@@ -217,7 +222,7 @@ public class CategoryDBDAO
 
     public void removeAllCategoryMovies(Genre selectedGenre) {
         try (Connection con = dbConnection.getConnection()) {
-            String sql = "DELETE FROM GenreMovies WHERE genId = ?;";
+            String sql = "DELETE FROM GenreMovies WHERE movId = ?;";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, selectedGenre.getId());
