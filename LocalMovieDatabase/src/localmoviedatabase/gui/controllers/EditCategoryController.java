@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package localmoviedatabase.gui;
+package localmoviedatabase.gui.controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import localmoviedatabase.be.Genre;
+import localmoviedatabase.gui.AppModel;
 //import localmoviedatabase.dal.dbaccess.DalException;
 
 /**
