@@ -160,6 +160,15 @@ public final class AppModel
                 noSelectionAlert.showAndWait();
     }
     
+    public void deletionReminder(){
+        Alert deletionReminderAlert = new Alert(Alert.AlertType.INFORMATION);
+        deletionReminderAlert.setTitle("Reminder");
+        deletionReminderAlert.setHeaderText("Remember to delete movies not seen for 2 years \nand with a rating of less than 6");
+        
+        deletionReminderAlert.showAndWait();
+        System.out.println("This ran");
+   }
+    
     /**
      * adds a new genre to the database
      * @param g the genre to be added

@@ -35,8 +35,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import localmoviedatabase.bll.util.SearchMovies;
-import localmoviedatabase.dal.dbmanagers.mockdatamanagers.MockMovieManager;
 
 
 /**
@@ -45,16 +43,13 @@ import localmoviedatabase.dal.dbmanagers.mockdatamanagers.MockMovieManager;
  */
 public class LmdbController implements Initializable
 {
-    private MockMovieManager mmm = new MockMovieManager();
-    private SearchMovies search = new SearchMovies();
+    //private final MockMovieManager mmm = new MockMovieManager();
+    //private final SearchMovies search = new SearchMovies();
     private AppModel model;
     public static int getRating;
     public static int getId;
     public static int getGenreId;
-    public static int getRelDate;
     public static String getTitle;
-    public static String getGenre;
-    public static String getLength;
     public static String getPath;
     public Genre lastSelectedGenre;
     private Movie lastSelectedMovie;
@@ -119,8 +114,8 @@ public class LmdbController implements Initializable
         categoryTable();
         selectedMovie();
         selectedMovieFromGenre();
-        
         genreMoviesLst.setItems(model.getGenreMovieList());
+        model.deletionReminder();
         
         }
 
