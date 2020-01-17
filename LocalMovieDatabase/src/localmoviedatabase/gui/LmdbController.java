@@ -64,7 +64,6 @@ public class LmdbController implements Initializable
     private TableColumn<Genre, String> categoryName;
     @FXML
     private TextField showTitle;
-    @FXML
     private TextField showCategory;
     @FXML
     private TextField showRating;
@@ -150,7 +149,6 @@ public class LmdbController implements Initializable
     public void selectedMovie()
     {
         showTitle.setEditable(false);
-        showCategory.setEditable(false);
         showRating.setEditable(false);
         
         movieTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -161,7 +159,6 @@ public class LmdbController implements Initializable
                 if (newValue != null)
                 {
                     showTitle.setText(newValue.getTitle());
-                    showCategory.setText(newValue.getCategory());
                     showRating.setText(newValue.getRating() + "");
                 }
             }
@@ -174,7 +171,6 @@ public class LmdbController implements Initializable
     public void selectedMovieFromGenre()
     {
         showTitle.setEditable(false);
-        showCategory.setEditable(false);
         showRating.setEditable(false);
         
         genreMoviesLst.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -185,7 +181,6 @@ public class LmdbController implements Initializable
                 if (newValue != null)
                 {
                     showTitle.setText(newValue.getTitle());
-                    showCategory.setText(newValue.getCategory());
                     showRating.setText(newValue.getRating() + "");
                 }
             }
