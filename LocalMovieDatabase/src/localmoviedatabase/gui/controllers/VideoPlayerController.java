@@ -29,8 +29,6 @@ public class VideoPlayerController extends LmdbController implements Initializab
     private MediaView mediaPlayer;
     @FXML
     private Button playBtn;
-    @FXML
-    private Slider volumeSlider;
 
     /**
      * Initializes the controller class.
