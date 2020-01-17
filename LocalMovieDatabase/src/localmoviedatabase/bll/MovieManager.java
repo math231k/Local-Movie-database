@@ -46,9 +46,9 @@ public class MovieManager
      * @param path
      * @return 
      */
-    public Movie addMovie(String category, String title, int rating, int relDate, String path) {
+    public Movie addMovie(String title, int rating, int relDate, String path) {
         
-        movie = movieDBDAO.createMovie(category, title, rating, relDate, path);
+        movie = movieDBDAO.createMovie(title, rating, relDate, path);
         return movie;
         
     }

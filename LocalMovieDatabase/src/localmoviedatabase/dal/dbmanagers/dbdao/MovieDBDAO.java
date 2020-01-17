@@ -153,17 +153,16 @@ public class MovieDBDAO implements MovieDalFacade{
      * @return the movie which was vreated
      */
     @Override
-    public Movie createMovie(String category, String title, int rating, int relDate, String path) {
+    public Movie createMovie(String title, int rating, int relDate, String path) {
 
         try (Connection con = dbConnection.getConnection()) {
-            String sql = "INSERT INTO Movie (title, path, genre, rating, date) VALUES (?,?,?,?,?);";
+            String sql = "INSERT INTO Movie (title, path, rating, date) VALUES (?,?,?,?);";
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             stmt.setString(1, title);
             stmt.setString(2, path);
-            stmt.setString(3, category);
-            stmt.setInt(4, rating);
-            stmt.setInt(5, relDate);
+            stmt.setInt(3, rating);
+            stmt.setInt(4, relDate);
             
             int updatedRows = stmt.executeUpdate();
 
@@ -173,7 +172,7 @@ public class MovieDBDAO implements MovieDalFacade{
                 if (rs.next())
                 {
                     int id = rs.getInt(1);
-                    Movie mov = new Movie (id, category, title, rating, relDate, path);
+                    Movie mov = new Movie (id, title, rating, relDate, path);
                     mov.setId(id);
                     mov.setPath(path);
                     return mov;
