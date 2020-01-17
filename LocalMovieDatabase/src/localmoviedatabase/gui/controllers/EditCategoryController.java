@@ -15,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.gui.AppModel;
-//import localmoviedatabase.dal.dbaccess.DalException;
 
 /**
  * FXML Controller class

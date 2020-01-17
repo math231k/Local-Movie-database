@@ -27,8 +27,7 @@ public class SearchMovies {
         List<Movie> output = new ArrayList<>();
 
         for (Movie movie : searchBase) {
-            if (movie.getTitle().toLowerCase().contains(query.toLowerCase())
-                    /*|| genre.getCategory().toLowerCase().contains(query.toLowerCase())*/) {
+            if (movie.getTitle().toLowerCase().contains(query.toLowerCase())) {
                 output.add(movie);
             }
         }
@@ -45,23 +44,9 @@ public class SearchMovies {
         List<Genre> output = new ArrayList<>();
 
         for (Genre genre : searchBase) {
-            
-            //System.out.println("Genre: " + genre.getGenreName());
-            //System.out.println("Movies In Genre: " + genre.getMovies());
-            /*
-            if (genre.getGenreName().toLowerCase().contains(query.toLowerCase())
-                    /*|| genre.getCategory().toLowerCase().contains(query.toLowerCase())) {
-                output.add(genre);
-            }
-            */
+         
             if (searchForMovie(genre.getMovies(),query) == true){
-                //System.out.println("Search Success");
                 output.add(genre);
-            }
-            else 
-            {
-                //System.out.println("Search Fail");
-                
             }
         }
 
@@ -70,16 +55,12 @@ public class SearchMovies {
     public boolean searchForMovie(List<Movie> searchBase, String query) {
         boolean output = false;
 
-        //System.out.println("Searching Started");
-        //System.out.println("Now Searching: " + searchBase);
         for (Movie movie : searchBase) {
-            //System.out.println("Now Searching: " + movie);
-            if (movie.getTitle().toLowerCase().contains(query.toLowerCase())
-                    /*|| genre.getCategory().toLowerCase().contains(query.toLowerCase())*/) {
+            if (movie.getTitle().toLowerCase().contains(query.toLowerCase())) {
                 output = true;
             }
         }
-        //System.out.println(output);
+
         return output;
     }
 }

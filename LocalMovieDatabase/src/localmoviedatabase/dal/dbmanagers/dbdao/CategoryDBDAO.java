@@ -225,7 +225,7 @@ public class CategoryDBDAO implements CategoryDalFacade
 
     }
 
-    public void removeAllCategoryMovies(Genre selectedGenre) {
+    /*public void removeAllCategoryMovies(Genre selectedGenre) {
         try (Connection con = dbConnection.getConnection()) {
             String sql = "DELETE FROM GenreMovies WHERE movId = ?;";
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -240,7 +240,7 @@ public class CategoryDBDAO implements CategoryDalFacade
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
     
 }
         
