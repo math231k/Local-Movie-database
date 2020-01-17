@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package localmoviedatabase.gui;
+package localmoviedatabase.gui.controllers;
 
 import java.io.File;
 import java.net.URL;
@@ -20,6 +20,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import localmoviedatabase.gui.AppModel;
 
 /**
  * FXML Controller class

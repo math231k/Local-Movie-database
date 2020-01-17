@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.media.MediaView?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="localmoviedatabase.gui.VideoPlayerController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="localmoviedatabase.gui.controllers.VideoPlayerController">
    <children>
       <MediaView fx:id="mediaPlayer" fitHeight="480.0" fitWidth="720.0" layoutX="40.0" layoutY="18.0" />
       <Button fx:id="playBtn" layoutX="40.0" layoutY="499.0" mnemonicParsing="false" onAction="#playPause" text="Pause" />

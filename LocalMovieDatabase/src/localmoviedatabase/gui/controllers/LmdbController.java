@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package localmoviedatabase.gui;
+package localmoviedatabase.gui.controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import localmoviedatabase.gui.AppModel;
 
 
 /**
