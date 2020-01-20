@@ -15,13 +15,13 @@ import java.util.logging.Logger;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DBSettings;
-import localmoviedatabase.dal.dbmanagers.facades.CategoryDalFacade;
+import localmoviedatabase.dal.dbmanagers.facades.GenreDalFacade;
 
 /**
  *
  * @author Rizvan
  */
-public class CategoryDBDAO implements CategoryDalFacade
+public class CategoryDBDAO implements GenreDalFacade
 {
     
     private DBSettings dbConnection;

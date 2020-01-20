@@ -12,9 +12,9 @@ import localmoviedatabase.be.Genre;
  *
  * @author math2
  */
-public interface CategoryDalFacade {
-    List<Genre> getAllCategories();
-    Genre createGenre(String name);
-    boolean removeGenre(Genre g);
-    boolean updateCategory(Genre g);
+public interface GenreDalFacade {
+    public boolean removeGenre(Genre g);
+    public Genre createGenre(String name);
+    public boolean updateCategory(Genre g);
+    public List<Genre> getAllCategories();
 }

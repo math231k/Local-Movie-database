@@ -15,9 +15,9 @@ import java.util.List;
 public class Genre
 {
 
-    String genreName;
-    List<Movie> movies = new ArrayList<>();
-    int id;
+    private String genreName;
+    private List<Movie> movies = new ArrayList<>();
+    private int id;
 
     public Genre(String genreName)
     {
