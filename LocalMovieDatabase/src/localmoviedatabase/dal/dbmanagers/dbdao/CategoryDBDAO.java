@@ -15,12 +15,13 @@ import java.util.logging.Logger;
 import localmoviedatabase.be.Genre;
 import localmoviedatabase.be.Movie;
 import localmoviedatabase.dal.dbaccess.DBSettings;
+import localmoviedatabase.dal.dbmanagers.facades.CategoryDalFacade;
 
 /**
  *
  * @author Rizvan
  */
-public class CategoryDBDAO
+public class CategoryDBDAO implements CategoryDalFacade
 {
     
     private DBSettings dbConnection;
@@ -33,7 +34,11 @@ public class CategoryDBDAO
             Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * gets all Genres in the database
+     * @return a list of Genre objects
+     */
+    @Override
     public List<Genre> getAllCategories()
     {
         
@@ -69,6 +74,12 @@ public class CategoryDBDAO
         return null;        
     }
     
+    /**
+     * Creates a new genre in the database
+     * @param name the name of the new genre
+     * @return the created Genre
+     */
+    @Override
     public Genre createGenre(String name){
         try(Connection con = dbConnection.getConnection()){
             
@@ -98,6 +109,12 @@ public class CategoryDBDAO
         
     }
 
+    /**
+     * removes a genre from the database
+     * @param g the genre to be removed
+     * @return true if the genre was deleted
+     */
+    @Override
     public boolean removeGenre(Genre g) {
     try (Connection con = dbConnection.getConnection()) {
             String sql = "DELETE FROM Genre WHERE genreId = ?;";
@@ -115,7 +132,12 @@ public class CategoryDBDAO
         return false;
 
     }
-
+    /**
+     * Adds a movie to a category
+     * @param m the movie to be added
+     * @param g the genre to have the movie added to
+     * @return true if the movie was aded
+     */
     public boolean addMovieToCategory(Movie m, Genre g) {
         try (Connection con = dbConnection.getConnection()) {
            String sql = "INSERT INTO GenreMovies(genId, movId) VALUES (?,?);";
@@ -137,6 +159,11 @@ public class CategoryDBDAO
         return false;
     }
    
+    /**
+     * Returns all movies from a genre
+     * @param genre the genre from where to get the movies
+     * @return a list of movie objects
+     */
     public List<Movie> getMoviesFromGenre(Genre genre){
         try (Connection con = dbConnection.getConnection()) {
             String sql = "SELECT * FROM genreMovies FULL OUTER JOIN Movie ON "
@@ -171,6 +198,12 @@ public class CategoryDBDAO
     }
     
   
+    /**
+     * updates the data of a Genre in the database
+     * @param g the genre to update
+     * @return true if the genre was updated
+     */
+    @Override
     public boolean updateCategory(Genre g)
     {
         try (Connection con = dbConnection.getConnection())
@@ -196,6 +229,11 @@ public class CategoryDBDAO
         return false;
     }
 
+    /**
+     * Removes a movie From a genre in the database
+     * @param selectedMovie the movie to remove
+     * @param selectedGenre the genre from where the movie is removed
+     */
     public void removeMovieFromGenre(Movie selectedMovie, Genre selectedGenre) {
       
       try (Connection con = dbConnection.getConnection()) {
@@ -217,26 +255,7 @@ public class CategoryDBDAO
             Logger.getLogger(MovieDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
-    }
-
-    public void removeAllCategoryMovies(Genre selectedGenre) {
-        try (Connection con = dbConnection.getConnection()) {
-            String sql = "DELETE FROM GenreMovies WHERE movId = ?;";
-            PreparedStatement stmt = con.prepareStatement(sql);
-
-            stmt.setInt(1, selectedGenre.getId());
-
-            int updatedRows = stmt.executeUpdate();
-
-
-        } catch (SQLServerException ex) {
-            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(CategoryDBDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+    }    
 }
         
     

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package localmoviedatabase.dal.dbmanagers.facades;
+package localmoviedatabase.dal.dbmanagers.mockdatamanagers;
 
 /**
  *
  * @author math2
  */
-public interface CategoryDalFacade {
+public class MockGenreManager {
     
 }

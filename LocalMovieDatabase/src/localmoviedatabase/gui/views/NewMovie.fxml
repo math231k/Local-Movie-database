@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="localmoviedatabase.gui.NewMovieController">
+<AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="localmoviedatabase.gui.controllers.NewMovieController">
    <children>
       <Label layoutX="106.0" layoutY="21.0" text="Add new movie">
          <font>
@@ -14,18 +14,16 @@
          </font>
       </Label>
       <Label layoutX="71.0" layoutY="94.0" text="Title" />
-      <Label layoutX="67.0" layoutY="141.0" text="Genre" />
-      <Label layoutX="65.0" layoutY="192.0" text="Rating" />
-      <Label layoutX="71.0" layoutY="241.0" text="Year" />
+      <Label layoutX="65.0" layoutY="160.0" text="Rating" />
+      <Label layoutX="71.0" layoutY="233.0" text="Year" />
       <Label layoutX="71.0" layoutY="306.0" text="Path" />
       <TextField fx:id="txtTitle" layoutX="121.0" layoutY="90.0" />
-      <TextField fx:id="txtGenre" layoutX="121.0" layoutY="137.0" />
-      <TextField fx:id="txtRating" layoutX="121.0" layoutY="188.0" />
-      <TextField fx:id="txtYear" layoutX="121.0" layoutY="237.0" />
+      <TextField fx:id="txtRating" layoutX="121.0" layoutY="156.0" />
+      <TextField fx:id="txtYear" layoutX="121.0" layoutY="229.0" />
       <TextField fx:id="txtPath" layoutX="121.0" layoutY="302.0" />
       <Button fx:id="btnAddMovie" layoutX="129.0" layoutY="376.0" mnemonicParsing="false" onAction="#addMovie" text="Add" />
       <Button fx:id="btnCancelMovie" layoutX="196.0" layoutY="376.0" mnemonicParsing="false" onAction="#cancelMovie" text="Cancel" />
       <Button fx:id="browsePath" layoutX="290.0" layoutY="302.0" mnemonicParsing="false" onAction="#browsePath" text="Browse" />
-      <Label layoutX="285.0" layoutY="192.0" text="(1-10)" />
+      <Label layoutX="285.0" layoutY="160.0" text="(1-10)" />
    </children>
 </AnchorPane>

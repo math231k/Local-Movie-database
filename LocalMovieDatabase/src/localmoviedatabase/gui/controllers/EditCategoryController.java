@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package localmoviedatabase.gui;
+package localmoviedatabase.gui.controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,7 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import localmoviedatabase.be.Genre;
-//import localmoviedatabase.dal.dbaccess.DalException;
+import localmoviedatabase.gui.AppModel;
 
 /**
  * FXML Controller class
@@ -49,9 +49,7 @@ public class EditCategoryController implements Initializable
 
     /**
      * Save button to update changes in a category
-     * @param event
-     * @throws IOException
-     * @throws DalException 
+     * @param event the event that runs the code
      */
     private void saveEditCategory(ActionEvent event)
     {
@@ -68,7 +66,7 @@ public class EditCategoryController implements Initializable
 
     /**
      * Closes the stage without updating
-     * @param event 
+     * @param event the event that runs the code
      */
     private void cancelEditCategory(ActionEvent event)
     {

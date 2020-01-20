@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package localmoviedatabase.gui;
+package localmoviedatabase.gui.controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import localmoviedatabase.gui.AppModel;
 
 
 /**
@@ -64,7 +65,6 @@ public class LmdbController implements Initializable
     private TableColumn<Genre, String> categoryName;
     @FXML
     private TextField showTitle;
-    @FXML
     private TextField showCategory;
     @FXML
     private TextField showRating;
@@ -150,7 +150,6 @@ public class LmdbController implements Initializable
     public void selectedMovie()
     {
         showTitle.setEditable(false);
-        showCategory.setEditable(false);
         showRating.setEditable(false);
         
         movieTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -161,7 +160,6 @@ public class LmdbController implements Initializable
                 if (newValue != null)
                 {
                     showTitle.setText(newValue.getTitle());
-                    showCategory.setText(newValue.getCategory());
                     showRating.setText(newValue.getRating() + "");
                 }
             }
@@ -174,7 +172,6 @@ public class LmdbController implements Initializable
     public void selectedMovieFromGenre()
     {
         showTitle.setEditable(false);
-        showCategory.setEditable(false);
         showRating.setEditable(false);
         
         genreMoviesLst.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -185,7 +182,6 @@ public class LmdbController implements Initializable
                 if (newValue != null)
                 {
                     showTitle.setText(newValue.getTitle());
-                    showCategory.setText(newValue.getCategory());
                     showRating.setText(newValue.getRating() + "");
                 }
             }
@@ -331,7 +327,7 @@ public class LmdbController implements Initializable
 
     
     /**
-     * Search function for movies
+     * Searches the database for a specific String
      * @param event 
      */
    @FXML
@@ -339,15 +335,8 @@ public class LmdbController implements Initializable
     {
         String input = searchMovie.getText();
         ObservableList<Movie> resultMovies = model.searchMovie(input);
-        ObservableList<Genre> resultGenre = model.searchGenre(input);
         movieTableView.setItems(resultMovies);
-        if (input.length()>0){
-            categoryTableView.setItems(resultGenre);
-        }
-        else
-        {
-            categoryTable();
-        }
+        categoryTable();       
     }
 
 
@@ -366,6 +355,20 @@ public class LmdbController implements Initializable
         System.out.println("Movie Added");
     }
 
+     /**
+     * sets the selected Movie
+     * @param event 
+     */
+    @FXML
+    private void setSlectedMovie(MouseEvent event) {
+        lastSelectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
+        System.out.println(lastSelectedMovie.toString());
+    }
+    
+    /**
+     * gets all movies from a selected genre
+     * @param event 
+     */
     @FXML
     private void getMoviesInCategory(MouseEvent event) {
         Genre selectedGenre = categoryTableView.getSelectionModel().getSelectedItem();
@@ -373,6 +376,9 @@ public class LmdbController implements Initializable
         lastSelectedGenre = selectedGenre;
     }
     
+    /**
+     * Adds a Movie to a Genre
+     */
     public void addMoviesToGenreList(){
         model.fetchMoviesFromGenre(lastSelectedGenre);
         ObservableList<Movie> oldMoviesInGenre = model.getGenreMovieList();
@@ -387,7 +393,10 @@ public class LmdbController implements Initializable
     }
 
 
-
+    /**
+     * removes a Movie From a Genre
+     * @param event 
+     */
     @FXML
     private void removeMovieFromCategory(ActionEvent event) {
     //Movie selectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
@@ -396,6 +405,11 @@ public class LmdbController implements Initializable
     
     }
 
+    /**
+     * Opens a new window where you can add a category
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void addCategory(ActionEvent event) throws IOException
     {
@@ -409,6 +423,10 @@ public class LmdbController implements Initializable
         categoryTable();
     }
    
+    /**
+     * Prepares a media for the mediaPlayer to play
+     * @return a Media object
+     */
     public Media getMediaToPlay(){
         
         if(getPath != null){
@@ -424,35 +442,54 @@ public class LmdbController implements Initializable
         
     }
 
+    /**
+     * sets the selected movie
+     * @param event 
+     */
     @FXML
     private void setSelectedMovie(MouseEvent event) {
         lastSelectedMovie = movieTableView.getSelectionModel().getSelectedItem();
-        getPath= lastSelectedMovie.getPath();
+        getPath = lastSelectedMovie.getPath();
         System.out.println(lastSelectedMovie.getPath());
     }
 
-    @FXML
-    private void setSlectedMovie(MouseEvent event) {
-        lastSelectedMovie = genreMoviesLst.getSelectionModel().getSelectedItem();
-        System.out.println(lastSelectedMovie.toString());
-    }
 
+    /**
+     * gets the rating of a selected movie
+     * @return the rating as an int
+     */
     public static int getGetRating() {
         return getRating;
     }
 
+    /**
+     * gets the id of a selected Movie
+     * @return the id as an int
+     */
     public static int getGetId() {
         return getId;
     }
 
+    /**
+     * gets the genre id of a selected genre 
+     * @return the genre id as an integer
+     */
     public static int getGetGenreId() {
         return getGenreId;
     }
 
+    /**
+     * returns the title of a movie
+     * @return the title as a String
+     */
     public static String getGetTitle() {
         return getTitle;
     }
-
+    
+    /**
+    * gets the path of a movie
+    * @return the path as a string
+    */
     public static String getGetPath() {
         return getPath;
     }

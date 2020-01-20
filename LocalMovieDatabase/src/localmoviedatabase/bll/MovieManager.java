@@ -30,7 +30,7 @@ public class MovieManager
     
     /**
      * Gets all movies from the database
-     * @return 
+     * @return a list of movie Objects
      */
     public List<Movie> getAllMovies()
     {
@@ -46,16 +46,16 @@ public class MovieManager
      * @param path
      * @return 
      */
-    public Movie addMovie(String category, String title, int rating, int relDate, String path) {
+    public Movie addMovie(String title, int rating, int relDate, String path) {
         
-        movie = movieDBDAO.createMovie(category, title, rating, relDate, path);
+        movie = movieDBDAO.createMovie(title, rating, relDate, path);
         return movie;
         
     }
 
     /**
      * Removes movie from database
-     * @param m 
+     * @param m the movie to be removed
      */
     public void removeMovie(Movie m) {
         movieDBDAO.deleteMovie(m);
@@ -63,7 +63,7 @@ public class MovieManager
 
     /**
      * Updates movie from database
-     * @param m 
+     * @param m the movie to be updated
      */
     public void updateMovie(Movie m) {
         movieDBDAO.updateMovie(m);

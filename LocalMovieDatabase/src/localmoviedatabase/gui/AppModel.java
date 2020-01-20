@@ -66,7 +66,7 @@ public final class AppModel
     
     /**
      * adds all movies from a specified genre to an ObservableList
-     * @param genre 
+     * @param genre the genre from where to fetch the movies
      */
     public void fetchMoviesFromGenre(Genre genre){
         
@@ -78,12 +78,26 @@ public final class AppModel
 
 
     /**
-    * Adds a movie to the database
+    * Adds a movie to the database and checks to see if movie already added
     */
-    public Movie addMovie(String category, String title, int rating, int relDate, String path) {
-        movie = movieManager.addMovie(category, title, rating, relDate, path);
+    public Movie addMovie(String title, int rating, int relDate, String path) {
+        movie = new Movie(rating, title, rating, relDate, path);
+        String repeatCheck;
+        boolean canAdd = true;
+        for (Movie mov : movies) {
+            repeatCheck = mov.getTitle();
+            if(movie.getTitle().equals(mov.getTitle())){
+                canAdd = false;
+            }
+        }
+        if(canAdd){
         movies.add(movie);
+        movieManager.addMovie(title, rating, relDate, path);
         return movie;
+        }else {
+            movieAlreadyExists();
+            return null;
+        }
     }
 
     /**
@@ -131,18 +145,6 @@ public final class AppModel
     }
     
     /**
-     * Returns a list with a search result consisting of genres
-     * @param input the String to compare to
-     * @return an ObservableList of genres
-     */
-    public ObservableList<Genre> searchGenre(String input){
-        List<Genre> filter = search.searchCategory(getCategories(),input);
-        
-        ObservableList<Genre> result = FXCollections.observableList(filter);
-        return result;
-    }
-    
-    /**
      * creates a prompt warning the user that no movie is selected
      */
     public void noMovieSelected(){
@@ -164,7 +166,17 @@ public final class AppModel
         deletionReminderAlert.setHeaderText("Remember to delete movies not seen for 2 years \nand with a rating of less than 6");
         
         deletionReminderAlert.showAndWait();
-        System.out.println("This ran");
+   }
+    
+   /**
+    * Creates a promt alerting the user that the movie already exists within the database
+    */
+   public void movieAlreadyExists(){
+       Alert alreadyExist = new Alert(Alert.AlertType.ERROR);
+       alreadyExist.setTitle("Movie Already Exists");
+       alreadyExist.setHeaderText("This movie is already in the database");
+       
+       alreadyExist.showAndWait();
    }
     
     /**
@@ -199,7 +211,7 @@ public final class AppModel
 
     
     /**
-     * 
+     * gets the list of movies in a genre
      * @return An Observablelist of movies in a genre
      */
     public ObservableList<Movie> getGenreMovieList(){
@@ -208,7 +220,7 @@ public final class AppModel
     }
     
     /**
-     * 
+     * gets the genres in the database
      * @return an Observable list of genres
      */
     public ObservableList<Genre> getCategories(){
@@ -219,7 +231,7 @@ public final class AppModel
     
 
     /**
-     * 
+     * gets the movies in the database
      * @return An observable list of movies
      */
     public ObservableList<Movie> getMovies(){

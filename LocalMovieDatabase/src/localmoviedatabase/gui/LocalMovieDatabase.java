@@ -16,6 +16,11 @@ import javafx.stage.Stage;
  */
 public class LocalMovieDatabase extends Application {
     
+    /**
+     * starts up the main view of the rogram
+     * @param stage the stage to be shown
+     * @throws Exception 
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/localmoviedatabase/gui/views/LmdbFXMLDocument.fxml"));

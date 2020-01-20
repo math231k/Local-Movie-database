@@ -32,15 +32,11 @@ public class MockMovieManager {
         };
         public void addMoreMoviesToPlaylists(Movie m){
         
-        g2.addMovieToGenre(m);
+        //g2.addMovieToGenre(m);
         
         };
         
         public void printMoviesFromPlaylist(){
-        
-            for (Movie m : g2.getGenreMovieList()) {
-                System.out.println(m.toString());
-            }
         
         }
         

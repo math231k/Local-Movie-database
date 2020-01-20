@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="265.0" prefWidth="226.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="localmoviedatabase.gui.NewCategoryController">
+<AnchorPane id="AnchorPane" prefHeight="265.0" prefWidth="226.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="localmoviedatabase.gui.controllers.NewCategoryController">
    <children>
       <Label layoutX="52.0" layoutY="30.0" text="New category">
          <font>
