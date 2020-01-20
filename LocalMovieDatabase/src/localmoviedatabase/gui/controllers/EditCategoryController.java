@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -27,8 +28,11 @@ public class EditCategoryController implements Initializable
     private LmdbController mainController;
     private AppModel appModel;
 
+    @FXML
     private TextField txtCategoryName;
+    @FXML
     private Button btnSaveCategory;
+    @FXML
     private Button btnCancelCategory;
 
     public void EditCategoryController()
@@ -51,6 +55,7 @@ public class EditCategoryController implements Initializable
      * Save button to update changes in a category
      * @param event the event that runs the code
      */
+    @FXML
     private void saveEditCategory(ActionEvent event)
     {
         appModel = new AppModel();
@@ -68,6 +73,7 @@ public class EditCategoryController implements Initializable
      * Closes the stage without updating
      * @param event the event that runs the code
      */
+    @FXML
     private void cancelEditCategory(ActionEvent event)
     {
         Stage stage = (Stage) btnCancelCategory.getScene().getWindow();
